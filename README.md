@@ -1,5 +1,5 @@
-Forever Free Christian Web App
+<h1>Forever Free Christian Web App</h1>
 
-Lead Developers - Jojo & David
-Developer - Carla
-Training - MJ
+<p>Lead Developers - Jojo & David</p>
+<p>Developer - Carla</p>
+<p>Training - MJ</p>
