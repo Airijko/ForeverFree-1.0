@@ -1,3 +1,5 @@
 Forever Free Christian Web App
 
-Side Project by Jojo and David
+Lead Developers - Jojo & David
+Developer - Carla
+Training - MJ
