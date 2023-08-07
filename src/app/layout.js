@@ -1,5 +1,5 @@
-const RootLayout = () => {
-  return <div>RootLayout</div>;
+const RootLayout = ({ children }) => {
+  return <div>{children}</div>;
 };
 
 export default RootLayout;
