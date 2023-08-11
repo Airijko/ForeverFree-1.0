@@ -3,7 +3,7 @@
 <h2>Members</h2>
 <p>Lead Developers - Jojo & David</p>
 <p>Developer - Carla</p>
-<p>Training - MJ</p>
+<p>Trainee - MJ</p>
 
 <h2>Technologies</h2>
 <ul>
