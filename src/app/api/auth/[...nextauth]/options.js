@@ -18,8 +18,7 @@ export const options = {
   callbacks: {
     async jwt({ token, user }) {
       if (user) {
-        console.log('JWT user:', user);
-        const db = await connectToDB();
+        await connectToDB();
         const existingUser = await User.findOne({ email: user.email });
 
         if (!existingUser) {
@@ -35,7 +34,6 @@ export const options = {
           token.role = existingUser.role;
         }
       }
-      console.log('JWT token:', token);
       return token;
     },
     async session({ session, token }) {
