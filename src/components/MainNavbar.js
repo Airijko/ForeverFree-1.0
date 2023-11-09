@@ -1,76 +1,39 @@
-'use client';
-
-import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import { getProviders, signIn, signOut, useSession } from 'next-auth/react';
+import Image from 'next/image';
+import { getServerSession } from 'next-auth';
+import { options } from '@app/api/auth/[...nextauth]/options';
 
-const MainNavbar = () => {
-  const { data: session } = useSession();
-
-  const [providers, setProviders] = useState(null);
-
-  useEffect(() => {
-    const setupProviders = async () => {
-      console.log('Getting providers');
-      const response = await getProviders();
-      console.log('Got providers');
-      setProviders(response);
-    };
-
-    setupProviders();
-  }, []);
-
+const MainNavbar = async () => {
+  const session = await getServerSession(options);
   return (
-    <nav className="flex-between w-full mb-16 pt-3">
+    <nav className="flex-between w-full mb-16 pt-3 bg-gray-300">
       <Link href="/" className="flex gap-2 flex-center">
         <Image
           src="/assets/icons/cross-logo.jpg"
           width={30}
           height={30}
-          alt="Forever Free Logo"
+          alt="ForeverFree Logo"
         />
-        <p className="logo_text">Forever Free</p>
+        <h1>Forever Free</h1>
       </Link>
-
-      {/* Desktop Navigation  */}
-      <div className="sm:flex hidden">
-        {session?.user ? (
-          <div className="flex gap-3 md:gap-5">
-            <Link href="/create-prompt" className="black_btn">
-              Create Post
-            </Link>
-            <button
-              type="button"
-              className="outline_btn"
-              onClick={() => signOut()}
-            >
-              Sign Out
-            </button>
-            <Link href="/profile">
-              <Image
-                src="/assets/icons/cross-logo.jpg"
-                width={37}
-                height={37}
-                className="rounded-full"
-                alt="profile"
-              />
-            </Link>
-          </div>
+      <div className="flex gap-10">
+        <Link href="/about" className="black_btn">
+          About
+        </Link>
+        <Link href="/events" className="black_btn">
+          Events
+        </Link>
+        <Link href="/admin" className="black_btn">
+          Admin
+        </Link>
+        {session ? (
+          <Link href="/api/auth/signout?callbackUrl=/" className="black_btn">
+            Logout
+          </Link>
         ) : (
-          <>
-            {providers &&
-              Object.values(providers).map((provider) => (
-                <button
-                  type="button"
-                  key={provider.name}
-                  onClick={() => signIn(provider.id)}
-                  className="black_btn"
-                >
-                  Sign In
-                </button>
-              ))}
-          </>
+          <Link href="/api/auth/signin" className="black_btn">
+            Login
+          </Link>
         )}
       </div>
     </nav>
