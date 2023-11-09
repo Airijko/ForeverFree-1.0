@@ -4,6 +4,7 @@ import { redirect } from 'next/navigation';
 
 const Admin = async () => {
   const session = await getServerSession(options);
+  console.log('Session object:', session);
   if (!session) {
     return redirect('/api/auth/signin?callbackUrl=/admin');
   }
@@ -11,7 +12,7 @@ const Admin = async () => {
     <div>
       <h1>ADMIN</h1>
       <p>{session?.user?.email}</p>
-      <p>{session?.user?.role}</p>
+      <p>{session?.user?.role ?? 'NULL'}</p>
     </div>
   );
 };

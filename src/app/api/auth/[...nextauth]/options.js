@@ -1,47 +1,41 @@
 import GitHubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
 
+import User from '@models/user';
+import { connectToDB } from '@utils/database';
+
 export const options = {
   providers: [
     GitHubProvider({
-      profile(profile) {
-        console.log('Profile Github:', profile);
-
-        let userRole = 'User';
-        if (profile?.email == 'jojojimenajr@gmail.com') {
-          userRole = 'Admin';
-        }
-
-        return {
-          ...profile,
-          role: userRole,
-        };
-      },
       clientId: process.env.GITHUB_CLIENT_ID,
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
     }),
     GoogleProvider({
-      profile(profile) {
-        console.log('Profile Google:', profile);
-
-        let userRole = 'User';
-        if (profile?.email == 'jojojimenajr@gmail.com') {
-          userRole = 'Admin';
-        }
-
-        return {
-          ...profile,
-          id: profile.sub,
-          role: userRole,
-        };
-      },
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
   ],
   callbacks: {
     async jwt({ token, user }) {
-      if (user) token.role = user.role;
+      if (user) {
+        console.log('JWT user:', user);
+        const db = await connectToDB();
+        const existingUser = await User.findOne({ email: user.email });
+
+        if (!existingUser) {
+          const newUser = new User({
+            email: user.email,
+            username: user.name.replace(' ', '').toLowerCase(),
+            image: user.picture,
+            role: user.role,
+          });
+          await newUser.save();
+        }
+        if (existingUser) {
+          token.role = existingUser.role;
+        }
+      }
+      console.log('JWT token:', token);
       return token;
     },
     async session({ session, token }) {
