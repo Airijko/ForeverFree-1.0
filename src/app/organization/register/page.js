@@ -4,20 +4,25 @@ import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-import OrganizationForm from '@components/OrganizationForm';
+import OrganizationForm from '@components/organization/OrganizationForm';
 
 const CreatePrompt = () => {
   const router = useRouter();
   const { data: session } = useSession();
 
+  console.log('session', session.user.id);
+
   const [submitting, setSubmitting] = useState(false);
-  const [organization, setOrganization] = useState({
+  const [formData, setFormData] = useState({
+    owner: session?.user.id,
     name: '',
     email: '',
     phone: '',
     address: '',
-    isChurch: false,
+    image: '',
     isApproved: false,
+    isChurch: false,
+    church: '',
   });
 
   const registerOrganization = async (e) => {
@@ -25,16 +30,17 @@ const CreatePrompt = () => {
     setSubmitting(true);
 
     try {
-      const response = await fetch('/api/prompt/new', {
+      const response = await fetch('/api/organization/new', {
         method: 'POST',
         body: JSON.stringify({
-          name: organization.name,
-          userId: session?.user.id,
-          email: organization.email,
-          phone: organization.phone,
-          address: organization.address,
-          isChurch: organization.isChurch,
-          isApproved: organization.isApproved,
+          owner: formData.owner,
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          address: formData.address,
+          image: formData.image,
+          isChurch: formData.isChurch,
+          isApproved: formData.isApproved,
         }),
       });
 
@@ -51,8 +57,8 @@ const CreatePrompt = () => {
   return (
     <OrganizationForm
       type="Register"
-      organization={organization}
-      setOrganization={setOrganization}
+      formData={formData}
+      setFormData={setFormData}
       submitting={submitting}
       handleSubmit={registerOrganization}
     ></OrganizationForm>

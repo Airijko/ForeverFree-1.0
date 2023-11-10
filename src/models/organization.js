@@ -21,6 +21,9 @@ const OrganizationSchema = new Schema({
     type: String,
     required: [true, 'Address is required'],
   },
+  image: {
+    type: String,
+  },
   isApproved: {
     type: Boolean,
   },

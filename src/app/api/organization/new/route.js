@@ -2,7 +2,7 @@ import { connectToDB } from '@utils/database';
 import Organization from '@models/organization';
 
 export const POST = async (req) => {
-  const { userId, name, address, phone, email, isApproved, isChurch } =
+  const { userId, name, address, phone, email, image, isApproved, isChurch } =
     await req.json();
 
   try {
@@ -13,6 +13,7 @@ export const POST = async (req) => {
       address,
       phone,
       email,
+      image,
       isApproved,
       isChurch,
     });

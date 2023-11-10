@@ -1,12 +1,16 @@
 import Link from 'next/link';
 
-const Form = ({
-  type,
-  organization,
-  setOrganization,
-  submitting,
-  handleSubmit,
-}) => {
+const Form = ({ type, formData, setFormData, submitting, handleSubmit }) => {
+  const handleImageUpload = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setFormData({ ...formData, image: reader.result });
+    };
+  };
+
+  console.log(formData);
   return (
     <section className="w-full max-w-full flex-start flex-col">
       <h1 className="head_text text-left">
@@ -22,10 +26,8 @@ const Form = ({
             Name
           </span>
           <input
-            value={organization.name}
-            onChange={(e) =>
-              setOrganization({ ...organization, name: e.target.value })
-            }
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             placeholder="register your organization name..."
             className="form_input"
             required
@@ -36,9 +38,9 @@ const Form = ({
             Email
           </span>
           <input
-            value={organization.email}
+            value={formData.email}
             onChange={(e) =>
-              setOrganization({ ...organization, email: e.target.value })
+              setFormData({ ...formData, email: e.target.value })
             }
             placeholder="email"
             className="form_input"
@@ -50,9 +52,9 @@ const Form = ({
             Phone
           </span>
           <input
-            value={organization.phone}
+            value={formData.phone}
             onChange={(e) =>
-              setOrganization({ ...organization, phone: e.target.value })
+              setFormData({ ...formData, phone: e.target.value })
             }
             placeholder="phone"
             className="form_input"
@@ -64,9 +66,9 @@ const Form = ({
             Address
           </span>
           <input
-            value={organization.address}
+            value={formData.address}
             onChange={(e) =>
-              setOrganization({ ...organization, address: e.target.value })
+              setFormData({ ...formData, address: e.target.value })
             }
             placeholder="email"
             className="form_input"
@@ -75,18 +77,43 @@ const Form = ({
         </label>
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
+            Logo
+          </span>
+          <input
+            type="file"
+            onChange={(e) => handleImageUpload(e)}
+            className="form_input"
+          />
+        </label>
+        <label>
+          <span className="font-satoshi font-semibold text-base text-gray-700">
             Church
           </span>
           <input
-            value={organization.church}
+            type="checkbox"
+            checked={formData.isChurch}
             onChange={(e) =>
-              setOrganization({ ...organization, church: e.target.value })
+              setFormData({
+                ...formData,
+                isChurch: e.target.checked,
+                church: e.target.checked ? formData.church : '',
+              })
             }
-            placeholder="church"
-            className="form_input"
-            required
+            className="slider"
           />
+          {formData.isChurch && (
+            <input
+              value={formData.church}
+              onChange={(e) =>
+                setFormData({ ...formData, church: e.target.value })
+              }
+              placeholder="church"
+              className="form_input"
+              required
+            />
+          )}
         </label>
+
         <div className="flex-end mx-3 mb5 gap-4">
           <Link href="/" className="text-gray-500 text-sm">
             Cancel
