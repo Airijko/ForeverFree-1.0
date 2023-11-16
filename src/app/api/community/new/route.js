@@ -2,8 +2,18 @@ import { connectToDB } from '@utils/database';
 import Organization from '@models/organization';
 
 export const POST = async (req) => {
-  const { userId, name, address, phone, email, image, isApproved, isChurch } =
-    await req.json();
+  const {
+    userId,
+    name,
+    address,
+    phone,
+    email,
+    image,
+    church,
+    denomination,
+    isApproved,
+    isChurch,
+  } = await req.json();
 
   try {
     await connectToDB();
@@ -14,6 +24,8 @@ export const POST = async (req) => {
       phone,
       email,
       image,
+      church,
+      denomination,
       isApproved,
       isChurch,
     });

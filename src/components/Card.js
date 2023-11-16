@@ -20,64 +20,42 @@ const Card = ({ organization, handleTagClick, handleEdit, handleDelete }) => {
       return router.push('/profile');
 
     router.push(
-      `/profile/${organization.creator._id}?name=${organization.owner.username}`
+      `/communities/${organization.owner._id}?name=${organization.owner.username}`
     );
   };
 
   return (
     <div className="prompt_card">
-      <div className="flex justify-between items-start gap-5">
+      <div className="flex justify-between gap-5">
         <div
           className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
           onClick={handleProfileClick}
         >
           <Image
-            src={organization.image}
+            src={organization.image || '/assets/icons/cross-logo.jpg'}
             alt="organization_image"
-            width={40}
             height={40}
-            className="rounded-full object-contain"
+            width={40}
+            className="w-full h-full object-cover"
           />
-
-          <div className="flex flex-col">
-            <h3 className="font-satosh font-semibold text-gray-900">
-              {organization.name}
-            </h3>
-            <p className="font-inter text-sm text-gray-500">
-              {organization.address}
-            </p>
-          </div>
         </div>
       </div>
-      <p className="my-4 font-satoshi text-sm text-gray-700">
-        {organization.name}
-      </p>
-      <p className="my-4 font-satoshi text-sm text-gray-700">
-        {organization.address}
-      </p>
-      <p
-        className="font-inter text-sm blue_gradient cursor-pointer"
-        onClick={() => handleTagClick && handleTagClick(organization.tag)}
-      >
-        {organization.isChurch ? 'Church' : 'Organization'}
-      </p>
-
-      {/* {session?.user.id === post.owner._id && pathName === '/organization' && (
-        <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
-          <p
-            className="font-inter text-sm green_gradient cursor-pointer"
-            onClick={handleEdit}
-          >
-            Edit
+      <div className="flex justify-between items-start flex-col mt-5">
+        <div>
+          <p className="my-4 font-satoshi text-sm text-gray-700">
+            {organization.name}
           </p>
-          <p
-            className="font-inter text-sm orange_gradient cursor-pointer"
-            onClick={handleDelete}
-          >
-            Delete
+          <p className="my-4 font-satoshi text-sm text-gray-700">
+            {organization.address}
           </p>
         </div>
-      )} */}
+        <p
+          className="font-inter text-sm blue_gradient cursor-pointer self-end"
+          onClick={() => handleTagClick && handleTagClick(organization.tag)}
+        >
+          {organization.isChurch ? 'Church' : 'Organization'}
+        </p>
+      </div>
     </div>
   );
 };

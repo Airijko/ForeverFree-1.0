@@ -24,11 +24,14 @@ const OrganizationSchema = new Schema({
   image: {
     type: String,
   },
+  denomination: {
+    type: String,
+  },
   isApproved: {
     type: Boolean,
   },
-  isChurch: {
-    type: Boolean,
+  type: {
+    type: String,
   },
 });
 

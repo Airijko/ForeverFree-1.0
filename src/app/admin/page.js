@@ -13,6 +13,7 @@ const Admin = async () => {
       <h1>ADMIN</h1>
       <p>{session?.user?.email}</p>
       <p>{session?.user?.role ?? 'NULL'}</p>
+      <p>{session.user.id ?? 'NULL'}</p>
     </div>
   );
 };
