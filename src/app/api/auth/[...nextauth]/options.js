@@ -30,14 +30,16 @@ export const options = {
           });
           await newUser.save();
         }
-        if (existingUser) {
-          token.role = existingUser.role;
-        }
+        token.id = existingUser.id;
+        token.role = existingUser.role;
       }
       return token;
     },
     async session({ session, token }) {
-      if (session) session.user.role = token.role;
+      if (session) {
+        session.user.id = token.id;
+        session.user.role = token.role;
+      }
       return session;
     },
   },

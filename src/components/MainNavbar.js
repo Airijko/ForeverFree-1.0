@@ -9,7 +9,7 @@ const MainNavbar = async () => {
     <nav className="flex-between w-full mb-16 pt-3">
       <Link href="/" className="flex gap-2 flex-center">
         <Image
-          src="/assets/icons/crusades-kingdom-of-jerusalem.png"
+          src="/assets/icons/kingdomofheaven.png"
           width={30}
           height={30}
           alt="ForeverFree Logo"
@@ -17,14 +17,14 @@ const MainNavbar = async () => {
         <h1>Forever Free</h1>
       </Link>
       <div className="flex gap-10">
+        <Link href="/" className="white_nav_btn">
+          Home
+        </Link>
         <Link href="/about" className="white_nav_btn">
           About
         </Link>
-        <Link href="/events" className="white_nav_btn">
-          Events
-        </Link>
-        <Link href="/organization" className="white_nav_btn">
-          Organizations
+        <Link href="/communities" className="white_nav_btn">
+          Communities
         </Link>
         <Link href="/admin" className="white_nav_btn">
           Admin

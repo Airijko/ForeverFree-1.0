@@ -1,4 +1,8 @@
+'use client';
+
+import React, { useState } from 'react';
 import Link from 'next/link';
+import ImageCropper from '@components/ImageCropper';
 
 const Form = ({ type, formData, setFormData, submitting, handleSubmit }) => {
   const handleImageUpload = (e) => {
@@ -16,7 +20,7 @@ const Form = ({ type, formData, setFormData, submitting, handleSubmit }) => {
       <h1 className="head_text text-left">
         <span className="blue_gradient">{type} Organization</span>
       </h1>
-      <p className="desc text-left max-w-md">{type} your organization</p>
+      <p className="desc text-left max-w-md">{type} your Institution</p>
       <form
         onSubmit={handleSubmit}
         className="mt-10 w-full max-w-2x1 flex flex-col gap-7 glassmorphism"
@@ -28,7 +32,7 @@ const Form = ({ type, formData, setFormData, submitting, handleSubmit }) => {
           <input
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            placeholder="register your organization name..."
+            placeholder="Name"
             className="form_input"
             required
           ></input>
@@ -42,7 +46,7 @@ const Form = ({ type, formData, setFormData, submitting, handleSubmit }) => {
             onChange={(e) =>
               setFormData({ ...formData, email: e.target.value })
             }
-            placeholder="email"
+            placeholder="Email"
             className="form_input"
             required
           />
@@ -56,7 +60,7 @@ const Form = ({ type, formData, setFormData, submitting, handleSubmit }) => {
             onChange={(e) =>
               setFormData({ ...formData, phone: e.target.value })
             }
-            placeholder="phone"
+            placeholder="Phone"
             className="form_input"
             required
           />
@@ -70,47 +74,43 @@ const Form = ({ type, formData, setFormData, submitting, handleSubmit }) => {
             onChange={(e) =>
               setFormData({ ...formData, address: e.target.value })
             }
-            placeholder="email"
+            placeholder="Address"
             className="form_input"
             required
           />
         </label>
         <label>
-          <span className="font-satoshi font-semibold text-base text-gray-700">
-            Logo
-          </span>
-          <input
-            type="file"
-            onChange={(e) => handleImageUpload(e)}
-            className="form_input"
+          <ImageCropper
+            setImage={(image) => setFormData({ ...formData, image })}
           />
         </label>
         <label>
           <span className="font-satoshi font-semibold text-base text-gray-700">
-            Church
+            Type
           </span>
-          <input
-            type="checkbox"
-            checked={formData.isChurch}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                isChurch: e.target.checked,
-                church: e.target.checked ? formData.church : '',
-              })
-            }
-            className="slider"
-          />
-          {formData.isChurch && (
-            <input
-              value={formData.church}
-              onChange={(e) =>
-                setFormData({ ...formData, church: e.target.value })
-              }
-              placeholder="church"
-              className="form_input"
-              required
-            />
+          <select
+            value={formData.type}
+            onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+            className="form_input"
+            required
+          >
+            <option value="">Select Type</option>
+            <option value="church">Church</option>
+            <option value="organization">Organization</option>
+            <option value="school">School</option>
+          </select>
+          {formData.type == 'church' && (
+            <div>
+              <input
+                value={formData.denomination}
+                onChange={(e) =>
+                  setFormData({ ...formData, denomination: e.target.value })
+                }
+                placeholder="Denomination"
+                className="form_input"
+                required
+              />
+            </div>
           )}
         </label>
 

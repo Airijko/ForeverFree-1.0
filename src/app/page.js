@@ -1,12 +1,10 @@
-import Feed from '@components/Feed';
-
 const Home = () => {
   return (
     <section className="w-full flex-center flex-col">
-      <h1>Hello World!</h1>
-      <p>Welcome to ForeverFree!</p>
-
-      <Feed />
+      <div className="flex mt-5 gap-10">
+        <button>Explore</button>
+        <button>Following</button>
+      </div>
     </section>
   );
 };

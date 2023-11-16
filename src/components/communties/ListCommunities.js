@@ -5,9 +5,9 @@ import { useState, useEffect } from 'react';
 import Card from '../Card';
 import Link from 'next/link';
 
-const PromptCardList = ({ data, handleTagClick }) => {
+const CommunitiesCardList = ({ data, handleTagClick }) => {
   return (
-    <div className="mt-16 prompt_layout">
+    <div className="mt-2 prompt_layout">
       {data.map((organization) => (
         <Card
           key={organization._id}
@@ -19,7 +19,7 @@ const PromptCardList = ({ data, handleTagClick }) => {
   );
 };
 
-const ListOrganizations = () => {
+const ListCommunities = () => {
   const [posts, setPosts] = useState([]);
 
   const [searchText, setSearchText] = useState('');
@@ -27,7 +27,7 @@ const ListOrganizations = () => {
   const [searchResults, setSearchResults] = useState([]);
 
   const fetchPosts = async () => {
-    const response = await fetch('/api/organization/');
+    const response = await fetch('/api/community/');
     const data = await response.json();
 
     setPosts(data);
@@ -40,10 +40,7 @@ const ListOrganizations = () => {
   const filterSearch = (search) => {
     const regex = new RegExp(search, 'i');
     return posts.filter(
-      (item) =>
-        regex.test(item.owner.username) ||
-        regex.test(item.tag) ||
-        regex.test(item.prompt)
+      (item) => regex.test(item.owner.username) || regex.test(item.name)
     );
   };
 
@@ -69,8 +66,6 @@ const ListOrganizations = () => {
 
   return (
     <section className="feed">
-      <h1 className="font-satoshi text-5xl font-bold">CHURCHES</h1>
-      <br />
       <form className="relative w-full flex-center">
         <input
           type="text"
@@ -82,17 +77,20 @@ const ListOrganizations = () => {
         />
       </form>
 
-      <Link href="/organization/register" className="white_nav_btn">
+      <Link href="/communities/register" className="white_nav_btn">
         Register Organization
       </Link>
 
       {searchText ? (
-        <PromptCardList data={searchResults} handleTagClick={handleTagClick} />
+        <CommunitiesCardList
+          data={searchResults}
+          handleTagClick={handleTagClick}
+        />
       ) : (
-        <PromptCardList data={posts} handleTagClick={handleTagClick} />
+        <CommunitiesCardList data={posts} handleTagClick={handleTagClick} />
       )}
     </section>
   );
 };
 
-export default ListOrganizations;
+export default ListCommunities;

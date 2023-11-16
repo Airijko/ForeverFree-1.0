@@ -4,13 +4,11 @@ import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 
-import OrganizationForm from '@components/organization/OrganizationForm';
+import CommunitiesForm from '@components/communties/CommunitiesForm';
 
-const CreatePrompt = () => {
+const CreateCommunity = () => {
   const router = useRouter();
   const { data: session } = useSession();
-
-  console.log('session', session.user.id);
 
   const [submitting, setSubmitting] = useState(false);
   const [formData, setFormData] = useState({
@@ -21,16 +19,16 @@ const CreatePrompt = () => {
     address: '',
     image: '',
     isApproved: false,
-    isChurch: false,
-    church: '',
+    type: '',
+    denomination: '',
   });
 
-  const registerOrganization = async (e) => {
+  const registerCommunity = async (e) => {
     e.preventDefault();
     setSubmitting(true);
 
     try {
-      const response = await fetch('/api/organization/new', {
+      const response = await fetch('/api/community/new', {
         method: 'POST',
         body: JSON.stringify({
           owner: formData.owner,
@@ -55,14 +53,14 @@ const CreatePrompt = () => {
   };
 
   return (
-    <OrganizationForm
+    <CommunitiesForm
       type="Register"
       formData={formData}
       setFormData={setFormData}
       submitting={submitting}
-      handleSubmit={registerOrganization}
-    ></OrganizationForm>
+      handleSubmit={registerCommunity}
+    ></CommunitiesForm>
   );
 };
 
-export default CreatePrompt;
+export default CreateCommunity;
