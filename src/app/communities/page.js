@@ -2,8 +2,8 @@ import ListCommunities from '@components/communties/ListCommunities';
 
 const Communities = () => {
   return (
-    <section className="w-full flex-center flex-col">
-      <h1 className="font-satoshi text-5xl font-bold">Christian Communities</h1>
+    <section className="w-full flex flex-col items-center justify-center py-12 px-4">
+      <h1 className="head_text text-center mb-8">Christian Communities</h1>
       <ListCommunities />
     </section>
   );

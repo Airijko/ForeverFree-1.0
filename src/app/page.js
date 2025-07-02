@@ -1,9 +1,9 @@
 const Home = () => {
   return (
-    <section className="w-full flex-center flex-col">
-      <div className="flex mt-5 gap-10">
-        <button>Explore</button>
-        <button>Following</button>
+    <section className="w-full flex-center flex-col py-10">
+      <div className="flex gap-6 mt-6">
+        <button className="btn btn-primary">Explore</button>
+        <button className="btn btn-outline">Following</button>
       </div>
     </section>
   );

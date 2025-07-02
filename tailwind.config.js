@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -7,12 +8,13 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        satoshi: ['Satoshi', 'sans-serif'],
-        inter: ['Inter', 'sans-serif'],
-      },
       colors: {
-        'primary-orange': '#FF5722',
+        primary: '#1f2937', // gray-800
+        secondary: '#f9fafb', // gray-50
+        accent: '#6366f1', // indigo-500
+      },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
       },
     },
   },

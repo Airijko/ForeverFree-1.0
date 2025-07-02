@@ -1,39 +1,34 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
 import Card from '../Card';
 import Link from 'next/link';
 
-const CommunitiesCardList = ({ data, handleTagClick }) => {
-  return (
-    <div className="mt-2 prompt_layout">
-      {data.map((organization) => (
-        <Card
-          key={organization._id}
-          organization={organization}
-          handleTagClick={handleTagClick}
-        />
-      ))}
-    </div>
-  );
-};
+const CommunitiesCardList = ({ data, handleTagClick }) => (
+  <div className="mt-6 prompt_layout">
+    {data.map((organization) => (
+      <Card
+        key={organization._id}
+        organization={organization}
+        handleTagClick={handleTagClick}
+      />
+    ))}
+  </div>
+);
 
 const ListCommunities = () => {
   const [posts, setPosts] = useState([]);
-
   const [searchText, setSearchText] = useState('');
   const [searchTimeout, setSearchTimeout] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
 
-  const fetchPosts = async () => {
-    const response = await fetch('/api/community/');
-    const data = await response.json();
-
-    setPosts(data);
-  };
-
   useEffect(() => {
+    const fetchPosts = async () => {
+      const response = await fetch('/api/community/');
+      const data = await response.json();
+      setPosts(data);
+    };
+
     fetchPosts();
   }, []);
 
@@ -57,16 +52,16 @@ const ListCommunities = () => {
     );
   };
 
-  const handleTagClick = (e) => {
-    setSearchText(e);
-
-    const search = filterSearch(e);
+  const handleTagClick = (tag) => {
+    setSearchText(tag);
+    const search = filterSearch(tag);
     setSearchResults(search);
   };
 
   return (
     <section className="feed">
-      <form className="relative w-full flex-center">
+      {/* Search Input */}
+      <form className="relative w-full flex-center mb-4">
         <input
           type="text"
           placeholder="Search for a tag or a username"
@@ -77,18 +72,18 @@ const ListCommunities = () => {
         />
       </form>
 
-      <Link href="/communities/register" className="white_nav_btn">
-        Register Organization
-      </Link>
+      {/* Register Button */}
+      <div className="flex justify-end w-full mb-6">
+        <Link href="/communities/register" className="btn btn-outline">
+          Register Organization
+        </Link>
+      </div>
 
-      {searchText ? (
-        <CommunitiesCardList
-          data={searchResults}
-          handleTagClick={handleTagClick}
-        />
-      ) : (
-        <CommunitiesCardList data={posts} handleTagClick={handleTagClick} />
-      )}
+      {/* Card List */}
+      <CommunitiesCardList
+        data={searchText ? searchResults : posts}
+        handleTagClick={handleTagClick}
+      />
     </section>
   );
 };

@@ -10,17 +10,11 @@ export const metadata = {
 
 const RootLayout = ({ children }) => {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" className="scroll-smooth">
+      <body className="bg-secondary dark:bg-slate-900 text-primary dark:text-white font-inter transition-colors duration-300">
         <Provider>
-          <div className="main">
-            <div className="gradient" />
-          </div>
-
-          <main className="app">
-            <MainNavbar />
-            {children}
-          </main>
+          <MainNavbar />
+          <main className="app relative z-10">{children}</main>
         </Provider>
       </body>
     </html>
