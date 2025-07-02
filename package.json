@@ -2,6 +2,7 @@
   "name": "ff",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "engines": {
     "node": ">=16.0.0",
     "npm": ">=9.0.0",
@@ -23,7 +24,7 @@
     "mongodb": "^5.7.0",
     "mongoose": "^8.0.0",
     "multer": "^1.4.5-lts.1",
-    "next": "^13.5.6",
+    "next": "^15.3.4",
     "next-auth": "^4.24.4",
     "prettier": "^3.0.1",
     "react": "18.2.0",
