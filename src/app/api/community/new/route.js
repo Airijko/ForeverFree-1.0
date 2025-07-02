@@ -13,6 +13,7 @@ export const POST = async (req) => {
     denomination,
     isApproved,
     isChurch,
+    type,
   } = await req.json();
 
   try {
@@ -28,6 +29,7 @@ export const POST = async (req) => {
       denomination,
       isApproved,
       isChurch,
+      type,
     });
 
     await newOrganization.save();

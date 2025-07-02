@@ -53,7 +53,7 @@ const Card = ({ organization, handleTagClick, handleEdit, handleDelete }) => {
           className="font-inter text-sm blue_gradient cursor-pointer self-end"
           onClick={() => handleTagClick && handleTagClick(organization.tag)}
         >
-          {organization.isChurch ? 'Church' : 'Organization'}
+          {organization.type}
         </p>
       </div>
     </div>

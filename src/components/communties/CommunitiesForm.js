@@ -1,18 +1,15 @@
-'use client';
-
-import React, { useState } from 'react';
 import Link from 'next/link';
 import ImageCropper from '@components/ImageCropper';
 
 const Form = ({ type, formData, setFormData, submitting, handleSubmit }) => {
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onloadend = () => {
-      setFormData({ ...formData, image: reader.result });
-    };
-  };
+  // const handleImageUpload = (e) => {
+  //   const file = e.target.files[0];
+  //   const reader = new FileReader();
+  //   reader.readAsDataURL(file);
+  //   reader.onloadend = () => {
+  //     setFormData({ ...formData, image: reader.result });
+  //   };
+  // };
 
   console.log(formData);
   return (

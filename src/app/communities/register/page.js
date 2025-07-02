@@ -39,6 +39,7 @@ const CreateCommunity = () => {
           image: formData.image,
           isChurch: formData.isChurch,
           isApproved: formData.isApproved,
+          type: formData.type,
         }),
       });
 
