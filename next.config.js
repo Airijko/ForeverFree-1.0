@@ -5,12 +5,7 @@ const nextConfig = {
     serverComponentsExternalPackages: ['mongoose'],
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'lh3.googleusercontent.com',
-      },
-    ],
+    domains: ['lh3.googleusercontent.com'],
   },
   webpack(config) {
     config.experiments = {
@@ -21,4 +16,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;
