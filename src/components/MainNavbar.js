@@ -8,7 +8,7 @@ const MainNavbar = async () => {
   const session = await getServerSession(options);
 
   return (
-    <nav className="flex-between items-center w-full mb-16 py-3 px-6 bg-white dark:bg-slate-900 shadow-sm dark:shadow-md transition-colors duration-300">
+    <nav className="flex-between items-center w-full mb-16 py-3 px-6 bg-white dark:bg-black shadow-sm dark:shadow-md transition-colors duration-300">
       <Link href="/" className="flex gap-4 flex-wrap items-center">
         <Image
           src="/assets/icons/kingdomofheaven.png"
@@ -20,23 +20,25 @@ const MainNavbar = async () => {
           Forever Free
         </h1>
       </Link>
-
       <div className="flex flex-wrap items-center gap-x-4">
-        <Link href="/" className="btn btn-light">
+        <Link href="/" className="btn-glow">
           Home
         </Link>
-        <Link href="/about" className="btn btn-light">
+        <Link href="/about" className="btn-glow">
           About
         </Link>
-        <Link href="/communities" className="btn btn-light">
+        <Link href="/communities" className="btn-glow">
           Communities
         </Link>
-        <Link href="/reconquista" className="btn btn-light">
+        <Link href="/reconquista" className="btn-glow">
           Reconquista
         </Link>
-        <Link href="/admin" className="btn btn-light">
+        <Link href="/admin" className="btn-glow">
           Admin
         </Link>
+      </div>
+
+      <div className="flex flex-wrap items-center gap-x-4">
         <ThemeToggle />
 
         {session ? (

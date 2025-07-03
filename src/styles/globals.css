@@ -13,13 +13,13 @@ html {
 }
 
 .dark html {
-  background-color: #0f172a; /* slate-900 */
-  color: #f1f5f9; /* slate-100 */
+  background-color: #1a1a1a; /* neutral-900 or zinc-900 */
+  color: #e5e5e5; /* neutral-200 or zinc-200 */
 }
 
 /* === Background Gradient === */
-.main {
-  @apply w-screen min-h-screen fixed flex justify-center items-center px-6 pt-32 pb-40 pointer-events-none;
+.dark .main::before {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0) 0%, #1a1a1a 100%);
 }
 
 .main::before {
@@ -57,7 +57,30 @@ html {
 }
 
 .dark .btn-light {
-  @apply bg-slate-800 text-white border-slate-600 hover:bg-slate-700;
+  @apply bg-neutral-800 text-white border-neutral-600 hover:bg-neutral-700;
+}
+
+.btn-glow {
+  @apply relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-black dark:text-neutral-200 bg-transparent transition-colors duration-300 ease-in-out;
+  @apply overflow-hidden z-0;
+}
+
+.btn-glow::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 9999px;
+  box-shadow: 0 0 0 transparent;
+  transition: box-shadow 0.3s ease-in-out;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.btn-glow:hover {
+  @apply text-accent dark:text-indigo-400;
 }
 
 /* === Typography === */
@@ -88,14 +111,10 @@ html {
 
 /* === Cards === */
 .prompt_card {
-  @apply bg-white dark:bg-slate-800 
-         border border-gray-200 dark:border-slate-700 
-         rounded-lg shadow-md 
-         p-6 
-         transition-colors duration-300;
+  @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
 }
 
-.prompt_layout {
+.organization_layout {
   @apply grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
 }
 

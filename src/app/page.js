@@ -1,4 +1,4 @@
-const Home = () => {
+const Home = async () => {
   return (
     <section className="w-full flex-center flex-col py-10">
       <div className="flex gap-6 mt-6">

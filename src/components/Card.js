@@ -11,17 +11,8 @@ const Card = ({ organization, handleTagClick, handleEdit, handleDelete }) => {
   const pathName = usePathname();
   const router = useRouter();
 
-  console.log(organization);
-
   const handleProfileClick = () => {
-    console.log(organization);
-
-    if (organization.owner._id === session?.user.id)
-      return router.push('/profile');
-
-    router.push(
-      `/communities/${organization.owner._id}?name=${organization.owner.username}`
-    );
+    router.push(`/communities/${organization._id}`);
   };
 
   return (
@@ -40,12 +31,12 @@ const Card = ({ organization, handleTagClick, handleEdit, handleDelete }) => {
           />
         </div>
       </div>
-      <div className="flex justify-between items-start flex-col mt-5">
-        <div>
-          <p className="my-4 font-satoshi text-sm text-gray-700">
+      <div className="flex flex-col justify-between items-start mt-5 min-h-32">
+        <div className="flex flex-col gap-2">
+          <p className="font-satoshi text-sm text-gray-700">
             {organization.name}
           </p>
-          <p className="my-4 font-satoshi text-sm text-gray-700">
+          <p className="font-satoshi text-sm text-gray-700">
             {organization.address}
           </p>
         </div>

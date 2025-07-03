@@ -3,7 +3,7 @@ import Organization from '@models/organization';
 
 export const POST = async (req) => {
   const {
-    userId,
+    owner,
     name,
     address,
     phone,
@@ -19,7 +19,7 @@ export const POST = async (req) => {
   try {
     await connectToDB();
     const newOrganization = new Organization({
-      owner: userId,
+      owner,
       name,
       address,
       phone,

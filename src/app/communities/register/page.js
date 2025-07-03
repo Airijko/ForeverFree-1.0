@@ -23,6 +23,8 @@ const CreateCommunity = () => {
     denomination: '',
   });
 
+  console.log(formData);
+
   const registerCommunity = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -37,7 +39,6 @@ const CreateCommunity = () => {
           phone: formData.phone,
           address: formData.address,
           image: formData.image,
-          isChurch: formData.isChurch,
           isApproved: formData.isApproved,
           type: formData.type,
         }),

@@ -29,9 +29,11 @@ const OrganizationSchema = new Schema({
   },
   isApproved: {
     type: Boolean,
+    default: false,
   },
   type: {
     type: String,
+    enum: ['church', 'school', 'organization'],
   },
 });
 
