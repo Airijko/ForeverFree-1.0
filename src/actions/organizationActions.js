@@ -3,7 +3,7 @@
 import { connectToDB } from '@utils/database';
 import Organization from '@models/organization';
 import { getServerSession } from 'next-auth';
-import { authOptions } from '@app/api/auth/[...nextauth]/route';
+import { options } from '@app/api/auth/[...nextauth]/options';
 import mongoose from 'mongoose';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -98,7 +98,7 @@ const extractOrganizationData = async (formData) => {
 };
 
 const handleOrganization = async (id, formData, isEdit = false) => {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(options);
 
   // Check if user is authenticated
   if (!session?.user?.id) {
