@@ -2,6 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import { mapOrganizations } from '@actions/organizationActions';
 import Link from 'next/link';
+import WrapCommunities from './WrapCommunties';
 
 const ListCommunities = async ({ data }) => {
   const organizations = await mapOrganizations(data);
@@ -16,15 +17,7 @@ const ListCommunities = async ({ data }) => {
       </div>
 
       {/* Card List */}
-      <section className="grid w-full gap-5 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-        {organizations && organizations.length > 0 ? (
-          organizations
-        ) : (
-          <p className="text-center text-gray-500 col-span-full">
-            No communities found. Please check back later.
-          </p>
-        )}
-      </section>
+      <WrapCommunities>{organizations}</WrapCommunities>
     </section>
   );
 };

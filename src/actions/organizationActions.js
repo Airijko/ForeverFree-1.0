@@ -25,8 +25,8 @@ export const fetchAllOrganizations = async () => {
 };
 
 export const mapOrganizations = async (data) => {
-  return data.map((organization) => (
-    <Card organization={organization} key={organization._id} />
+  return data.map((organization, index) => (
+    <Card organization={organization} key={organization._id} index={index} />
   ));
 };
 
@@ -41,6 +41,7 @@ export const fetchOrganization = async (id) => {
     }
 
     // Convert to plain object for Client Components
+    console.log('Fetched organization:', organization);
     return JSON.parse(JSON.stringify(organization));
   } catch (error) {
     console.error('Error fetching organization:', error);
@@ -53,10 +54,10 @@ const extractOrganizationData = async (formData) => {
   const isChurch = type === 'church';
 
   // Debug: Log all form data
-  console.log('Form data entries:');
-  for (let [key, value] of formData.entries()) {
-    console.log(`${key}:`, value);
-  }
+  // console.log('Form data entries:');
+  // for (let [key, value] of formData.entries()) {
+  //   console.log(`${key}:`, value);
+  // }
 
   // Handle file uploads
   const imageFile = formData.get('image');
@@ -74,6 +75,26 @@ const extractOrganizationData = async (formData) => {
     bannerUrl = await handleFileUpload(bannerFile, 'banners');
   }
 
+  let services;
+  if (isChurch) {
+    const servicesRaw = formData.get('services');
+    try {
+      services = servicesRaw ? JSON.parse(servicesRaw) : [];
+
+      // Transform the services to combine day/hour/minute/ampm into a single time string
+      services = services.map((service) => ({
+        ...service,
+        times: service.times.map((timeObj) => ({
+          day: timeObj.day,
+          time: `${timeObj.hour}:${timeObj.minute} ${timeObj.ampm}`,
+        })),
+      }));
+    } catch (error) {
+      console.error('Failed to parse services JSON:', error);
+      services = [];
+    }
+  }
+
   const data = {
     name: formData.get('name'),
     address: formData.get('address'),
@@ -81,6 +102,8 @@ const extractOrganizationData = async (formData) => {
     email: formData.get('email'),
     type,
     isChurch,
+    language: formData.get('language') || 'English',
+    services,
     description: formData.get('description') || '',
     denomination: isChurch ? formData.get('denomination') : undefined,
     isApproved: formData.get('isApproved') === 'true',
@@ -144,12 +167,12 @@ const handleOrganization = async (id, formData, isEdit = false) => {
     Object.assign(organization, orgData);
 
     // Debug: Log the organization before saving
-    console.log('Organization before save:', organization.toObject());
+    // console.log('Organization before save:', organization.toObject());
 
     await organization.save();
 
     // Debug: Log the organization after saving
-    console.log('Organization after save:', organization.toObject());
+    // console.log('Organization after save:', organization.toObject());
 
     // Clean up old files if new ones were uploaded
     if (isEdit) {

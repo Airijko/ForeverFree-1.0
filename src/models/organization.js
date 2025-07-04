@@ -1,5 +1,15 @@
 import { Schema, model, models } from 'mongoose';
 
+const serviceTimeSchema = new Schema({
+  day: { type: String, required: true },
+  time: { type: String, required: true },
+});
+
+const serviceSchema = new Schema({
+  description: { type: String, required: true },
+  times: [serviceTimeSchema],
+});
+
 const OrganizationSchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
@@ -29,7 +39,13 @@ const OrganizationSchema = new Schema({
   },
   denomination: {
     type: String,
+    default: 'Non-Denominational',
   },
+  language: {
+    type: String,
+    default: 'English',
+  },
+  services: [serviceSchema],
   description: {
     type: String,
     default: '',

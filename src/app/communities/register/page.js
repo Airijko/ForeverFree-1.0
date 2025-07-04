@@ -1,66 +1,52 @@
 'use client';
 import { useState } from 'react';
 
-import {
-  createOrganization,
-  updateOrganization,
-} from '@actions/organizationActions';
+import { createOrganization } from '@actions/organizationActions';
 import { SubmitButton } from '@components/Buttons/SubmitButton';
 import ImageCropper from '@components/ImageCropper';
 import Link from 'next/link';
+import LanguageInput from '@components/Inputs/LanguageInput';
+import PhoneInput from '@components/Inputs/PhoneInput';
+import ServiceInput from '@components/Inputs/ServiceInput';
 
-const CreateCommunity = ({ formData, edit = false }) => {
-  const formId = formData?._id;
+const CreateCommunity = () => {
   const [selectedType, setSelectedType] = useState('');
   const [croppedImage, setCroppedImage] = useState(null);
-  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState(null);
+  const [services, setServices] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitting(true);
+  // Form action
+  const clientAction = async (formData) => {
+    if (croppedImage) {
+      const response = await fetch(croppedImage);
+      const blob = await response.blob();
+      const file = new File([blob], 'cropped-image.jpg', {
+        type: 'image/jpeg',
+      });
+      formData.append('image', file);
+    }
 
-    try {
-      const form = e.target;
-      const formData = new FormData(form);
+    if (formData.get('type') === 'church') {
+      formData.append('services', JSON.stringify(services));
+    }
 
-      // Add cropped image if present
-      if (croppedImage) {
-        formData.append('image', croppedImage);
-      }
+    const result = await createOrganization(formData);
 
-      let result = null;
-      if (edit) {
-        result = await updateOrganization(formId, formData);
-      } else {
-        result = await createOrganization(formData);
-      }
-
-      if (result && !result.error) {
-        // Handle success - maybe redirect or show success message
-        console.log('Success:', result);
-      } else {
-        console.error('Error:', result?.error);
-      }
-    } catch (error) {
-      console.error('Error submitting form:', error);
-    } finally {
-      setSubmitting(false);
+    if (result?.error) {
+      console.error(result.error);
+      setError(result.error);
     }
   };
 
   return (
     <section className="w-full max-w-xl mx-auto flex flex-col items-start px-4">
       <h1 className="head_text text-left">
-        <span className="blue_gradient">
-          {edit ? 'Edit' : 'Register'} Organization
-        </span>
+        <span className="blue_gradient">Register Organization</span>
       </h1>
-      <p className="desc text-left max-w-md">
-        {edit ? 'Edit' : 'Register'} your Institution
-      </p>
+      <p className="desc text-left max-w-md">Register your Institution</p>
 
       <form
-        onSubmit={handleSubmit}
+        action={clientAction}
         className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
       >
         {/* Name */}
@@ -92,18 +78,7 @@ const CreateCommunity = ({ formData, edit = false }) => {
         </label>
 
         {/* Phone */}
-        <label>
-          <span className="font-satoshi font-semibold text-base text-gray-700 dark:text-gray-300">
-            Phone
-          </span>
-          <input
-            name="phone"
-            type="text"
-            placeholder="Phone"
-            className="form_input"
-            required
-          />
-        </label>
+        <PhoneInput name="phone" />
 
         {/* Address */}
         <label>
@@ -119,10 +94,11 @@ const CreateCommunity = ({ formData, edit = false }) => {
           />
         </label>
 
+        {/* Language */}
+        <LanguageInput />
+
         {/* Image Upload */}
-        <label>
-          <ImageCropper setImage={setCroppedImage} />
-        </label>
+        <ImageCropper setImage={setCroppedImage} />
 
         {/* Type */}
         <label>
@@ -143,8 +119,9 @@ const CreateCommunity = ({ formData, edit = false }) => {
           </select>
         </label>
 
+        {/* Denomination + Services if church */}
         {selectedType === 'church' && (
-          <div>
+          <>
             <input
               name="denomination"
               type="text"
@@ -152,7 +129,11 @@ const CreateCommunity = ({ formData, edit = false }) => {
               className="form_input"
               required
             />
-          </div>
+            <ServiceInput
+              isEditing
+              onChange={(updatedServices) => setServices(updatedServices)}
+            />
+          </>
         )}
 
         {/* Submit + Cancel */}
@@ -160,13 +141,11 @@ const CreateCommunity = ({ formData, edit = false }) => {
           <Link href="/" className="text-gray-500 text-sm">
             Cancel
           </Link>
-          <SubmitButton
-            disabled={submitting}
-            className="mt-4 flex w-full justify-center rounded-md bg-gray-800 px-4 py-2 text-center text-white hover:bg-gray-700 disabled:opacity-50"
-          >
-            {submitting ? 'Submitting...' : 'Submit'}
+          <SubmitButton className="mt-4 flex w-full justify-center rounded-md bg-gray-800 px-4 py-2 text-center text-white hover:bg-gray-700">
+            Submit
           </SubmitButton>
         </div>
+        {error && <p className="text-center text-red-500">{error}</p>}
       </form>
     </section>
   );

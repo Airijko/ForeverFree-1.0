@@ -5,6 +5,11 @@
 @tailwind utilities;
 
 /* === Base Theme Setup === */
+html,
+body {
+  min-height: 100vh;
+}
+
 html {
   font-family: 'Inter', sans-serif;
   scroll-behavior: smooth;
@@ -48,8 +53,7 @@ body::before {
 
 /* === Overlay when in dark mode === */
 .dark body::before {
-  background-color: #1c1c1c99; /* twilight overlay */
-  backdrop-filter: brightness(0.1); /* dim image */
+  backdrop-filter: brightness(0.075); /* dim image */
 }
 
 .feed {

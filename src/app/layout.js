@@ -1,4 +1,5 @@
 import '@styles/globals.css';
+import 'react-phone-number-input/style.css';
 
 import MainNavbar from '@components/MainNavbar';
 import Provider from '@components/Provider';
