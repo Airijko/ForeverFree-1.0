@@ -1,52 +1,40 @@
-'use client';
-
-import { useState } from 'react';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
-import { usePathname, useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-const Card = ({ organization, handleTagClick, handleEdit, handleDelete }) => {
-  const [copied, setCopied] = useState('');
-  const { data: session } = useSession();
-  const pathName = usePathname();
-  const router = useRouter();
-
-  const handleProfileClick = () => {
-    router.push(`/communities/${organization._id}`);
-  };
-
+const Card = async ({ organization }) => {
   return (
-    <div className="prompt_card">
-      <div className="flex justify-between gap-5">
-        <div
-          className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
-          onClick={handleProfileClick}
-        >
+    <div className="transition-transform duration-300 hover:scale-105">
+      <Link
+        href={`/communities/${organization._id}`}
+        className="flex w-full overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 hover:shadow transition-shadow duration-300 hover:shadow-lg"
+      >
+        {/* Image Section */}
+        <div className="relative w-40 aspect-square flex-shrink-0">
           <Image
             src={organization.image || '/assets/icons/cross-logo.jpg'}
-            alt="organization_image"
-            height={40}
-            width={40}
-            className="w-full h-full object-cover"
+            alt={`${organization.name} image`}
+            fill
+            className="object-cover transition-transform duration-300"
           />
         </div>
-      </div>
-      <div className="flex flex-col justify-between items-start mt-5 min-h-32">
-        <div className="flex flex-col gap-2">
-          <p className="font-satoshi text-sm text-gray-700">
-            {organization.name}
-          </p>
-          <p className="font-satoshi text-sm text-gray-700">
-            {organization.address}
-          </p>
+
+        {/* Text Content */}
+        <div className="flex flex-col justify-between p-4 flex-grow">
+          <div>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
+              {organization.name}
+            </h3>
+            <p className="text-sm text-gray-600 dark:text-gray-300 truncate mt-1">
+              {organization.address}
+            </p>
+          </div>
+          <div className="mt-3 ml-auto">
+            <span className="text-sm font-medium text-blue-600 dark:text-blue-400 cursor-pointer">
+              {organization.type}
+            </span>
+          </div>
         </div>
-        <p
-          className="font-inter text-sm blue_gradient cursor-pointer self-end"
-          onClick={() => handleTagClick && handleTagClick(organization.tag)}
-        >
-          {organization.type}
-        </p>
-      </div>
+      </Link>
     </div>
   );
 };

@@ -39,6 +39,10 @@ html {
   filter: invert(1);
 }
 
+.feed {
+  @apply container flex flex-col items-center justify-center px-4;
+}
+
 /* === Buttons === */
 .btn {
   @apply inline-flex items-center justify-center px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200;
@@ -95,11 +99,6 @@ html {
 .desc {
   @apply mt-5 text-lg text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl;
 }
-
-.feed {
-  @apply flex flex-col gap-6;
-}
-
 /* === Forms === */
 .search_input,
 .form_input,
@@ -114,12 +113,8 @@ html {
 }
 
 /* === Cards === */
-.prompt_card {
-  @apply flex-1 break-inside-avoid rounded-lg border border-gray-300 bg-white/20 bg-clip-padding p-6 pb-4 backdrop-blur-lg backdrop-filter md:w-[360px] w-full h-fit;
-}
-
 .organization_layout {
-  @apply grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3;
+  @apply w-full;
 }
 
 /* === Utility Layouts === */
