@@ -12,31 +12,44 @@ html {
   color: theme('colors.primary');
 }
 
-.dark html {
-  background-color: #1a1a1a; /* neutral-900 or zinc-900 */
-  color: #e5e5e5; /* neutral-200 or zinc-200 */
+/* === Base Theme Background Image === */
+body {
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+
+  background-image: url('/assets/images/sitebackground.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  color: theme('colors.primary');
+  position: relative;
+  z-index: 0;
 }
 
-/* === Background Gradient === */
-.dark .main::before {
-  background: radial-gradient(circle, rgba(255, 255, 255, 0) 0%, #1a1a1a 100%);
-}
-
-.main::before {
+/* === Overlay (light mode default: no overlay) */
+body::before {
   content: '';
-  @apply absolute w-full h-full z-10;
-  background: radial-gradient(circle, rgba(2, 0, 36, 0) 0%, #fafafa 100%);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+
+  background-color: transparent;
+  backdrop-filter: brightness(1); /* no dimming */
+  transition:
+    background-color 0.3s ease,
+    backdrop-filter 0.3s ease;
 }
 
-.dark .main::before {
-  background: radial-gradient(circle, rgba(255, 255, 255, 0) 0%, #0f172a 100%);
-}
-
-.main::after {
-  content: '';
-  @apply absolute w-full h-full z-0 opacity-40;
-  background-image: url('/assets/images/grid.svg');
-  filter: invert(1);
+/* === Overlay when in dark mode === */
+.dark body::before {
+  background-color: #1c1c1c99; /* twilight overlay */
+  backdrop-filter: brightness(0.1); /* dim image */
 }
 
 .feed {

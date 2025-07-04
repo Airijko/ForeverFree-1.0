@@ -10,14 +10,32 @@ const Card = async ({ organization }) => {
         className="relative w-full overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 hover:shadow transition-shadow duration-300 hover:shadow-lg flex flex-col"
       >
         {/* Banner */}
+        {/* Banner */}
         <div className="relative h-48 w-full bg-gray-200">
-          {organization.bannerUrl && (
+          {organization.bannerUrl ? (
             <Image
               src={organization.bannerUrl}
               alt={`${organization.name} banner`}
               fill
               className="object-cover"
             />
+          ) : (
+            <>
+              {/* Light Theme Fallback */}
+              <Image
+                src="/assets/images/light-cardbackground.svg"
+                alt="Default banner light"
+                fill
+                className="object-cover dark:hidden"
+              />
+              {/* Dark Theme Fallback */}
+              <Image
+                src="/assets/images/dark-cardbackground.svg"
+                alt="Default banner dark"
+                fill
+                className="object-cover hidden dark:block"
+              />
+            </>
           )}
 
           {/* Tag - Top Right */}
@@ -42,7 +60,7 @@ const Card = async ({ organization }) => {
             </div>
 
             {/* Name & Location */}
-            <div className="flex flex-col justify-end pb-1 text-gray-900 dark:text-white">
+            <div className="flex flex-col justify-end pb-3 text-gray-900 dark:text-white">
               <h1 className="text-2xl font-semibold truncate">
                 {organization.name}
               </h1>
