@@ -8,7 +8,7 @@ const MainNavbar = async () => {
   const session = await getServerSession(options);
 
   return (
-    <nav className="flex-between items-center w-full mb-16 py-3 px-6 bg-white dark:bg-black shadow-sm dark:shadow-md transition-colors duration-300">
+    <nav className="flex-between items-center w-full py-3 px-6 bg-white dark:bg-black shadow-sm dark:shadow-md transition-colors duration-300">
       <Link href="/" className="flex gap-4 flex-wrap items-center">
         <Image
           src="/assets/icons/kingdomofheaven.png"

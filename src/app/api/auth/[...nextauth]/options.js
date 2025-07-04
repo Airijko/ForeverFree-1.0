@@ -19,18 +19,18 @@ export const options = {
     async jwt({ token, user }) {
       if (user) {
         await connectToDB();
-        const existingUser = await User.findOne({ email: user.email });
+        let existingUser = await User.findOne({ email: user.email });
 
         if (!existingUser) {
-          const newUser = new User({
+          existingUser = new User({
             email: user.email,
             username: user.name.replace(' ', '').toLowerCase(),
             image: user.picture,
-            role: user.role,
+            role: user.role || 'user', // Default role
           });
-          await newUser.save();
+          await existingUser.save();
         }
-        token.id = existingUser.id;
+        token.id = existingUser._id.toString(); // Use _id and convert to string
         token.role = existingUser.role;
       }
       return token;

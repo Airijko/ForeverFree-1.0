@@ -96,6 +96,10 @@ html {
   @apply mt-5 text-lg text-gray-600 dark:text-gray-300 sm:text-xl max-w-2xl;
 }
 
+.feed {
+  @apply flex flex-col gap-6;
+}
+
 /* === Forms === */
 .search_input,
 .form_input,

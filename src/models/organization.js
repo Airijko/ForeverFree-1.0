@@ -24,8 +24,15 @@ const OrganizationSchema = new Schema({
   image: {
     type: String,
   },
+  bannerUrl: {
+    type: String,
+  },
   denomination: {
     type: String,
+  },
+  description: {
+    type: String,
+    default: '',
   },
   isApproved: {
     type: Boolean,
