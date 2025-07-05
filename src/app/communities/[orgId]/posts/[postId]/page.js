@@ -1,4 +1,5 @@
 import { fetchPost } from '@actions/postActions';
+import Image from 'next/image';
 
 const ViewPostPage = async ({ params }) => {
   const { orgId, postId } = params;
@@ -83,7 +84,7 @@ const ViewPostPage = async ({ params }) => {
       )}
 
       {post.image && (
-        <img
+        <Image
           src={post.image}
           alt={post.title}
           className="mt-6 rounded-md object-cover w-full max-h-96"

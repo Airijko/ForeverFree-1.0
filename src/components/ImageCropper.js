@@ -3,6 +3,7 @@
 import React, { useRef, useState, useEffect } from 'react';
 import Cropper from 'cropperjs';
 import 'cropperjs/dist/cropper.css';
+import Image from 'next/image';
 
 const ImageCropper = ({ setImage }) => {
   const imageRef = useRef(null);
@@ -74,7 +75,7 @@ const ImageCropper = ({ setImage }) => {
       {imageUploaded && (
         <div className="mt-4 flex flex-col items-center gap-2">
           <div className="w-[200px] h-[200px] rounded border border-gray-300 shadow-sm overflow-hidden">
-            <img
+            <Image
               ref={imageRef}
               src={imageSrc}
               alt="Crop preview"

@@ -7,6 +7,7 @@ import { options } from '@app/api/auth/[...nextauth]/options';
 import { handleFileUpload } from '@utils/fileUpload';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import PostCard from '@components/Cards/PostCard';
 
 // Fetch all posts (no filter)
 export const fetchAllPosts = async () => {

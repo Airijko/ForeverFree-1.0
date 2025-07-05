@@ -36,10 +36,9 @@ const OrganizationSchema = new Schema({
     required: false,
     validate: {
       validator: function (v) {
-        // Allow empty, undefined, or valid URLs
         return (
           !v ||
-          /^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/.test(
+          /^(https?:\/\/)?([\w-]+\.)+[\w-]+(\/[\w-._~:/?#[\]@!$&'()*+,;=]*)?$/.test(
             v
           )
         );
