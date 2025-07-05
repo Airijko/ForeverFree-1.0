@@ -24,6 +24,12 @@ const UserSchema = new Schema({
   test: {
     type: String,
   },
+  organizations: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Organization',
+    },
+  ],
 });
 
 const User = models.User || model('User', UserSchema);

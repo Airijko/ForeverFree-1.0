@@ -13,8 +13,8 @@ const WrapCommunities = ({ children }) => {
   return (
     <Masonry
       breakpointCols={breakpointColumnsObj}
-      className="flex gap-4"
-      columnClassName="space-y-4"
+      className="masonry-grid"
+      columnClassName="masonry-grid_column"
     >
       {children}
     </Masonry>

@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic';
 
 import { mapOrganizations } from '@actions/organizationActions';
 import Link from 'next/link';
-import WrapCommunities from './WrapCommunties';
+import WrapCommunities from './WrapCommunities';
 
 const ListCommunities = async ({ data }) => {
   const organizations = await mapOrganizations(data);

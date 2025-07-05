@@ -7,9 +7,9 @@ import {
   PhoneIcon,
 } from '@heroicons/react/24/outline';
 
-const Card = async ({ organization, index }) => {
+const OrganizationCard = async ({ organization, index }) => {
   return (
-    <div className="transition-transform duration-300 hover:scale-105">
+    <div className="w-full transition-transform duration-300 hover:scale-105">
       <Link
         href={`/communities/${organization._id}`}
         className="relative w-full h-full overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 hover:shadow transition-shadow duration-300 hover:shadow-lg flex flex-col"
@@ -53,7 +53,7 @@ const Card = async ({ organization, index }) => {
         </div>
 
         {/* Content Section */}
-        <div className="flex flex-col px-4 pb-4 gap-3 relative h-full">
+        <div className="flex flex-col px-4 pb-4 gap-3 relative">
           {/* Floating profile row */}
           <div className="flex items-end gap-4 -mt-12">
             {/* Profile Image */}
@@ -68,7 +68,7 @@ const Card = async ({ organization, index }) => {
 
             {/* Name & Location */}
             <div className="flex flex-col justify-end pb-3 text-gray-900 dark:text-white w-full">
-              <h1 className="text-2xl font-semibold break-words whitespace-normal">
+              <h1 className="font-bold organization_card_title text-2xl font-semibold break-words whitespace-normal">
                 {organization.name}
               </h1>
               <div className="mt-1 flex flex-col sm:flex-row flex-wrap justify-between items-start sm:items-center text-sm text-gray-600 dark:text-gray-300 gap-1 min-w-0">
@@ -152,4 +152,4 @@ const Card = async ({ organization, index }) => {
   );
 };
 
-export default Card;
+export default OrganizationCard;

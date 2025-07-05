@@ -5,9 +5,11 @@ import {
   MapPinIcon,
   PhoneIcon,
   EnvelopeIcon,
+  CameraIcon,
 } from '@heroicons/react/24/outline';
 import ServiceInput from './Inputs/ServiceInput';
 import ServiceTimesView from './Views/ServiceTimesView';
+import ImageUpload from './Inputs/ImageUpload';
 
 const OrganizationProfile = ({
   formData,
@@ -19,7 +21,18 @@ const OrganizationProfile = ({
       <div className="w-full bg-white dark:bg-neutral-900 rounded-lg shadow-md overflow-hidden border border-gray-200 dark:border-neutral-700">
         {/* Banner */}
         <div className="relative h-64 w-full bg-gray-200 dark:bg-neutral-800">
-          {formData.bannerUrl ? (
+          {isEditing ? (
+            <ImageUpload
+              name="banner"
+              className="absolute inset-0 w-full h-full"
+              defaultImage={formData.bannerUrl}
+              altText={`${formData.name} banner`}
+            >
+              <span className="absolute top-3 right-3 p-2 bg-white dark:bg-neutral-900 rounded-full shadow-md">
+                <CameraIcon className="w-5 h-5" />
+              </span>
+            </ImageUpload>
+          ) : formData.bannerUrl ? (
             <Image
               src={formData.bannerUrl}
               alt={`${formData.name} banner`}
@@ -27,30 +40,85 @@ const OrganizationProfile = ({
               className="object-cover"
             />
           ) : (
-            <div className="h-full flex items-center justify-center text-gray-500 dark:text-gray-400 text-sm">
+            <div className="h-full w-full flex items-center justify-center text-gray-500 dark:text-gray-400 text-sm">
               No banner uploaded
             </div>
           )}
+          {/* Action Buttons */}
+          <div className="absolute bottom-4 right-4 z-20">
+            {isOwner && !isEditing && (
+              <div className="flex items-center gap-2">
+                <Link
+                  href={`/communities/${formData._id}/edit`}
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500"
+                >
+                  Edit Page
+                </Link>
+                <Link
+                  href={`/communities/${formData._id}/posts/create`}
+                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
+                >
+                  Create Post
+                </Link>
+              </div>
+            )}
+            {isEditing && (
+              <div className="flex items-center gap-2">
+                <Link
+                  href={`/communities/${formData._id}`}
+                  className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-500"
+                >
+                  Cancel
+                </Link>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
+                >
+                  Save Changes
+                </button>
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Profile & Name */}
         <div className="relative px-6 -mt-16 flex flex-col sm:flex-row sm:items-end sm:justify-between">
-          <div className="flex items-end gap-4">
-            <div className="relative w-32 h-32 rounded-full overflow-hidden border-4 border-white dark:border-neutral-900 bg-gray-100 shrink-0">
-              <Image
-                src={formData.image || '/assets/icons/cross-logo.jpg'}
-                alt={`${formData.name} logo`}
-                fill
-                className="object-cover"
-              />
+          <div className="flex flex-row gap-5">
+            <div className="relative w-32 h-32 shrink-0">
+              <div className="w-full h-full rounded-full overflow-hidden border-4 border-white dark:border-neutral-900 bg-gray-100 shrink-0">
+                {isEditing ? (
+                  <ImageUpload
+                    name="image"
+                    className="w-full h-full"
+                    defaultImage={
+                      formData.image || '/assets/icons/cross-logo.jpg'
+                    }
+                    altText={`${formData.name} logo`}
+                  />
+                ) : (
+                  <div className="w-full h-full relative">
+                    <Image
+                      src={formData.image || '/assets/icons/cross-logo.jpg'}
+                      alt={`${formData.name} logo`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                )}
+              </div>
+              {isEditing && (
+                <span className="absolute bottom-0 right-0 p-2 bg-white dark:bg-neutral-900 rounded-full shadow-md z-10">
+                  <CameraIcon className="w-5 h-5" />
+                </span>
+              )}
             </div>
-            <div className="mb-0.5">
+            <div className="mt-auto mb-0.5">
               {isEditing ? (
                 <>
                   <input
                     name="name"
                     defaultValue={formData.name}
-                    className="mt-1 w-full p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
+                    className="text-3xl font-bold border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
                     placeholder="Organization Name"
                   />
                   <input type="hidden" name="type" value={formData.type} />
@@ -65,34 +133,6 @@ const OrganizationProfile = ({
                   formData.type?.slice(1)}
               </p>
             </div>
-          </div>
-
-          {/* Action Buttons */}
-          <div className="mt-4 sm:mt-0 space-x-2">
-            {isOwner && !isEditing && (
-              <Link
-                href={`/communities/${formData._id}/edit`}
-                className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500"
-              >
-                Edit Page
-              </Link>
-            )}
-            {isEditing && (
-              <>
-                <Link
-                  href={`/communities/${formData._id}`}
-                  className="px-4 py-2 bg-gray-600 text-white rounded-md hover:bg-gray-500"
-                >
-                  Cancel
-                </Link>
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
-                >
-                  Save Changes
-                </button>
-              </>
-            )}
           </div>
         </div>
 

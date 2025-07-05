@@ -147,3 +147,36 @@ body::before {
 .flex-start {
   @apply flex justify-start items-start;
 }
+
+.masonry-grid {
+  display: flex;
+  margin-left: -1rem;
+  width: auto;
+  gap: 1rem;
+}
+
+.masonry-grid_column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.organization_card_title {
+  color: #000;
+  text-shadow:
+    0 0 2px #fff,
+    0 0 2px #fff,
+    0 0 2px #fff,
+    0 0 2px #fff;
+}
+
+.dark .organization_card_title {
+  color: #fff;
+  text-shadow:
+    0 0 2px #000,
+    0 0 2px #000,
+    0 0 2px #000,
+    0 0 2px #000;
+}
+
+/* === Posts === */

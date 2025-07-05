@@ -5,8 +5,8 @@ import { options } from '@app/api/auth/[...nextauth]/options';
 import OrganizationProfile from '@components/OrganizationProfile';
 
 const Page = async ({ params }) => {
-  const { id } = await params;
-  const organization = await fetchOrganization(id);
+  const { orgId } = await params;
+  const organization = await fetchOrganization(orgId);
   const session = await getServerSession(options);
   const userId = session?.user?.id; // Changed from userId to id
   const isOwner = userId === organization?.owner?._id;

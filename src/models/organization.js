@@ -31,6 +31,22 @@ const OrganizationSchema = new Schema({
     type: String,
     required: [true, 'Address is required'],
   },
+  website: {
+    type: String,
+    required: false,
+    validate: {
+      validator: function (v) {
+        // Allow empty, undefined, or valid URLs
+        return (
+          !v ||
+          /^(https?:\/\/)?([\w\-]+\.)+[\w\-]+(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/.test(
+            v
+          )
+        );
+      },
+      message: 'Please enter a valid URL',
+    },
+  },
   image: {
     type: String,
   },
@@ -58,6 +74,19 @@ const OrganizationSchema = new Schema({
     type: String,
     enum: ['church', 'school', 'organization'],
   },
+  members: [
+    {
+      user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
+      role: {
+        type: String,
+        enum: ['admin', 'editor', 'viewer'],
+        default: 'viewer',
+      },
+    },
+  ],
 });
 
 const Organization =

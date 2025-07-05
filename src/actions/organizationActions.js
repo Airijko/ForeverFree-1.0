@@ -4,11 +4,12 @@ import { connectToDB } from '@utils/database';
 import Organization from '@models/organization';
 import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';
-import mongoose from 'mongoose';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import Card from '@components/Card';
-import { handleFileUpload, deleteUploadedFile } from '@utils/fileUpload';
+import OrganizationCard from '@components/Cards/OrganizationCard';
+import { handleFileUpload } from '@utils/fileUpload';
+
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
 
 // ✅ Fetch all organizations
 export const fetchAllOrganizations = async () => {
@@ -26,7 +27,11 @@ export const fetchAllOrganizations = async () => {
 
 export const mapOrganizations = async (data) => {
   return data.map((organization, index) => (
-    <Card organization={organization} key={organization._id} index={index} />
+    <OrganizationCard
+      organization={organization}
+      key={organization._id}
+      index={index}
+    />
   ));
 };
 
@@ -63,14 +68,34 @@ const extractOrganizationData = async (formData) => {
   const imageFile = formData.get('image');
   const bannerFile = formData.get('banner');
 
+  // === File size validation ===
+  if (
+    imageFile &&
+    imageFile instanceof File &&
+    imageFile.size > MAX_FILE_SIZE
+  ) {
+    return {
+      error: 'Image file is too large. Maximum size is 5 MB.',
+      status: 400,
+    };
+  }
+  if (
+    bannerFile &&
+    bannerFile instanceof File &&
+    bannerFile.size > MAX_FILE_SIZE
+  ) {
+    return {
+      error: 'Banner file is too large. Maximum size is 5 MB.',
+      status: 400,
+    };
+  }
+
   let imageUrl = null;
   let bannerUrl = null;
 
-  // Only process files if they are actual File objects with content
   if (imageFile && imageFile instanceof File && imageFile.size > 0) {
     imageUrl = await handleFileUpload(imageFile, 'organizations');
   }
-
   if (bannerFile && bannerFile instanceof File && bannerFile.size > 0) {
     bannerUrl = await handleFileUpload(bannerFile, 'banners');
   }
@@ -100,6 +125,7 @@ const extractOrganizationData = async (formData) => {
     address: formData.get('address'),
     phone: formData.get('phone'),
     email: formData.get('email'),
+    website: formData.get('website'),
     type,
     isChurch,
     language: formData.get('language') || 'English',
@@ -129,15 +155,12 @@ const handleOrganization = async (id, formData, isEdit = false) => {
   }
 
   const userId = session.user.id;
-
   const orgData = await extractOrganizationData(formData);
 
   try {
     await connectToDB();
 
     let organization;
-    let oldImageUrl = null;
-    let oldBannerUrl = null;
 
     if (isEdit) {
       organization = await Organization.findById(id);
@@ -152,41 +175,24 @@ const handleOrganization = async (id, formData, isEdit = false) => {
           status: 403,
         };
       }
-
-      // Store old URLs for cleanup if new files are uploaded
-      oldImageUrl = organization.image;
-      oldBannerUrl = organization.bannerUrl;
     } else {
+      // NEW: Add creator as owner and admin-level member
       organization = new Organization({
         ...orgData,
         owner: userId,
+        members: [
+          {
+            user: userId,
+            role: 'admin',
+          },
+        ],
       });
     }
 
-    // Update with new data (including new file URLs if any)
+    // Update with new data (excluding old file cleanup for simplicity)
     Object.assign(organization, orgData);
 
-    // Debug: Log the organization before saving
-    // console.log('Organization before save:', organization.toObject());
-
     await organization.save();
-
-    // Debug: Log the organization after saving
-    // console.log('Organization after save:', organization.toObject());
-
-    // Clean up old files if new ones were uploaded
-    if (isEdit) {
-      if (orgData.image && oldImageUrl && oldImageUrl !== orgData.image) {
-        deleteUploadedFile(oldImageUrl);
-      }
-      if (
-        orgData.bannerUrl &&
-        oldBannerUrl &&
-        oldBannerUrl !== orgData.bannerUrl
-      ) {
-        deleteUploadedFile(oldBannerUrl);
-      }
-    }
 
     revalidatePath('/communities');
     revalidatePath(`/communities/${organization._id}`);
