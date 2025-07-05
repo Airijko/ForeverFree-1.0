@@ -35,9 +35,6 @@ const ServiceTimesView = ({ services = [] }) => {
   if (!normalized.length) return null;
   return (
     <div>
-      <span className="font-satoshi font-semibold text-base text-gray-700 dark:text-gray-300">
-        Services
-      </span>
       {normalized.map((service, sIndex) => (
         <div
           key={sIndex}

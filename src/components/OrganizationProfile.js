@@ -120,118 +120,119 @@ const OrganizationProfile = ({
 
           {/* Info Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700 dark:text-gray-300">
-            {/* Address */}
-            <div className="flex items-center gap-2">
-              <MapPinIcon className="w-4 h-4" />
-              {isEditing ? (
-                <input
-                  name="address"
-                  defaultValue={formData.address}
-                  className="w-full p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
-                  placeholder="Address"
-                />
-              ) : (
-                formData.address
-              )}
-            </div>
-
-            {/* Phone */}
-            <div className="flex items-center gap-2">
-              <PhoneIcon className="w-4 h-4" />
-              {isEditing ? (
-                <input
-                  name="phone"
-                  defaultValue={formData.phone}
-                  className="w-full p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
-                  placeholder="Phone number"
-                />
-              ) : (
-                <p className="truncate">{formData.phone}</p>
-              )}
-            </div>
-
-            {/* Email */}
-            <div className="flex items-center gap-2">
-              <EnvelopeIcon className="w-4 h-4" />
-              {isEditing ? (
-                <input
-                  name="email"
-                  type="email"
-                  defaultValue={formData.email}
-                  className="w-full p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
-                  placeholder="Email"
-                />
-              ) : (
-                formData.email
-              )}
-            </div>
-
-            {/* Language */}
-            <div>
-              <strong>Language:</strong>{' '}
-              {isEditing ? (
-                <input
-                  name="language"
-                  defaultValue={formData.language || ''}
-                  className="w-full p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
-                  placeholder="Language"
-                />
-              ) : (
-                formData.language
-              )}
-            </div>
-
-            {/* Denomination */}
-            {formData.type === 'church' && (
-              <div>
-                <strong>Denomination:</strong>{' '}
+            <div className="space-y-1">
+              {/* Address */}
+              <div className="flex items-center gap-2">
+                <MapPinIcon className="w-4 h-4" />
                 {isEditing ? (
                   <input
-                    name="denomination"
-                    defaultValue={formData.denomination || ''}
+                    name="address"
+                    defaultValue={formData.address}
                     className="w-full p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
-                    placeholder="Denomination"
+                    placeholder="Address"
                   />
                 ) : (
-                  formData.denomination
+                  <span>{formData.address}</span>
                 )}
               </div>
-            )}
 
-            {/* Approval Status */}
-            <div>
-              <strong>Approved:</strong>{' '}
-              {isEditing ? (
-                <select
-                  name="isApproved"
-                  defaultValue={formData.isApproved ? 'true' : 'false'}
-                  className="p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
-                >
-                  <option value="false">No</option>
-                  <option value="true">Yes</option>
-                </select>
-              ) : formData.isApproved ? (
-                'Yes'
-              ) : (
-                'No'
-              )}
+              {/* Email */}
+              <div className="flex items-center gap-2">
+                <EnvelopeIcon className="w-4 h-4" />
+                {isEditing ? (
+                  <input
+                    name="email"
+                    type="email"
+                    defaultValue={formData.email}
+                    className="w-full p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
+                    placeholder="Email"
+                  />
+                ) : (
+                  formData.email
+                )}
+              </div>
+
+              {/* Phone */}
+              <div className="flex items-center gap-2">
+                <PhoneIcon className="w-4 h-4" />
+                {isEditing ? (
+                  <input
+                    name="phone"
+                    defaultValue={formData.phone}
+                    className="w-full p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
+                    placeholder="Phone number"
+                  />
+                ) : (
+                  <p className="truncate">{formData.phone}</p>
+                )}
+              </div>
+              {/* Language */}
+              <div className="space-y-1">
+                <div className="mt-4">
+                  <strong>Language:</strong>{' '}
+                  {isEditing ? (
+                    <input
+                      name="language"
+                      defaultValue={formData.language || ''}
+                      className="w-full p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
+                      placeholder="Language"
+                    />
+                  ) : (
+                    <span>{formData.language}</span>
+                  )}
+                </div>
+                {/* Denomination */}
+                {formData.type === 'church' && (
+                  <div>
+                    <strong>Denomination:</strong>{' '}
+                    {isEditing ? (
+                      <input
+                        name="denomination"
+                        defaultValue={formData.denomination || ''}
+                        className="w-full p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
+                        placeholder="Denomination"
+                      />
+                    ) : (
+                      <span>{formData.denomination}</span>
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="space-y-1">
+              {/* Service Times (if church) */}
+              {formData.type === 'church' &&
+                (isEditing ? (
+                  <ServiceInput initialServices={formData.services || []} />
+                ) : (
+                  <ServiceTimesView services={formData.services || []} />
+                ))}
+
+              {/* Approval Status */}
+              <div>
+                <strong>Approved:</strong>{' '}
+                {isEditing ? (
+                  <select
+                    name="isApproved"
+                    defaultValue={formData.isApproved ? 'true' : 'false'}
+                    className="p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
+                  >
+                    <option value="false">No</option>
+                    <option value="true">Yes</option>
+                  </select>
+                ) : formData.isApproved ? (
+                  'Yes'
+                ) : (
+                  'No'
+                )}
+              </div>
             </div>
           </div>
 
-          {/* Service Times (if church) */}
-          {formData.type === 'church' &&
-            (isEditing ? (
-              <ServiceInput initialServices={formData.services || []} />
-            ) : (
-              <ServiceTimesView services={formData.services || []} />
-            ))}
-
           {/* Owner Info */}
           {!isEditing && formData.owner && (
-            <div className="pt-4 border-t border-gray-200 dark:border-neutral-800">
-              <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
-                Owner Info
-              </h2>
+            <div className="bg-gray-50 dark:bg-neutral-800 p-4 rounded-md mt-6 text-sm">
+              <h3 className="font-semibold mb-2">Owner Info</h3>
               <p>
                 <strong>Username:</strong> {formData.owner.username}
               </p>

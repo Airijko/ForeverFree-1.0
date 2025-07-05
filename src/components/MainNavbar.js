@@ -24,9 +24,6 @@ const MainNavbar = async () => {
         <Link href="/" className="btn-glow">
           Home
         </Link>
-        <Link href="/about" className="btn-glow">
-          About
-        </Link>
         <Link href="/communities" className="btn-glow">
           Communities
         </Link>

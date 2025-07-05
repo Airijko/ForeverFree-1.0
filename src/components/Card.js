@@ -68,17 +68,21 @@ const Card = async ({ organization, index }) => {
 
             {/* Name & Location */}
             <div className="flex flex-col justify-end pb-3 text-gray-900 dark:text-white w-full">
-              <h1 className="text-2xl font-semibold truncate">
+              <h1 className="text-2xl font-semibold break-words whitespace-normal">
                 {organization.name}
               </h1>
-              <div className="mt-1 flex justify-between items-center text-sm text-gray-600 dark:text-gray-300 gap-1">
-                <span className="flex items-center gap-1">
+              <div className="mt-1 flex flex-col sm:flex-row flex-wrap justify-between items-start sm:items-center text-sm text-gray-600 dark:text-gray-300 gap-1 min-w-0">
+                <span className="flex items-center gap-1 min-w-0">
                   <MapPinIcon className="w-4 h-4 shrink-0" />
-                  <p className="truncate">{organization.address}</p>
+                  <p className="break-words whitespace-normal min-w-0">
+                    {organization.address}
+                  </p>
                 </span>
-                <span className="flex items-center gap-1">
+                <span className="flex items-center gap-1 min-w-0">
                   <PhoneIcon className="w-4 h-4 shrink-0" />
-                  <p className="truncate">{organization.phone}</p>
+                  <p className="break-words whitespace-normal min-w-0">
+                    {organization.phone}
+                  </p>
                 </span>
               </div>
             </div>

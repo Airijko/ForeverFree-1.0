@@ -1,20 +1,60 @@
 import { Schema, model, models } from 'mongoose';
 
-const PostScheme = new Schema({
-  creator: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-  },
-  prompt: {
-    type: String,
-    required: [true, 'Prompt is required'],
-  },
-  tag: {
-    type: String,
-    required: [true, 'Tag is required'],
-  },
-});
+const PostSchema = new Schema(
+  {
+    creator: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    organization: {
+      type: Schema.Types.ObjectId,
+      ref: 'Organization',
+      required: true,
+    },
 
-const Post = models.Post || model('Post', PostScheme);
+    title: { type: String, required: true },
+    description: { type: String, required: true },
+
+    eventType: {
+      type: String,
+      enum: [
+        'Worship',
+        'Retreat',
+        'Outreach',
+        'Prayer',
+        'Bible Study',
+        'Social',
+        'Fundraiser',
+        'Conference',
+        'Camp',
+        'Other',
+      ],
+      default: 'Other',
+    },
+
+    groupTarget: {
+      type: String,
+      enum: ['Kids', 'Youth', 'Young Adults', 'Adults', 'Seniors', 'All Ages'],
+      default: 'All Ages',
+    },
+
+    startDate: { type: Date, required: true },
+    endDate: Date,
+    startTime: String,
+    endTime: String,
+
+    location: { type: String, required: true },
+
+    isFree: { type: Boolean, default: true },
+    price: { type: Number, default: 0 },
+    currency: { type: String, default: 'USD' },
+
+    registrationLink: String,
+    image: String,
+    bannerUrl: String,
+
+    tags: [String],
+  },
+  { timestamps: true }
+);
+
+const Post = models.Post || model('Post', PostSchema);
 
 export default Post;
