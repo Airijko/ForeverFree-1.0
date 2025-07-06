@@ -40,7 +40,7 @@ const MainNavbar = async () => {
 
       <div className="flex items-center gap-x-4">
         <div className="hidden md:flex items-center gap-x-4">
-          {['Home', 'Communities', 'Reconquista', 'Admin'].map((label) => (
+          {['Communities', 'Reconquista'].map((label) => (
             <Link
               key={label}
               href={`/${label.toLowerCase()}`}
