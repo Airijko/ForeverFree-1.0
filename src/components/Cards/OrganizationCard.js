@@ -9,15 +9,11 @@ import {
 
 const OrganizationCard = async ({ organization, index }) => {
   return (
-    <div className="w-full transition-transform duration-300 hover:scale-105">
+    <div className="w-full hover:scale-105 shadow-md hover:shadow-xl overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 transition-all duration-300">
       <Link
         href={`/communities/${organization._id}`}
-        className="p-2 relative w-full h-full overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 transition-shadow duration-300 hover:shadow-lg flex flex-col"
+        className="p-2 relative w-full h-full flex flex-col"
       >
-        {/* <span className="absolute top-2 left-2 z-20 bg-yellow-200 text-yellow-800 text-xs font-bold px-2 py-1 rounded shadow">
-          #{index}
-        </span> */}
-
         {/* Content Section */}
         <div className="flex flex-row min-h-[8rem]">
           {/* Profile Image - full height left */}

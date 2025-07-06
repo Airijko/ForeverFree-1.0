@@ -144,7 +144,6 @@ body::before {
 
 .masonry-grid {
   display: flex;
-  margin-left: -1rem;
   gap: 1rem;
 }
 
@@ -170,4 +169,9 @@ body::before {
     0 0 2px #000,
     0 0 2px #000,
     0 0 2px #000;
+}
+
+.heading-3 {
+  @apply text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-300 tracking-tight mb-2 pb-1  dark:border-gray-800 w-fit;
+  letter-spacing: -0.01em;
 }

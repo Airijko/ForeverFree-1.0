@@ -26,7 +26,9 @@ const Communities = async () => {
         </div>
       </MainHeader>
 
-      <ListCommunities data={data} />
+      <div className="w-full max-w-5xl mx-auto py-8">
+        <ListCommunities data={data} />
+      </div>
     </section>
   );
 };

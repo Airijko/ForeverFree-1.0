@@ -8,7 +8,7 @@ const ListCommunities = async ({ data }) => {
   const organizations = await mapOrganizations(data);
 
   return (
-    <section className="w-full max-w-5xl mx-auto py-8">
+    <section className="w-full">
       {/* Card List */}
       <WrapCommunities>{organizations}</WrapCommunities>
     </section>
