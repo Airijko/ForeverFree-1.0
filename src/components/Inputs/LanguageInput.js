@@ -28,7 +28,7 @@ const LanguageInput = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col">
       <label className="font-satoshi font-semibold text-base text-gray-700 dark:text-gray-300">
         Languages
       </label>

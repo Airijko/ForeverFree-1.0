@@ -8,6 +8,7 @@ import Link from 'next/link';
 import LanguageInput from '@components/Inputs/LanguageInput';
 import PhoneInput from '@components/Inputs/PhoneInput';
 import ServiceInput from '@components/Inputs/ServiceInput';
+import MainHeader from '@components/MainHeader';
 
 const CreateCommunity = () => {
   const [selectedType, setSelectedType] = useState('');
@@ -39,15 +40,18 @@ const CreateCommunity = () => {
   };
 
   return (
-    <section className="w-full max-w-xl mx-auto flex flex-col items-start px-4">
-      <h1 className="head_text text-left">
-        <span className="blue_gradient">Register Organization</span>
-      </h1>
-      <p className="desc text-left max-w-md">Register your Institution</p>
-
+    <section className="w-full max-w-xl mx-auto flex flex-col items-start my-20 xl:mt-6 bg-red-500 rounded-lg shadow-lg overflow-auto">
+      <header className="w-full flex flex-col items-center justify-end py-8 bg-gradient-to-t from-blue-200 to-blue-300">
+        <h1 className="text-left text-5xl font-extrabold leading-tight tracking-tight text-gray-900 dark:text-white">
+          <span className="blue_gradient">Register Organization</span>
+        </h1>
+        <p className="text-left max-w-md text-sm text-neutral-500">
+          Fill out the form below to register your community.
+        </p>
+      </header>
       <form
         action={clientAction}
-        className="mt-10 w-full max-w-2xl flex flex-col gap-7 glassmorphism"
+        className="w-full max-w-xl flex flex-col gap-5 glassmorphism bg-neutral-100 p-5"
       >
         {/* Name */}
         <label>
@@ -95,10 +99,22 @@ const CreateCommunity = () => {
         </label>
 
         {/* Language */}
-        <LanguageInput />
+        <div className="flex flex-row gap-4">
+          {/* Address */}
+          <label>
+            <span className="font-satoshi font-semibold text-base text-gray-700 dark:text-gray-300">
+              Website
+            </span>
+            <input
+              name="website"
+              type="text"
+              placeholder="Website"
+              className="form_input"
+            />
+          </label>
 
-        {/* Image Upload */}
-        <ImageCropper setImage={setCroppedImage} />
+          <LanguageInput />
+        </div>
 
         {/* Type */}
         <label>
@@ -135,6 +151,9 @@ const CreateCommunity = () => {
             />
           </>
         )}
+
+        {/* Image Upload */}
+        <ImageCropper setImage={setCroppedImage} />
 
         {/* Submit + Cancel */}
         <div className="flex-end mx-3 mb-5 gap-4">
