@@ -8,7 +8,7 @@ const Page = async ({ params }) => {
   const { orgId } = await params;
   const organization = await fetchOrganization(orgId);
   const session = await getServerSession(options);
-  const userId = session?.user?.id; // Changed from userId to id
+  const userId = session?.user?.id;
   const isOwner = userId === organization?.owner?._id;
 
   if (!organization) {

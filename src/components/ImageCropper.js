@@ -57,7 +57,7 @@ const ImageCropper = ({ setImage }) => {
       {/* Upload Label */}
       <label
         htmlFor="image-upload"
-        className="inline-block cursor-pointer bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition"
+        className="inline-block cursor-pointer bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-md text-sm font-medium transition"
       >
         Upload Profile Image
       </label>

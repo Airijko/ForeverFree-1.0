@@ -122,7 +122,6 @@ const extractOrganizationData = async (formData) => {
 
   const data = {
     name: formData.get('name'),
-    address: formData.get('address'),
     phone: formData.get('phone'),
     email: formData.get('email'),
     website: formData.get('website'),
@@ -133,6 +132,12 @@ const extractOrganizationData = async (formData) => {
     description: formData.get('description') || '',
     denomination: isChurch ? formData.get('denomination') : undefined,
     isApproved: formData.get('isApproved') === 'true',
+    location: {
+      street: formData.get('street'),
+      city: formData.get('city'),
+      province: formData.get('province'),
+      country: formData.get('country'),
+    },
   };
 
   // Only add image/banner URLs if we have new uploads

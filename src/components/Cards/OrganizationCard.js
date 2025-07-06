@@ -43,7 +43,7 @@ const OrganizationCard = async ({ organization, index }) => {
                 <span className="flex items-center gap-1 min-w-0">
                   <MapPinIcon className="w-4 h-4 shrink-0" />
                   <p className="break-words whitespace-normal min-w-0">
-                    {organization.address}
+                    {organization.location.street}
                   </p>
                 </span>
                 <span className="flex items-center gap-1 min-w-0">

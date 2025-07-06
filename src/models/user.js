@@ -21,9 +21,6 @@ const UserSchema = new Schema({
     type: String,
     default: 'User',
   },
-  test: {
-    type: String,
-  },
   organizations: [
     {
       type: Schema.Types.ObjectId,

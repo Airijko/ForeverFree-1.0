@@ -11,6 +11,7 @@ import ServiceInput from './Inputs/ServiceInput';
 import ServiceTimesView from './Views/ServiceTimesView';
 import ImageUpload from './Inputs/ImageUpload';
 import DynamicHeader from './DynamicHeader';
+import LocationInput from './Inputs/LocationInput';
 
 const OrganizationProfile = ({
   formData,
@@ -30,7 +31,7 @@ const OrganizationProfile = ({
                 defaultImage={formData.bannerUrl}
                 altText={`${formData.name} banner`}
               >
-                <span className="absolute top-3 right-3 p-2 bg-white dark:bg-neutral-900 rounded-full shadow-md">
+                <span className="absolute bottom-3 left-3 p-2 bg-white dark:bg-neutral-900 rounded-full shadow-md">
                   <CameraIcon className="w-5 h-5" />
                 </span>
               </ImageUpload>
@@ -182,19 +183,20 @@ const OrganizationProfile = ({
           {/* Info Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-gray-700 dark:text-gray-300">
             <div className="space-y-1">
-              {/* Address */}
-              <div className="flex items-center gap-2">
-                <MapPinIcon className="w-4 h-4" />
-                {isEditing ? (
-                  <input
-                    name="address"
-                    defaultValue={formData.address}
-                    className="w-full p-1 border border-gray-300 rounded dark:bg-neutral-800 dark:border-neutral-700"
-                    placeholder="Address"
-                  />
-                ) : (
-                  <span>{formData.address}</span>
-                )}
+              {/* Location */}
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-2">
+                  <MapPinIcon className="w-4 h-4" />
+                  {isEditing ? (
+                    <LocationInput formData={formData} isEditing />
+                  ) : (
+                    <span>
+                      {formData.location?.street}, {formData.location?.city},{' '}
+                      {formData.location?.province},{' '}
+                      {formData.location?.country}
+                    </span>
+                  )}
+                </div>
               </div>
 
               {/* Email */}

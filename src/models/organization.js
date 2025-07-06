@@ -27,9 +27,11 @@ const OrganizationSchema = new Schema({
     type: String,
     required: [true, 'Phone is required'],
   },
-  address: {
-    type: String,
-    required: [true, 'Address is required'],
+  location: {
+    street: { type: String, required: true },
+    city: { type: String, required: true },
+    province: { type: String, required: true },
+    country: { type: String, required: true },
   },
   website: {
     type: String,
