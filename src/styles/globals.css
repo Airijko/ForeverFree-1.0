@@ -15,14 +15,6 @@ body {
 html {
   font-family: 'Inter', sans-serif;
   scroll-behavior: smooth;
-  background-color: theme('colors.secondary');
-  color: theme('colors.primary');
-}
-
-/* === Base Theme Background Image === */
-body {
-  font-family: 'Inter', sans-serif;
-  scroll-behavior: smooth;
 
   background-image: url('/assets/images/sitebackground.svg');
   background-repeat: no-repeat;
@@ -108,7 +100,7 @@ body::before {
 
 /* === Typography === */
 .head_text {
-  @apply mt-5 font-semibold leading-tight text-primary md:text-4xl;
+  @apply font-semibold text-primary;
 }
 
 .blue_gradient {
@@ -116,7 +108,7 @@ body::before {
 }
 
 .desc {
-  @apply mt-5 text-lg text-gray-600 dark:text-gray-300 sm:text-xl;
+  @apply mt-5 text-lg text-gray-600  sm:text-xl;
 }
 /* === Forms === */
 .search_input,
@@ -153,7 +145,6 @@ body::before {
 .masonry-grid {
   display: flex;
   margin-left: -1rem;
-  width: auto;
   gap: 1rem;
 }
 

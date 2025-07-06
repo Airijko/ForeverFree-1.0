@@ -8,14 +8,7 @@ const ListCommunities = async ({ data }) => {
   const organizations = await mapOrganizations(data);
 
   return (
-    <section className="feed">
-      {/* Register Button */}
-      <div className="flex justify-end w-full mb-6">
-        <Link href="/communities/register" className="btn btn-outline">
-          Register Organization
-        </Link>
-      </div>
-
+    <section className="w-full max-w-5xl mx-auto py-8">
       {/* Card List */}
       <WrapCommunities>{organizations}</WrapCommunities>
     </section>

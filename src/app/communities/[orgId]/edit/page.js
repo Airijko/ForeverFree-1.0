@@ -44,7 +44,7 @@ const EditPage = async ({ params }) => {
           You can only edit organizations that you own.
         </p>
         <Link
-          href={`/communities/${id}`}
+          href={`/communities/${orgId}`}
           className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500"
         >
           Back to Organization
@@ -55,7 +55,7 @@ const EditPage = async ({ params }) => {
 
   const clientAction = async (data) => {
     'use server';
-    const result = await updateOrganization(id, data);
+    const result = await updateOrganization(orgId, data);
     if (result && !result.error) {
       // Handle success - maybe redirect or show success message
       console.log('Success:', result);
