@@ -8,7 +8,7 @@ import { options } from '@app/api/auth/[...nextauth]/options';
 import Link from 'next/link';
 
 const EditPage = async ({ params }) => {
-  const { id } = await params;
+  const { orgId } = await params;
   const session = await getServerSession(options);
   const userId = session?.user?.id;
 
@@ -32,7 +32,7 @@ const EditPage = async ({ params }) => {
     );
   }
 
-  const data = await fetchOrganization(id);
+  const data = await fetchOrganization(orgId);
   const isOwner = userId === data?.owner?._id;
 
   // Redirect if user is not the owner

@@ -4,9 +4,8 @@
 import Masonry from 'react-masonry-css';
 
 const breakpointColumnsObj = {
-  default: 3,
-  1024: 2,
-  640: 1,
+  default: 2,
+  850: 1,
 };
 
 const WrapCommunities = ({ children }) => {
