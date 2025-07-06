@@ -119,7 +119,7 @@ const OrganizationProfile = ({
         </div>
       </DynamicHeader>
       {/* Main Content */}
-      <div className="pt-4 w-full bg-white dark:bg-neutral-900 rounded-lg shadow-md overflow-hidden max-w-5xl">
+      <div className="pt-4 w-full bg-white dark:bg-neutral-900 rounded-b-lg shadow-md overflow-hidden max-w-5xl">
         <div className="leading-none mb-0.5 text-center">
           {isEditing ? (
             <>
