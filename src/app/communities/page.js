@@ -31,8 +31,8 @@ const Communities = async () => {
         </div>
       </MainHeader>
 
-      <div className="w-full max-w-5xl mx-auto py-8">
-        <ListCommunities data={data} />
+      <div className="mx-auto py-8">
+        <ListCommunities data={data} columns={3} />
       </div>
     </section>
   );

@@ -46,7 +46,7 @@ const Home = async () => {
         </div>
         <div className="flex flex-col gap-4">
           <h3 className="heading-3">Explore Christian Communities</h3>
-          <ListCommunities data={recentCommunities} />
+          <ListCommunities data={recentCommunities} columns={2} />
         </div>
       </div>
     </section>

@@ -3,12 +3,7 @@
 
 import Masonry from 'react-masonry-css';
 
-const breakpointColumnsObj = {
-  default: 2,
-  850: 1,
-};
-
-const Wrapper = ({ children }) => {
+const Wrapper = ({ children, breakpointColumnsObj }) => {
   return (
     <Masonry
       breakpointCols={breakpointColumnsObj}
