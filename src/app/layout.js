@@ -7,6 +7,9 @@ import Provider from '@components/Provider';
 export const metadata = {
   title: 'Forever Free',
   description: 'Find Events in Your Local Area',
+  icons: {
+    icon: '/assets/icons/ForeverFree_Logo.png',
+  },
 };
 
 const RootLayout = async ({ children }) => {

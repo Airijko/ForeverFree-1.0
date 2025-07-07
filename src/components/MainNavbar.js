@@ -18,21 +18,29 @@ const MainNavbar = async () => {
       transition-all duration-300
     "
     >
-      <Link href="/" className="flex gap-4 items-center">
+      <Link
+        href="/"
+        className="flex gap-4 items-center group transition-all duration-200 ease-in-out hover:opacity-90 hover:scale-[1.02]"
+        aria-label="Go to homepage"
+      >
         <Image
-          src="/assets/icons/kingdomofheaven.png"
-          width={30}
-          height={30}
+          src="/assets/icons/ForeverFree_Logo.png"
+          width={50}
+          height={50}
           alt="ForeverFree Logo"
+          className="transition-transform duration-200 group-hover:scale-105 drop-shadow-[0_0_2px_black]"
         />
+
         <h1
           className="
-          text-3xl font-extrabold
-          text-gray-900 dark:text-gray-100
-          drop-shadow-md
-          select-none
-          tracking-wide
-        "
+      text-3xl font-extrabold
+      text-gray-900 dark:text-gray-100
+      drop-shadow-md
+      select-none
+      tracking-wide
+      transition-colors duration-200
+      group-hover:text-amber-600 dark:group-hover:text-amber-400
+    "
         >
           Forever Free
         </h1>
@@ -60,16 +68,23 @@ const MainNavbar = async () => {
         </div>
 
         {/* ThemeToggle wrapper with background & border */}
-
         <ThemeToggle />
 
         {session ? (
           <Link
             href="/api/auth/signout?callbackUrl=/"
             className="
-              btn btn-primary ml-4
-              select-none
-            "
+      flex items-center gap-2 ml-4
+      px-4 py-2 rounded-xl
+      bg-white/70 dark:bg-neutral-900/70
+      text-gray-900 dark:text-gray-100
+      font-semibold shadow
+      backdrop-blur-md
+      border border-gray-200 dark:border-neutral-800
+      hover:bg-amber-600 hover:text-white dark:hover:bg-amber-400 dark:hover:text-neutral-900
+      transition-all duration-200
+      select-none
+    "
           >
             Logout
           </Link>
@@ -77,9 +92,17 @@ const MainNavbar = async () => {
           <Link
             href="/api/auth/signin"
             className="
-              btn btn-primary ml-4
-              select-none
-            "
+      flex items-center gap-2 ml-4
+      px-4 py-2 rounded-xl
+      bg-white/70 dark:bg-neutral-900/70
+      text-gray-900 dark:text-gray-100
+      font-semibold shadow
+      backdrop-blur-md
+      border border-gray-200 dark:border-neutral-800
+      hover:bg-amber-600 hover:text-white dark:hover:bg-amber-400 dark:hover:text-neutral-900
+      transition-all duration-200
+      select-none
+    "
           >
             Login
           </Link>
