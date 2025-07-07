@@ -1,7 +1,41 @@
-export default function Events() {
+import { fetchAllPosts } from '@actions/postActions';
+import PostCard from '@components/Cards/PostCard';
+import SearchBar from '@components/Inputs/SearchBar';
+import MainHeader from '@components/MainHeader';
+import Link from 'next/link';
+import ListPosts from '@components/Posts/ListPosts';
+
+const Events = async () => {
+  const data = await fetchAllPosts();
   return (
-    <div>
-      <h1>Hello World! EVENTS</h1>
-    </div>
+    <section className="w-full flex flex-col items-center justify-center">
+      <MainHeader>
+        <div className="flex flex-col items-center justify-end h-full w-full max-w-5xl">
+          <h1 className="head_text w-full text-center text-6xl font-bold mb-8">
+            <span className="block">Christian</span>
+            <span className="block">Events</span>
+          </h1>
+          {/* Search Bar */}
+          <SearchBar></SearchBar>
+          {/* Register Button */}
+          <div className="w-full flex justify-end mt-1 mb-4">
+            <Link href="/communities/posts">
+              <button
+                type="button"
+                className="items-center justify-center px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-400 dark:focus:ring-blue-300 transition-all duration-200"
+              >
+                Create Event
+              </button>
+            </Link>
+          </div>
+        </div>
+      </MainHeader>
+
+      <div className="w-full max-w-5xl mx-auto py-8">
+        <ListPosts data={data} />
+      </div>
+    </section>
   );
-}
+};
+
+export default Events;

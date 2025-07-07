@@ -48,7 +48,6 @@ const PostSchema = new Schema(
 
     registrationLink: String,
     image: String,
-    bannerUrl: String,
 
     tags: [String],
   },

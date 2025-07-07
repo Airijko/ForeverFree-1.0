@@ -18,9 +18,14 @@ const Communities = async () => {
           {/* Search Bar */}
           <SearchBar></SearchBar>
           {/* Register Button */}
-          <div className="ml-auto mb-6">
-            <Link href="/communities/register" className="btn btn-outline">
-              Register Organization
+          <div className="w-full flex justify-end mt-1 mb-4">
+            <Link href="/communities/register">
+              <button
+                type="button"
+                className="items-center justify-center px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-400 dark:focus:ring-blue-300 transition-all duration-200"
+              >
+                Register Community
+              </button>
             </Link>
           </div>
         </div>

@@ -8,7 +8,7 @@ const breakpointColumnsObj = {
   850: 1,
 };
 
-const WrapCommunities = ({ children }) => {
+const Wrapper = ({ children }) => {
   return (
     <Masonry
       breakpointCols={breakpointColumnsObj}
@@ -20,4 +20,4 @@ const WrapCommunities = ({ children }) => {
   );
 };
 
-export default WrapCommunities;
+export default Wrapper;

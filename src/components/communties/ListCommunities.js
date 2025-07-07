@@ -1,8 +1,7 @@
 export const dynamic = 'force-dynamic';
 
 import { mapOrganizations } from '@actions/organizationActions';
-import Link from 'next/link';
-import WrapCommunities from './WrapCommunities';
+import Wrapper from '../Wrapper';
 
 const ListCommunities = async ({ data }) => {
   const organizations = await mapOrganizations(data);
@@ -10,7 +9,7 @@ const ListCommunities = async ({ data }) => {
   return (
     <section className="w-full">
       {/* Card List */}
-      <WrapCommunities>{organizations}</WrapCommunities>
+      <Wrapper>{organizations}</Wrapper>
     </section>
   );
 };

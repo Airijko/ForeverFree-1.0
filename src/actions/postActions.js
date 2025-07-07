@@ -24,7 +24,12 @@ export const fetchAllPosts = async () => {
 // Map posts to components (UI-related, you may want to keep this elsewhere)
 export const mapPosts = async (data) => {
   return data.map((post, index) => (
-    <PostCard post={post} key={post._id} index={index} />
+    <PostCard
+      key={post._id}
+      post={post}
+      index={index}
+      organization={post.organization}
+    />
   ));
 };
 
@@ -66,17 +71,11 @@ export const fetchPostsByOrganization = async (organizationId) => {
 // Extract post data from FormData
 const extractPostData = async (formData) => {
   const imageFile = formData.get('image');
-  const bannerFile = formData.get('banner');
 
   let imageUrl = null;
-  let bannerUrl = null;
 
   if (imageFile instanceof File && imageFile.size > 0) {
     imageUrl = await handleFileUpload(imageFile, 'posts');
-  }
-
-  if (bannerFile instanceof File && bannerFile.size > 0) {
-    bannerUrl = await handleFileUpload(bannerFile, 'banners');
   }
 
   const tagsRaw = formData.get('tags');
@@ -97,7 +96,6 @@ const extractPostData = async (formData) => {
     currency: formData.get('currency') || 'USD',
     registrationLink: formData.get('registrationLink') || '',
     image: imageUrl,
-    bannerUrl: bannerUrl,
     tags,
   };
 };
