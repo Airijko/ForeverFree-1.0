@@ -18,6 +18,7 @@ const eventTypes = [
 const CreatePostForm = ({ orgId, createPost }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  console.log('CreatePostForm rendered with orgId:', orgId);
 
   async function onSubmit(event) {
     event.preventDefault();
