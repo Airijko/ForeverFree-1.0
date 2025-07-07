@@ -1,9 +1,9 @@
-import { fetchAllPosts } from '@actions/postActions';
-import PostCard from '@components/Cards/PostCard';
+import { fetchAllPosts } from '@actions/eventAction';
+import PostCard from '@components/Cards/EventCard';
 import SearchBar from '@components/Inputs/SearchBar';
 import MainHeader from '@components/MainHeader';
 import Link from 'next/link';
-import ListPosts from '@components/Posts/ListPosts';
+import ListPosts from '@components/Events/ListEvents';
 
 const Events = async () => {
   const data = await fetchAllPosts();

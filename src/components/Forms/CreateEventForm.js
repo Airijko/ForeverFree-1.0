@@ -15,10 +15,10 @@ const eventTypes = [
   'Other',
 ];
 
-const CreatePostForm = ({ orgId, createPost }) => {
+const CreateEventForm = ({ orgId, createEvent }) => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  console.log('CreatePostForm rendered with orgId:', orgId);
+  console.log('CreateEventForm rendered with orgId:', orgId);
 
   async function onSubmit(event) {
     event.preventDefault();
@@ -29,10 +29,10 @@ const CreatePostForm = ({ orgId, createPost }) => {
     formData.set('organization', orgId);
 
     try {
-      await createPost(formData);
-      // Redirect handled by createPost
+      await createEvent(formData);
+      // Redirect handled by createEvent
     } catch (err) {
-      setError('Failed to create post.');
+      setError('Failed to create event.');
       setLoading(false);
     }
   }
@@ -44,7 +44,7 @@ const CreatePostForm = ({ orgId, createPost }) => {
                  border border-gray-200 dark:border-gray-700"
     >
       <h1 className="text-3xl font-semibold mb-6 text-gray-900 dark:text-gray-100">
-        Create New Post
+        Create New Event
       </h1>
 
       <label className="block mb-4">
@@ -58,7 +58,7 @@ const CreatePostForm = ({ orgId, createPost }) => {
                      bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100
                      px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500
                      focus:border-blue-500 transition"
-          placeholder="Enter post title"
+          placeholder="Enter event title"
         />
       </label>
 
@@ -138,7 +138,7 @@ const CreatePostForm = ({ orgId, createPost }) => {
                    text-white font-semibold rounded-md py-3 transition focus:outline-none
                    focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
       >
-        {loading ? 'Creating...' : 'Create Post'}
+        {loading ? 'Creating...' : 'Create Event'}
       </button>
 
       {error && <p className="mt-4 text-red-600 font-medium">{error}</p>}
@@ -146,4 +146,4 @@ const CreatePostForm = ({ orgId, createPost }) => {
   );
 };
 
-export default CreatePostForm;
+export default CreateEventForm;

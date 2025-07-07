@@ -1,15 +1,15 @@
 import { fetchAllOrganizations } from '@actions/organizationActions';
-import { fetchAllPosts } from '@actions/postActions';
+import { fetchAllEvents } from '@actions/eventAction';
 import MainHeader from '@components/MainHeader';
 import Link from 'next/link';
 import ListCommunities from '@components/communties/ListCommunities';
-import ListPosts from '@components/Posts/ListPosts';
+import ListEvents from '@components/Events/ListEvents';
 
 const Home = async () => {
   const communityData = await fetchAllOrganizations();
   const recentCommunities = communityData.reverse().slice(0, 4);
-  const postData = await fetchAllPosts();
-  const recentPosts = postData.reverse().slice(0, 1);
+  const eventData = await fetchAllEvents();
+  const recentEvents = eventData.reverse().slice(0, 1);
 
   return (
     <section className="w-full flex flex-col items-center justify-center">
@@ -42,7 +42,7 @@ const Home = async () => {
       <div className="flex flex-col gap-6 py-6 w-full max-w-5xl px-4">
         <div className="flex flex-col gap-4">
           <h3 className="heading-3">Featured Events</h3>
-          <ListPosts data={recentPosts} />
+          <ListEvents data={recentEvents} />
         </div>
         <div className="flex flex-col gap-4">
           <h3 className="heading-3">Explore Christian Communities</h3>

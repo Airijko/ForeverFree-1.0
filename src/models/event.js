@@ -1,6 +1,6 @@
 import { Schema, model, models } from 'mongoose';
 
-const PostSchema = new Schema(
+const EventSchema = new Schema(
   {
     creator: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     organization: {
@@ -54,6 +54,6 @@ const PostSchema = new Schema(
   { timestamps: true }
 );
 
-const Post = models.Post || model('Post', PostSchema);
+const Event = models.Event || model('Event', EventSchema);
 
-export default Post;
+export default Event;

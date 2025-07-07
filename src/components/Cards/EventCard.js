@@ -8,8 +8,7 @@ import {
   CurrencyDollarIcon,
 } from '@heroicons/react/24/outline';
 
-const PostCard = async ({ post, index }) => {
-  console.log('PostCard rendered for post:', post);
+const EventCard = async ({ event, index }) => {
   const {
     _id,
     title,
@@ -21,7 +20,7 @@ const PostCard = async ({ post, index }) => {
     currency,
     imageUrl,
     organization,
-  } = post;
+  } = event;
 
   const formattedDate = startDate
     ? new Date(startDate).toLocaleDateString('en-US', {
@@ -35,7 +34,7 @@ const PostCard = async ({ post, index }) => {
   return (
     <div className="w-full hover:scale-105 shadow-md hover:shadow-xl overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-neutral-800 dark:bg-neutral-900 transition-all duration-300">
       <Link
-        href={`communities/${organization._id}/posts/${_id}`}
+        href={`communities/${organization._id}/events/${_id}`}
         className="p-2 relative w-full h-full flex flex-col"
       >
         {/* Content Section */}
@@ -74,11 +73,11 @@ const PostCard = async ({ post, index }) => {
             </div>
           </div>
 
-          {/* Post Info */}
+          {/* Event Info */}
           <div className="flex flex-col justify-between text-gray-900 dark:text-white w-full">
             {/* Tag - Top Right */}
             <span className="ml-auto my-1 mx-1 bg-green-100 dark:bg-green-800 text-green-700 dark:text-green-300 text-xs font-semibold px-3 py-1 rounded-md select-none z-10">
-              {post.eventType || 'Event'}
+              {event.eventType || 'Event'}
             </span>
 
             <div className="px-4">
@@ -135,4 +134,4 @@ const PostCard = async ({ post, index }) => {
   );
 };
 
-export default PostCard;
+export default EventCard;
