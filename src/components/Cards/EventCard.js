@@ -34,8 +34,8 @@ const EventCard = async ({ event }) => {
         className="flex items-center justify-between p-4 w-full"
       >
         {/* Date */}
-        <div className="w-16 h-16 flex flex-col items-center justify-center text-center rounded-md  shrink-0 mr-2">
-          <span className="text-md font-medium text-gray-500 dark:text-gray-400">
+        <div className="w-16 h-16 flex flex-col items-center justify-center text-center rounded-md shrink-0 mr-2">
+          <span className="text-lg font-medium text-gray-500 dark:text-gray-400">
             {formattedMonth}
           </span>
           <span className="text-4xl font-bold text-gray-800 dark:text-white leading-none">
@@ -71,8 +71,13 @@ const EventCard = async ({ event }) => {
               <div className="flex items-center gap-2 text-sm text-gray-500 dark:text-gray-400 mr-auto">
                 <span className="flex items-center gap-1">
                   <MapPinIcon className="w-4 h-4" />
-                  <p className="truncate">{location || 'TBD'}</p>
+                  <p className="truncate">
+                    {location?.street && location?.city && location?.province
+                      ? `${location.street}, ${location.city}, ${location.province}`
+                      : 'TBD'}
+                  </p>
                 </span>
+
                 <span className="flex items-center gap-1">
                   <CurrencyDollarIcon className="w-4 h-4" />
                   <p>

@@ -1,13 +1,14 @@
 import { fetchAllEvents } from '@actions/eventAction';
 import SearchBar from '@components/Inputs/SearchBar';
-import MainHeader from '@components/MainHeader';
-import Link from 'next/link';
 import ListEvents from '@components/Events/ListEvents';
 import Maps from '@components/Maps';
 import EventFilterBar from '@components/Navbars/EventFilterBar';
+import { mapCoordinatesFromData } from '@actions/locationAction';
 
 const Events = async () => {
   const data = await fetchAllEvents();
+  const coordinates = await mapCoordinatesFromData(data);
+
   return (
     <section className="w-full flex flex-col items-center justify-center">
       <div className="w-full h-screen">
@@ -26,7 +27,7 @@ const Events = async () => {
             <ListEvents data={data} />
           </main>
           <section className="w-[720px] h-full">
-            <Maps />
+            <Maps location={coordinates} />
           </section>
         </div>
       </div>

@@ -40,7 +40,12 @@ const EventSchema = new Schema(
     startTime: String,
     endTime: String,
 
-    location: { type: String, required: true },
+    location: {
+      street: { type: String, required: true },
+      city: { type: String, required: true },
+      province: { type: String, required: true },
+      country: { type: String, required: true },
+    },
 
     isFree: { type: Boolean, default: true },
     price: { type: Number, default: 0 },

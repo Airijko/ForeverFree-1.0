@@ -91,7 +91,12 @@ const extractEventData = async (formData) => {
     endDate: formData.get('endDate') || null,
     startTime: formData.get('startTime') || '',
     endTime: formData.get('endTime') || '',
-    location: formData.get('location'),
+    location: {
+      street: formData.get('street'),
+      city: formData.get('city'),
+      province: formData.get('province'),
+      country: formData.get('country'),
+    },
     isFree: formData.get('isFree') === 'true',
     price: Number(formData.get('price') || 0),
     currency: formData.get('currency') || 'USD',

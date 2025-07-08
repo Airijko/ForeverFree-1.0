@@ -2,7 +2,7 @@ import React from 'react';
 
 const EventFilterBar = () => {
   return (
-    <aside className="w-[280px] h-full p-4 overflow-y-auto">
+    <aside className="w-[280px] p-4 overflow-y-auto">
       <h2 className="text-lg font-semibold mb-4 text-gray-900 dark:text-gray-100">
         Filter Events
       </h2>
