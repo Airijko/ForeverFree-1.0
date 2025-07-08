@@ -1,8 +1,8 @@
-import { fetchAllOrganizations } from '@actions/organizationActions';
+import { fetchAllOrganizations } from '@actions/organizationAction';
 import { fetchAllEvents } from '@actions/eventAction';
 import MainHeader from '@components/MainHeader';
 import Link from 'next/link';
-import ListCommunities from '@components/communties/ListCommunities';
+import ListCommunities from '@components/Communties/ListCommunities';
 import ListEvents from '@components/Events/ListEvents';
 
 const Home = async () => {

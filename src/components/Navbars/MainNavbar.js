@@ -6,6 +6,13 @@ import ThemeToggle from '../ThemeToggle';
 
 const MainNavbar = async () => {
   const session = await getServerSession(options);
+  const isAdmin = session?.user?.role === 'admin';
+
+  const navItems = [
+    ...(isAdmin ? [{ label: 'Dashboard', href: '/dashboard' }] : []),
+    { label: 'Communities', href: '/communities' },
+    { label: 'Reconquista', href: '/reconquista' },
+  ];
 
   return (
     <nav
@@ -48,19 +55,17 @@ const MainNavbar = async () => {
 
       <div className="flex items-center gap-x-4">
         <div className="hidden md:flex items-center gap-x-4">
-          {['Communities', 'Reconquista'].map((label) => (
+          {navItems.map(({ label, href }) => (
             <Link
               key={label}
-              href={`/${label.toLowerCase()}`}
-              className="
-                px-4 py-2 rounded-md
-                text-gray-900 dark:text-gray-100
-                font-semibold
-                hover:bg-primary hover:text-white
-                transition-colors duration-200
-                cursor-pointer
-                select-none
-              "
+              href={href}
+              className="px-4 py-2 rounded-md
+        text-gray-900 dark:text-gray-100
+        font-semibold
+        hover:bg-primary hover:text-white
+        transition-colors duration-200
+        cursor-pointer
+        select-none"
             >
               {label}
             </Link>

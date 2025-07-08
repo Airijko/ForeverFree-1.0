@@ -1,5 +1,5 @@
 // app/communities/[id]/page.js
-import { fetchOrganization } from '@actions/organizationActions';
+import { fetchOrganization } from '@actions/organizationAction';
 import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';
 import OrganizationProfile from '@components/OrganizationProfile';

@@ -1,6 +1,6 @@
 export const dynamic = 'force-dynamic';
 
-import { mapOrganizations } from '@actions/organizationActions';
+import { mapOrganizations } from '@actions/organizationAction';
 import Wrapper from '../Wrapper';
 
 const getBreakpointColumnsObj = (maxColumns = 4) => {

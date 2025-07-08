@@ -1,7 +1,7 @@
 import {
   updateOrganization,
   fetchOrganization,
-} from '@actions/organizationActions';
+} from '@actions/organizationAction';
 import OrganizationProfile from '@components/OrganizationProfile';
 import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';

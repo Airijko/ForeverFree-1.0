@@ -27,6 +27,7 @@ const UserSchema = new Schema({
       ref: 'Organization',
     },
   ],
+  lastVisitedAt: { type: Date },
 });
 
 const User = models.User || model('User', UserSchema);

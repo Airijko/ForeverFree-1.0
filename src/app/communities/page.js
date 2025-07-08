@@ -1,5 +1,5 @@
-import { fetchAllOrganizations } from '@actions/organizationActions';
-import ListCommunities from '@components/communties/ListCommunities';
+import { fetchAllOrganizations } from '@actions/organizationAction';
+import ListCommunities from '@components/Communties/ListCommunities';
 import SearchBar from '@components/Inputs/SearchBar';
 import MainHeader from '@components/MainHeader';
 import Link from 'next/link';
