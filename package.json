@@ -22,6 +22,7 @@
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
     "fast-average-color": "^9.5.0",
+    "leaflet": "^1.9.4",
     "libphonenumber-js": "^1.12.9",
     "mongodb": "^5.7.0",
     "mongoose": "^8.0.0",
@@ -32,6 +33,7 @@
     "react": "18.2.0",
     "react-country-region-selector": "^4.0.2",
     "react-dom": "18.2.0",
+    "react-leaflet": "^4.2.1",
     "react-masonry-css": "^1.0.16",
     "react-phone-number-input": "^3.4.12"
   },

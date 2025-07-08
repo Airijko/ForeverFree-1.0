@@ -1,6 +1,7 @@
 'use server';
 
 import { connectToDB } from '@utils/database';
+import Organization from '@models/organization';
 import Event from '@models/event';
 import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';

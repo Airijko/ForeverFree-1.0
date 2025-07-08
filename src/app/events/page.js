@@ -1,38 +1,34 @@
-import { fetchAllPosts } from '@actions/eventAction';
-import PostCard from '@components/Cards/EventCard';
+import { fetchAllEvents } from '@actions/eventAction';
 import SearchBar from '@components/Inputs/SearchBar';
 import MainHeader from '@components/MainHeader';
 import Link from 'next/link';
-import ListPosts from '@components/Events/ListEvents';
+import ListEvents from '@components/Events/ListEvents';
+import Maps from '@components/Maps';
+import EventFilterBar from '@components/Navbars/EventFilterBar';
 
 const Events = async () => {
-  const data = await fetchAllPosts();
+  const data = await fetchAllEvents();
   return (
     <section className="w-full flex flex-col items-center justify-center">
-      <MainHeader>
-        <div className="flex flex-col items-center justify-end h-full w-full max-w-5xl">
-          <h1 className="head_text w-full text-center text-6xl font-bold mb-8">
-            <span className="block">Christian</span>
-            <span className="block">Events</span>
-          </h1>
-          {/* Search Bar */}
-          <SearchBar></SearchBar>
-          {/* Register Button */}
-          <div className="w-full flex justify-end mt-1 mb-4">
-            <Link href="/communities/posts">
-              <button
-                type="button"
-                className="items-center justify-center px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-400 dark:focus:ring-blue-300 transition-all duration-200"
-              >
-                Create Event
-              </button>
-            </Link>
+      <div className="w-full h-screen">
+        <div className="flex w-full h-full">
+          <div className="h-full pt-40">
+            <EventFilterBar />
           </div>
+          <main className="flex-grow overflow-y-scroll p-4 scrollbar-hide">
+            <div className="py-4">
+              <h1 className="head_text w-full text-center text-6xl font-bold mb-6">
+                <span className="block">Christian Events</span>
+              </h1>
+              {/* Search Bar */}
+              <SearchBar />
+            </div>
+            <ListEvents data={data} />
+          </main>
+          <section className="w-[720px] h-full">
+            <Maps />
+          </section>
         </div>
-      </MainHeader>
-
-      <div className="w-full max-w-5xl mx-auto py-8">
-        <ListPosts data={data} />
       </div>
     </section>
   );

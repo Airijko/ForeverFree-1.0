@@ -2,7 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';
-import ThemeToggle from './ThemeToggle';
+import ThemeToggle from '../ThemeToggle';
 
 const MainNavbar = async () => {
   const session = await getServerSession(options);
