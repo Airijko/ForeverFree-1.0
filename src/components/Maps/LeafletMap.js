@@ -4,7 +4,7 @@ import { useEffect, useRef } from 'react';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 
-// Fix for missing marker icons in Leaflet with Webpack/Next.js
+// Fix for missing marker icons in Leaflet with Next.js
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
@@ -45,7 +45,13 @@ const LeafletMap = ({ location }) => {
 
       // Add all markers
       markersRef.current = location.map((loc) =>
-        L.marker([loc.lat, loc.lng]).addTo(mapInstance.current)
+        L.marker([loc.lat, loc.lng])
+          .addTo(mapInstance.current)
+          .on('click', () => {
+            // Construct Google Maps URL
+            const googleMapsUrl = `https://www.google.com/maps?q=${loc.lat},${loc.lng}`;
+            window.open(googleMapsUrl, '_blank');
+          })
       );
     } else if (mapInstance.current && Array.isArray(location)) {
       clearMarkers();
