@@ -58,7 +58,7 @@ const OrganizationProfile = ({
                     Edit Page
                   </Link>
                   <Link
-                    href={`/communities/${formData._id}/posts/create`}
+                    href={`/communities/${formData._id}/events/create`}
                     className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
                   >
                     Create Post

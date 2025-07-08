@@ -1,5 +1,6 @@
 'use client';
 
+import LocationInput from '@components/Inputs/LocationInput';
 import { useState } from 'react';
 
 const eventTypes = [
@@ -112,21 +113,10 @@ const CreateEventForm = ({ orgId, createEvent }) => {
                      focus:border-blue-500 transition"
         />
       </label>
-
-      <label className="block mb-4">
-        <span className="text-gray-700 dark:text-gray-300 font-medium mb-1 block">
-          Location
-        </span>
-        <input
-          name="location"
-          required
-          className="w-full rounded-md border border-gray-300 dark:border-gray-600
-                     bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-gray-100
-                     px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500
-                     focus:border-blue-500 transition"
-          placeholder="Where will this event take place?"
-        />
-      </label>
+      {/* Location   */}
+      <div className="mb-8">
+        <LocationInput />
+      </div>
 
       {/* Hidden organization id */}
       <input type="hidden" name="organization" value={orgId} />
