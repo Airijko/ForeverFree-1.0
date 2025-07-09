@@ -20,9 +20,6 @@ await logVisit();
 
 const Dashboard = async () => {
   const session = await getServerSession(options);
-  if (!session) {
-    return redirect('/api/auth/signin?callbackUrl=/admin');
-  }
 
   const stats = await getDashboardStats();
   return (
@@ -90,7 +87,7 @@ const Dashboard = async () => {
               User ID
             </span>
             <span className="font-mono text-amber-700 dark:text-amber-300 break-all">
-              {session.user.id ?? 'NULL'}
+              {session?.user.id ?? 'NULL'}
             </span>
           </div>
         </div>

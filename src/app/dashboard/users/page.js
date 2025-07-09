@@ -1,4 +1,4 @@
-import { fetchAllUsers, deleteUser } from '@actions/userAction';
+import { fetchAllUsers, deleteUser, updateUserRole } from '@actions/userAction';
 import DashboardLayout from '@components/Layouts/DashboardLayout';
 
 const Users = async () => {
@@ -39,9 +39,33 @@ const Users = async () => {
                 key={user._id}
                 className="border-b border-gray-200 dark:border-neutral-700"
               >
-                <td className="p-2">{user.email}</td>
-                <td className="p-2">{user.role}</td>
-                <td className="p-2">
+                <td className="p-2 align-middle">{user.email}</td>
+                <td className="p-2 align-middle">
+                  <form
+                    action={async (formData) => {
+                      'use server';
+                      const newRole = formData.get('role');
+                      await updateUserRole(user._id, newRole);
+                    }}
+                    className="flex items-center gap-2"
+                  >
+                    <select
+                      name="role"
+                      defaultValue={user.role}
+                      className="border rounded px-2 py-1"
+                    >
+                      <option value="user">User</option>
+                      <option value="admin">Admin</option>
+                    </select>
+                    <button
+                      type="submit"
+                      className="px-2 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                    >
+                      Update
+                    </button>
+                  </form>
+                </td>
+                <td className="p-2 align-middle">
                   <form
                     action={async () => {
                       'use server';

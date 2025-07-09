@@ -27,10 +27,14 @@ const EventCard = async ({ event }) => {
 
   const formattedDay = startDate ? new Date(startDate).getDate() : '';
 
+  const eventLink = organization?._id
+    ? `communities/${organization._id}/events/${_id}`
+    : '#';
+
   return (
     <div className="w-full overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 hover:scale-[1.02] hover:shadow-md transition-all duration-300">
       <Link
-        href={`communities/${organization._id}/events/${_id}`}
+        href={eventLink}
         className="flex items-center justify-between p-4 w-full"
       >
         {/* Date */}

@@ -60,6 +60,29 @@ export const updateUser = async (id, updateData) => {
   }
 };
 
+// Admin: Update a user's role
+export const updateUserRole = async (id, newRole) => {
+  if (!(await isAdmin())) {
+    return { error: 'Unauthorized: Admins only', status: 403 };
+  }
+  try {
+    await connectToDB();
+    const user = await User.findByIdAndUpdate(
+      id,
+      { role: newRole },
+      { new: true }
+    ).lean();
+    if (!user) {
+      return { error: 'User not found', status: 404 };
+    }
+    revalidatePath('/dashboard/users');
+    return JSON.parse(JSON.stringify(user));
+  } catch (error) {
+    console.error('Error updating user role (admin):', error);
+    return { error: 'Failed to update user role', status: 500 };
+  }
+};
+
 // Delete a user (admin only)
 export const deleteUser = async (id) => {
   if (!(await isAdmin())) {

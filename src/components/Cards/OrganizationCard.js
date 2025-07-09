@@ -8,10 +8,12 @@ import {
 } from '@heroicons/react/24/outline';
 
 const OrganizationCard = async ({ organization, index }) => {
+  const orgLink = organization?._id ? `/communities/${organization._id}` : '#';
+
   return (
     <div className="w-full hover:scale-105 shadow-md hover:shadow-xl overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 transition-all duration-300">
       <Link
-        href={`/communities/${organization._id}`}
+        href={`/communities/${orgLink}`}
         className="p-2 relative w-full h-full flex flex-col"
       >
         {/* Content Section */}
