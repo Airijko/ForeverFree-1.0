@@ -26,19 +26,26 @@ export const options = {
             email: user.email,
             username: user.name.replace(' ', '').toLowerCase(),
             image: user.picture,
-            role: user.role || 'user', // Default role
+            role: user.role || 'user',
           });
           await existingUser.save();
         }
-        token.id = existingUser._id.toString(); // Use _id and convert to string
+        token.id = existingUser._id.toString();
         token.role = existingUser.role;
       }
       return token;
     },
     async session({ session, token }) {
-      if (session) {
-        session.user.id = token.id;
-        session.user.role = token.role;
+      if (session?.user?.email) {
+        await connectToDB();
+        const dbUser = await User.findOne({ email: session.user.email });
+        if (dbUser) {
+          session.user.id = dbUser._id.toString();
+          session.user.role = dbUser.role;
+        } else {
+          session.user.id = token.id;
+          session.user.role = token.role;
+        }
       }
       return session;
     },

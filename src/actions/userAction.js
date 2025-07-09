@@ -5,6 +5,7 @@ import User from '@models/user';
 import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 // Utility: Check if current session is admin
 const isAdmin = async () => {
@@ -40,47 +41,18 @@ export const fetchUser = async (id) => {
 };
 
 // Update a user (admin only)
-export const updateUser = async (id, updateData) => {
-  if (!(await isAdmin())) {
-    return { error: 'Unauthorized: Admins only', status: 403 };
-  }
-  try {
-    await connectToDB();
-    const user = await User.findByIdAndUpdate(id, updateData, {
-      new: true,
-    }).lean();
-    if (!user) {
-      return { error: 'User not found', status: 404 };
-    }
-    revalidatePath('/dashboard/users');
-    return JSON.parse(JSON.stringify(user));
-  } catch (error) {
-    console.error('Error updating user (admin):', error);
-    return { error: 'Failed to update user', status: 500 };
-  }
-};
+export const updateUser = async (userId, updatedData) => {
+  const session = await getServerSession(options);
 
-// Admin: Update a user's role
-export const updateUserRole = async (id, newRole) => {
-  if (!(await isAdmin())) {
-    return { error: 'Unauthorized: Admins only', status: 403 };
+  if (!session || session.user.role !== 'admin') {
+    throw new Error('Unauthorized: Admins only');
   }
-  try {
-    await connectToDB();
-    const user = await User.findByIdAndUpdate(
-      id,
-      { role: newRole },
-      { new: true }
-    ).lean();
-    if (!user) {
-      return { error: 'User not found', status: 404 };
-    }
-    revalidatePath('/dashboard/users');
-    return JSON.parse(JSON.stringify(user));
-  } catch (error) {
-    console.error('Error updating user role (admin):', error);
-    return { error: 'Failed to update user role', status: 500 };
-  }
+
+  await connectToDB();
+  await User.findByIdAndUpdate(userId, updatedData);
+
+  revalidatePath('/dashboard/users');
+  redirect('/dashboard/users');
 };
 
 // Delete a user (admin only)

@@ -12,10 +12,7 @@ const OrganizationCard = async ({ organization, index }) => {
 
   return (
     <div className="w-full hover:scale-105 shadow-md hover:shadow-xl overflow-hidden rounded-2xl border border-gray-200 bg-white dark:border-neutral-700 dark:bg-neutral-800 transition-all duration-300">
-      <Link
-        href={`/communities/${orgLink}`}
-        className="p-2 relative w-full h-full flex flex-col"
-      >
+      <Link href={orgLink} className="p-2 relative w-full h-full flex flex-col">
         {/* Content Section */}
         <div className="flex flex-row min-h-[8rem]">
           {/* Profile Image - full height left */}

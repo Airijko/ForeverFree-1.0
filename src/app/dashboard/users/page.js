@@ -1,4 +1,4 @@
-import { fetchAllUsers, deleteUser, updateUserRole } from '@actions/userAction';
+import { fetchAllUsers, deleteUser, updateUser } from '@actions/userAction';
 import DashboardLayout from '@components/Layouts/DashboardLayout';
 
 const Users = async () => {
@@ -45,7 +45,7 @@ const Users = async () => {
                     action={async (formData) => {
                       'use server';
                       const newRole = formData.get('role');
-                      await updateUserRole(user._id, newRole);
+                      await updateUser(user._id, { role: newRole });
                     }}
                     className="flex items-center gap-2"
                   >
