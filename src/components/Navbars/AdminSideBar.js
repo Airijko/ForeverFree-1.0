@@ -1,10 +1,24 @@
 import Link from 'next/link';
+import {
+  HomeIcon,
+  UsersIcon,
+  CalendarDaysIcon,
+  BuildingOffice2Icon,
+} from '@heroicons/react/24/outline';
 
 const navLinks = [
-  { label: 'Overview', href: '/dashboard' },
-  { label: 'User Management', href: '/dashboard/users' },
-  { label: 'Event Management', href: '/dashboard/events' },
-  { label: 'Organization Management', href: '/dashboard/communities' },
+  { label: 'Overview', href: '/dashboard', icon: HomeIcon },
+  { label: 'User Management', href: '/dashboard/users', icon: UsersIcon },
+  {
+    label: 'Event Management',
+    href: '/dashboard/events',
+    icon: CalendarDaysIcon,
+  },
+  {
+    label: 'Organization Management',
+    href: '/dashboard/communities',
+    icon: BuildingOffice2Icon,
+  },
 ];
 
 const AdminSideBar = () => {
@@ -18,8 +32,9 @@ const AdminSideBar = () => {
           <Link
             key={link.href}
             href={link.href}
-            className="px-4 py-2 rounded-md font-semibold text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-700 transition"
+            className="flex items-center gap-3 px-4 py-2 rounded-md font-semibold text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-700 transition"
           >
+            <link.icon className="h-5 w-5" aria-hidden="true" />
             {link.label}
           </Link>
         ))}

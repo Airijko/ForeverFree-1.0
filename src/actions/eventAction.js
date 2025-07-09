@@ -115,6 +115,7 @@ const handleEvent = async (id, formData, isEdit = false) => {
   }
 
   const userId = session.user.id;
+  const userRole = session.user.role;
   const organizationId = formData.get('organization');
 
   if (!organizationId) {
@@ -132,9 +133,10 @@ const handleEvent = async (id, formData, isEdit = false) => {
       event = await Event.findById(id);
       if (!event) return { error: 'Event not found', status: 404 };
 
-      if (event.creator.toString() !== userId) {
+      // Allow if creator or admin
+      if (event.creator.toString() !== userId && userRole !== 'admin') {
         return {
-          error: 'Unauthorized: You can only edit your own events',
+          error: 'Unauthorized: Only the creator or admins can edit this event',
           status: 403,
         };
       }
@@ -189,8 +191,31 @@ export const updateEvent = async (id, formData) => {
 };
 
 export const deleteEvent = async (id, organizationId) => {
+  const session = await getServerSession(options);
+
+  if (!session?.user?.id) {
+    return { error: 'Unauthorized: You must be logged in', status: 401 };
+  }
+
+  const userId = session.user.id;
+  const userRole = session.user.role;
+
   try {
     await connectToDB();
+    const event = await Event.findById(id);
+
+    if (!event) {
+      return { error: 'Event not found', status: 404 };
+    }
+
+    // Allow if creator or admin
+    if (event.creator.toString() !== userId && userRole !== 'admin') {
+      return {
+        error: 'Unauthorized: Only the creator or admins can delete this event',
+        status: 403,
+      };
+    }
+
     await Event.findByIdAndDelete(id);
     revalidatePath(`/communities/${organizationId}/events`);
     return { message: 'Event deleted successfully' };

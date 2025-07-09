@@ -160,6 +160,7 @@ const handleOrganization = async (id, formData, isEdit = false) => {
   }
 
   const userId = session.user.id;
+  const userRole = session.user.role; // <-- Add this line
   const orgData = await extractOrganizationData(formData);
 
   try {
@@ -173,10 +174,11 @@ const handleOrganization = async (id, formData, isEdit = false) => {
         return { error: 'Organization not found', status: 404 };
       }
 
-      // Check if the current user is the owner
-      if (organization.owner.toString() !== userId) {
+      // Allow if owner or admin
+      if (organization.owner.toString() !== userId && userRole !== 'admin') {
         return {
-          error: 'Unauthorized: You can only edit organizations you own',
+          error:
+            'Unauthorized: Only the owner or admins can edit this organization',
           status: 403,
         };
       }
@@ -230,8 +232,32 @@ export const updateOrganization = async (id, formData) => {
 
 // ✅ Delete an organization
 export const deleteOrganization = async (id) => {
+  const session = await getServerSession(options);
+
+  if (!session?.user?.id) {
+    return { error: 'Unauthorized: You must be logged in', status: 401 };
+  }
+
+  const userId = session.user.id;
+  const userRole = session.user.role;
+
   try {
     await connectToDB();
+    const organization = await Organization.findById(id);
+
+    if (!organization) {
+      return { error: 'Organization not found', status: 404 };
+    }
+
+    // Allow if owner or admin
+    if (organization.owner.toString() !== userId && userRole !== 'admin') {
+      return {
+        error:
+          'Unauthorized: Only the owner or admins can delete this organization',
+        status: 403,
+      };
+    }
+
     await Organization.findByIdAndDelete(id);
     revalidatePath('/communities');
     return { message: 'Organization deleted successfully' };

@@ -6,6 +6,12 @@ import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';
 import { revalidatePath } from 'next/cache';
 
+// Utility: Check if current session is admin
+const isAdmin = async () => {
+  const session = await getServerSession(options);
+  return session?.user?.role === 'admin';
+};
+
 // Fetch all users
 export const fetchAllUsers = async () => {
   try {
@@ -35,8 +41,7 @@ export const fetchUser = async (id) => {
 
 // Update a user (admin only)
 export const updateUser = async (id, updateData) => {
-  const session = await getServerSession(options);
-  if (!session?.user?.role || session.user.role !== 'admin') {
+  if (!(await isAdmin())) {
     return { error: 'Unauthorized: Admins only', status: 403 };
   }
   try {
@@ -50,15 +55,14 @@ export const updateUser = async (id, updateData) => {
     revalidatePath('/dashboard/users');
     return JSON.parse(JSON.stringify(user));
   } catch (error) {
-    console.error('Error updating user:', error);
+    console.error('Error updating user (admin):', error);
     return { error: 'Failed to update user', status: 500 };
   }
 };
 
 // Delete a user (admin only)
 export const deleteUser = async (id) => {
-  const session = await getServerSession(options);
-  if (!session?.user?.role || session.user.role !== 'admin') {
+  if (!(await isAdmin())) {
     return { error: 'Unauthorized: Admins only', status: 403 };
   }
   try {
