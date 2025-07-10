@@ -17,8 +17,14 @@ const RootLayout = async ({ children }) => {
     <html lang="en" className="scroll-smooth">
       <body className="text-primary dark:text-white font-inter transition-colors duration-300">
         <Provider>
-          <MainNavbar />
-          <main className="app relative z-10">{children}</main>
+          <div className="flex min-h-screen w-full flex-row justify-center">
+            {/* Sidebar/Navbar */}
+            <MainNavbar />
+            <main className="border-x border-gray-200  dark:border-neutral-700 transition-all duration-300">
+              {children}
+            </main>
+            <aside className="sticky top-0 hidden h-screen w-[300px] flex-shrink-0 lg:flex" />
+          </div>
         </Provider>
       </body>
     </html>
