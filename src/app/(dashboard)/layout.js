@@ -9,9 +9,9 @@ export const metadata = {
 const DashboardLayout = ({ children }) => {
   return (
     <html lang="en">
+      <head />
       <body className="font-inter text-primary transition-colors duration-300 dark:text-white">
         <Provider>
-          {/* Your custom dashboard layout */}
           <div className="min-h-screen w-full bg-neutral-50 dark:bg-neutral-900">
             {children}
           </div>
