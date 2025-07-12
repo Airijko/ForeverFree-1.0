@@ -26,7 +26,7 @@ const MainSidebar = async () => {
 
   return (
     <aside className="sticky top-0 z-50 flex h-screen w-max flex-shrink-0 flex-col justify-between gap-2 overflow-hidden px-5 py-5">
-      <nav className="ml-auto flex w-max flex-col items-center gap-4 md:items-start">
+      <nav className="mx-auto flex w-max flex-col items-center gap-4 lg:items-start">
         <Link
           href="/"
           aria-label="Go to homepage"
