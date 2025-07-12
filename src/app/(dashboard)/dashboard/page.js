@@ -1,6 +1,5 @@
 import { options } from '@app/api/auth/[...nextauth]/options';
 import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
 import Link from 'next/link';
 import { getDashboardStats, logVisit } from '@actions/statsAction';
 
@@ -16,36 +15,35 @@ import {
 } from '@heroicons/react/24/outline';
 import DashboardLayout from '@components/Layouts/DashboardLayout';
 
-await logVisit();
-
 const Dashboard = async () => {
+  await logVisit();
   const session = await getServerSession(options);
-
   const stats = await getDashboardStats();
+
   return (
     <DashboardLayout>
-      <div className="w-full max-w-2xl mx-auto p-8 bg-white/90 dark:bg-neutral-900/90 rounded-xl shadow-lg border border-gray-200 dark:border-neutral-800 flex flex-col items-center">
-        <h1 className="text-4xl font-extrabold mb-2 text-gray-900 dark:text-gray-100 tracking-wide drop-shadow flex items-center gap-2">
+      <div className="mx-auto flex w-full max-w-2xl flex-col items-center rounded-xl border border-gray-200 bg-white/90 p-8 shadow-lg dark:border-neutral-800 dark:bg-neutral-900/90">
+        <h1 className="mb-2 flex items-center gap-2 text-4xl font-extrabold tracking-wide text-gray-900 drop-shadow dark:text-gray-100">
           <ChartBarIcon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
           Admin Dashboard
         </h1>
-        <p className="mb-6 text-gray-600 dark:text-gray-400 text-lg flex items-center gap-2">
+        <p className="mb-6 flex items-center gap-2 text-lg text-gray-600 dark:text-gray-400">
           <UserCircleIcon className="h-6 w-6 text-amber-500 dark:text-amber-400" />
           Welcome, <span className="font-semibold">{session?.user?.email}</span>
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full max-w-6xl mx-auto">
+        <div className="mx-auto grid w-full max-w-6xl grid-cols-1 gap-6 sm:grid-cols-3">
           {/* User Management Card */}
           <Link
             href="/dashboard/users"
-            className="group bg-white rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-200 p-6 flex flex-col items-center text-center hover:bg-blue-50"
+            className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center shadow-md transition-all hover:bg-blue-50 hover:shadow-lg"
           >
-            <div className="bg-blue-100 text-blue-600 rounded-full p-3 mb-4">
+            <div className="mb-4 rounded-full bg-blue-100 p-3 text-blue-600">
               <UsersIcon className="h-6 w-6" />
             </div>
             <h3 className="text-lg font-semibold text-gray-800 group-hover:text-blue-700">
               User Management
             </h3>
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="mt-2 text-sm text-gray-500">
               Manage users, roles, and permissions.
             </p>
           </Link>
@@ -53,15 +51,15 @@ const Dashboard = async () => {
           {/* Community Management Card */}
           <Link
             href="/dashboard/communities"
-            className="group bg-white rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-200 p-6 flex flex-col items-center text-center hover:bg-amber-50"
+            className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center shadow-md transition-all hover:bg-amber-50 hover:shadow-lg"
           >
-            <div className="bg-amber-100 text-amber-600 rounded-full p-3 mb-4">
+            <div className="mb-4 rounded-full bg-amber-100 p-3 text-amber-600">
               <BuildingOffice2Icon className="h-6 w-6" />
             </div>
             <h3 className="text-lg font-semibold text-gray-800 group-hover:text-amber-700">
               Community Management
             </h3>
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="mt-2 text-sm text-gray-500">
               Oversee churches, schools, and Christian orgs.
             </p>
           </Link>
@@ -69,22 +67,22 @@ const Dashboard = async () => {
           {/* Event Management Card */}
           <Link
             href="/dashboard/events"
-            className="group bg-white rounded-xl shadow-md hover:shadow-lg transition-all border border-gray-200 p-6 flex flex-col items-center text-center hover:bg-green-50"
+            className="group flex flex-col items-center rounded-xl border border-gray-200 bg-white p-6 text-center shadow-md transition-all hover:bg-green-50 hover:shadow-lg"
           >
-            <div className="bg-green-100 text-green-600 rounded-full p-3 mb-4">
+            <div className="mb-4 rounded-full bg-green-100 p-3 text-green-600">
               <CalendarDaysIcon className="h-6 w-6" />
             </div>
             <h3 className="text-lg font-semibold text-gray-800 group-hover:text-green-700">
               Event Management
             </h3>
-            <p className="text-sm text-gray-500 mt-2">
+            <p className="mt-2 text-sm text-gray-500">
               Create, edit, and organize Christian events.
             </p>
           </Link>
         </div>
-        <div className="grid grid-cols-2 gap-4 my-8 w-full">
-          <div className="bg-blue-100 dark:bg-blue-900/30 rounded-lg p-4 flex flex-col items-center">
-            <UsersIcon className="h-6 w-6 mb-1 text-blue-700 dark:text-blue-300" />
+        <div className="my-8 grid w-full grid-cols-2 gap-4">
+          <div className="flex flex-col items-center rounded-lg bg-blue-100 p-4 dark:bg-blue-900/30">
+            <UsersIcon className="mb-1 h-6 w-6 text-blue-700 dark:text-blue-300" />
             <span className="text-xs text-gray-500 dark:text-gray-400">
               Total Users
             </span>
@@ -92,8 +90,8 @@ const Dashboard = async () => {
               {stats.totalUsers}
             </span>
           </div>
-          <div className="bg-green-100 dark:bg-green-900/30 rounded-lg p-4 flex flex-col items-center">
-            <UserGroupIcon className="h-6 w-6 mb-1 text-green-700 dark:text-green-300" />
+          <div className="flex flex-col items-center rounded-lg bg-green-100 p-4 dark:bg-green-900/30">
+            <UserGroupIcon className="mb-1 h-6 w-6 text-green-700 dark:text-green-300" />
             <span className="text-xs text-gray-500 dark:text-gray-400">
               Currently Active
             </span>
@@ -101,8 +99,8 @@ const Dashboard = async () => {
               {stats.currentlyActive}
             </span>
           </div>
-          <div className="bg-amber-100 dark:bg-amber-900/30 rounded-lg p-4 flex flex-col items-center">
-            <EyeIcon className="h-6 w-6 mb-1 text-amber-700 dark:text-amber-300" />
+          <div className="flex flex-col items-center rounded-lg bg-amber-100 p-4 dark:bg-amber-900/30">
+            <EyeIcon className="mb-1 h-6 w-6 text-amber-700 dark:text-amber-300" />
             <span className="text-xs text-gray-500 dark:text-gray-400">
               Total Visits
             </span>
@@ -110,8 +108,8 @@ const Dashboard = async () => {
               {stats.totalVisits}
             </span>
           </div>
-          <div className="bg-purple-100 dark:bg-purple-900/30 rounded-lg p-4 flex flex-col items-center">
-            <UserCircleIcon className="h-6 w-6 mb-1 text-purple-700 dark:text-purple-300" />
+          <div className="flex flex-col items-center rounded-lg bg-purple-100 p-4 dark:bg-purple-900/30">
+            <UserCircleIcon className="mb-1 h-6 w-6 text-purple-700 dark:text-purple-300" />
             <span className="text-xs text-gray-500 dark:text-gray-400">
               Unique Visitors
             </span>
@@ -120,9 +118,9 @@ const Dashboard = async () => {
             </span>
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row gap-4 w-full justify-center mb-8">
-          <div className="flex-1 bg-blue-100 dark:bg-blue-900/30 rounded-lg p-4 flex flex-col items-center">
-            <UsersIcon className="h-5 w-5 mb-1 text-blue-700 dark:text-blue-300" />
+        <div className="mb-8 flex w-full flex-col justify-center gap-4 sm:flex-row">
+          <div className="flex flex-1 flex-col items-center rounded-lg bg-blue-100 p-4 dark:bg-blue-900/30">
+            <UsersIcon className="mb-1 h-5 w-5 text-blue-700 dark:text-blue-300" />
             <span className="text-xs text-gray-500 dark:text-gray-400">
               Role
             </span>
@@ -130,12 +128,12 @@ const Dashboard = async () => {
               {session?.user?.role ?? 'NULL'}
             </span>
           </div>
-          <div className="flex-1 bg-amber-100 dark:bg-amber-900/30 rounded-lg p-4 flex flex-col items-center">
-            <UserCircleIcon className="h-5 w-5 mb-1 text-amber-700 dark:text-amber-300" />
+          <div className="flex flex-1 flex-col items-center rounded-lg bg-amber-100 p-4 dark:bg-amber-900/30">
+            <UserCircleIcon className="mb-1 h-5 w-5 text-amber-700 dark:text-amber-300" />
             <span className="text-xs text-gray-500 dark:text-gray-400">
               User ID
             </span>
-            <span className="font-mono text-amber-700 dark:text-amber-300 break-all">
+            <span className="break-all font-mono text-amber-700 dark:text-amber-300">
               {session?.user.id ?? 'NULL'}
             </span>
           </div>
