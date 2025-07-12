@@ -18,9 +18,7 @@ const RootLayout = async ({ children }) => {
     <html lang="en" className="scroll-smooth">
       <body className="font-inter text-primary transition-colors duration-300 dark:text-white">
         <Provider>
-          <div className="flex min-h-screen w-full flex-row justify-center">
-            <MainLayout mainNavbar={<MainNavbar />}>{children}</MainLayout>
-          </div>
+          <MainLayout mainNavbar={<MainNavbar />}>{children}</MainLayout>
         </Provider>
       </body>
     </html>

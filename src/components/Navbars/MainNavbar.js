@@ -26,7 +26,7 @@ const MainSidebar = async () => {
 
   return (
     <aside className="sticky top-0 z-50 flex h-screen w-max flex-shrink-0 flex-col justify-between gap-2 overflow-hidden px-5 py-5">
-      <nav className="flex flex-col items-center gap-4 md:items-start">
+      <nav className="ml-auto flex w-max flex-col items-center gap-4 md:items-start">
         <Link
           href="/"
           aria-label="Go to homepage"
@@ -39,7 +39,7 @@ const MainSidebar = async () => {
             alt="ForeverFree Logo"
             className="drop-shadow-[0_0_2px_black]"
           />
-          <h1 className="hidden select-none whitespace-nowrap text-3xl font-extrabold tracking-wide text-gray-900 transition-colors duration-200 group-hover:text-amber-600 dark:text-gray-100 dark:group-hover:text-amber-400 md:block">
+          <h1 className="hidden select-none whitespace-nowrap text-3xl font-extrabold tracking-wide text-gray-900 transition-colors duration-200 group-hover:text-amber-600 dark:text-gray-100 dark:group-hover:text-amber-400 lg:block">
             Forever Free
           </h1>
         </Link>
@@ -50,12 +50,12 @@ const MainSidebar = async () => {
             className="mx-auto flex flex-row items-center gap-2 rounded-lg px-2 py-2 hover:bg-amber-700 hover:text-white hover:transition-all hover:duration-300 dark:hover:text-white md:mx-0 md:w-full"
           >
             <Icon className="h-10 w-10" aria-hidden="true" />
-            <span className="hidden text-2xl md:inline">{label}</span>
+            <span className="hidden text-2xl lg:block">{label}</span>
           </Link>
         ))}
       </nav>
 
-      <div className="mt-auto flex w-full flex-col items-center gap-4 md:flex-row">
+      <div className="mt-auto flex w-full flex-col items-center gap-4 lg:flex-row">
         <ThemeToggle />
         <div className="w-full">
           {session ? (

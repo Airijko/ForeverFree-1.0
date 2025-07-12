@@ -14,12 +14,9 @@ const ListCommunities = async ({ data, columns = 4 }) => {
   const breakpointColumnsObj = getBreakpointColumnsObj(columns);
 
   return (
-    <section className="w-full">
-      {/* Card List */}
-      <Wrapper breakpointColumnsObj={breakpointColumnsObj}>
-        {organizations}
-      </Wrapper>
-    </section>
+    <Wrapper breakpointColumnsObj={breakpointColumnsObj}>
+      {organizations}
+    </Wrapper>
   );
 };
 

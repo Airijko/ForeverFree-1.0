@@ -7,7 +7,6 @@
 /* === Base Theme Setup === */
 html,
 body {
-  min-height: 100vh;
   margin: 0;
   padding: 0;
 }
@@ -46,14 +45,11 @@ body::before {
 }
 
 .mainContent {
-  flex: 1;
-  border-left: 1px solid #e5e7eb; /* Tailwind's border-gray-200 */
-  border-right: 1px solid #e5e7eb;
-  transition: all 0.3s;
+  @apply w-full border-l border-r border-gray-200 transition-all dark:border-neutral-700 lg:w-[600px] xl:w-[800px];
 }
+
 .dark .mainContent {
-  border-left-color: #404040; /* Tailwind's dark:border-neutral-700 */
-  border-right-color: #404040;
+  @apply border-neutral-700;
 }
 
 /* === Overlay when in dark mode === */
@@ -164,6 +160,7 @@ body::before {
 .masonry-grid {
   display: flex;
   gap: 1rem;
+  width: 100%; /* Ensure it doesn't overflow parent */
 }
 
 .masonry-grid_column {

@@ -16,7 +16,7 @@ const Home = async () => {
     <>
       <section className="mainContent">
         <MainHeader>
-          <div className="mb-5 flex h-full w-full max-w-5xl flex-col items-center justify-end">
+          <div className="mb-5 flex h-full flex-col items-center justify-end">
             <h1 className="head_text max-w-2xl text-center md:text-4xl">
               Discover What&apos;s Happening in Your Christian Community
             </h1>
@@ -41,7 +41,7 @@ const Home = async () => {
           </div>
         </MainHeader>
         {/* Main Content */}
-        <div className="flex w-full max-w-5xl flex-col gap-6 px-4 py-6">
+        <div className="flex w-full flex-col gap-6 px-4 py-6">
           <div className="flex flex-col gap-4">
             <h3 className="heading-3">Featured Events</h3>
             <ListEvents data={recentEvents} />
@@ -52,7 +52,6 @@ const Home = async () => {
           </div>
         </div>
       </section>
-      <DynamicPanel>test</DynamicPanel>
     </>
   );
 };

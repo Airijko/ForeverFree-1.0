@@ -70,7 +70,7 @@ const LeafletMap = ({ location }) => {
     };
   }, [location]);
 
-  return <div ref={mapRef} className="w-full h-full rounded-md z-0" />;
+  return <div ref={mapRef} className="z-0 h-full w-full" />;
 };
 
 export default LeafletMap;
