@@ -16,7 +16,7 @@ const Home = async () => {
     <>
       <section className="mainContent">
         <MainHeader>
-          <div className="mb-5 flex h-full flex-col items-center justify-end">
+          <div className="flex h-full flex-col items-center justify-end">
             <h1 className="head_text max-w-2xl text-center md:text-4xl">
               Discover What&apos;s Happening in Your Christian Community
             </h1>

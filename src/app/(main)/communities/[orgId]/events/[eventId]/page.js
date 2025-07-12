@@ -10,96 +10,98 @@ const ViewPostPage = async ({ params }) => {
 
   if (event.error) {
     return (
-      <div className="max-w-3xl mx-auto p-6 text-center">
-        <h1 className="text-2xl font-semibold mb-4">Post Not Found</h1>
+      <div className="mx-auto max-w-3xl p-6 text-center">
+        <h1 className="mb-4 text-2xl font-semibold">Post Not Found</h1>
         <p className="text-gray-600 dark:text-gray-400">{event.error}</p>
       </div>
     );
   }
 
   return (
-    <article className="mt-40 max-w-3xl mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow-md border border-gray-200 dark:border-gray-700">
-      <h1 className="text-4xl font-bold mb-4 text-gray-900 dark:text-gray-100">
-        {event.title}
-      </h1>
+    <article className="mainContent">
+      <div className="flex flex-col items-center justify-center p-6">
+        <h1 className="mb-4 text-4xl font-bold text-gray-900 dark:text-gray-100">
+          {event.title}
+        </h1>
 
-      <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
-        <strong>Event Type:</strong> {event.eventType}
-      </p>
+        <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
+          <strong>Event Type:</strong> {event.eventType}
+        </p>
 
-      <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
-        <strong>Target Group:</strong> {event.groupTarget}
-      </p>
+        <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
+          <strong>Target Group:</strong> {event.groupTarget}
+        </p>
 
-      <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
-        <strong>Date:</strong>{' '}
-        {new Date(event.startDate).toLocaleDateString(undefined, {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        })}
-        {event.endDate
-          ? ` - ${new Date(event.endDate).toLocaleDateString(undefined, {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}`
-          : ''}
-      </p>
+        <p className="mb-2 text-sm text-gray-600 dark:text-gray-400">
+          <strong>Date:</strong>{' '}
+          {new Date(event.startDate).toLocaleDateString(undefined, {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+          })}
+          {event.endDate
+            ? ` - ${new Date(event.endDate).toLocaleDateString(undefined, {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+              })}`
+            : ''}
+        </p>
 
-      {event.startTime && (
+        {event.startTime && (
+          <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
+            <strong>Time:</strong> {event.startTime}{' '}
+            {event.endTime && `- ${event.endTime}`}
+          </p>
+        )}
+
+        <p className="mb-6 whitespace-pre-wrap text-gray-800 dark:text-gray-200">
+          {event.description}
+        </p>
+
         <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-          <strong>Time:</strong> {event.startTime}{' '}
-          {event.endTime && `- ${event.endTime}`}
+          <strong>Location:</strong>{' '}
+          {event.location
+            ? [
+                event.location.street,
+                event.location.city,
+                event.location.state,
+                event.location.country,
+              ]
+                .filter(Boolean)
+                .join(', ')
+            : ''}
         </p>
-      )}
 
-      <p className="mb-6 text-gray-800 dark:text-gray-200 whitespace-pre-wrap">
-        {event.description}
-      </p>
+        {event.isFree ? (
+          <p className="mb-4 font-semibold text-green-600 dark:text-green-400">
+            Free Event
+          </p>
+        ) : (
+          <p className="mb-4 font-semibold text-red-600 dark:text-red-400">
+            Price: {event.currency} {event.price.toFixed(2)}
+          </p>
+        )}
 
-      <p className="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        <strong>Location:</strong>{' '}
-        {event.location
-          ? [
-              event.location.street,
-              event.location.city,
-              event.location.state,
-              event.location.country,
-            ]
-              .filter(Boolean)
-              .join(', ')
-          : ''}
-      </p>
+        {event.registrationLink && (
+          <a
+            href={event.registrationLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block rounded-md bg-blue-600 px-6 py-2 text-white transition hover:bg-blue-700"
+          >
+            Register Here
+          </a>
+        )}
 
-      {event.isFree ? (
-        <p className="mb-4 text-green-600 dark:text-green-400 font-semibold">
-          Free Event
-        </p>
-      ) : (
-        <p className="mb-4 text-red-600 dark:text-red-400 font-semibold">
-          Price: {event.currency} {event.price.toFixed(2)}
-        </p>
-      )}
-
-      {event.registrationLink && (
-        <a
-          href={event.registrationLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block px-6 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
-        >
-          Register Here
-        </a>
-      )}
-
-      {event.image && (
-        <Image
-          src={event.image}
-          alt={event.title}
-          className="mt-6 rounded-md object-cover w-full max-h-96"
-        />
-      )}
+        {event.image && (
+          <Image
+            src={event.image}
+            alt={event.title}
+            className="mt-6 max-h-96 w-full rounded-md object-cover"
+          />
+        )}
+      </div>
     </article>
   );
 };

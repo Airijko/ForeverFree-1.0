@@ -42,11 +42,11 @@ const CreateCommunityForm = () => {
   return (
     <form
       action={clientAction}
-      className="w-full max-w-xl flex flex-col gap-5 glassmorphism bg-neutral-100 p-5"
+      className="glassmorphism flex w-full flex-col gap-5 bg-neutral-100 p-5"
     >
       {/* Name */}
       <label>
-        <span className="font-satoshi font-semibold text-base text-gray-700 dark:text-gray-300">
+        <span className="font-satoshi text-base font-semibold text-gray-700 dark:text-gray-300">
           Name
         </span>
         <input
@@ -60,7 +60,7 @@ const CreateCommunityForm = () => {
 
       {/* Email */}
       <label>
-        <span className="font-satoshi font-semibold text-base text-gray-700 dark:text-gray-300">
+        <span className="font-satoshi text-base font-semibold text-gray-700 dark:text-gray-300">
           Email
         </span>
         <input
@@ -75,14 +75,14 @@ const CreateCommunityForm = () => {
       {/* Phone */}
       <PhoneInput name="phone" />
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {/* Location   */}
         <LocationInput />
 
-        <div className="flex flex-col h-full">
+        <div className="flex h-full flex-col">
           {/* Website */}
           <label>
-            <span className="font-satoshi font-semibold text-base text-gray-700 dark:text-gray-300">
+            <span className="font-satoshi text-base font-semibold text-gray-700 dark:text-gray-300">
               Website
             </span>
             <input
@@ -97,7 +97,7 @@ const CreateCommunityForm = () => {
 
           {/* Type */}
           <label>
-            <span className="font-satoshi font-semibold text-base text-gray-700 dark:text-gray-300">
+            <span className="font-satoshi text-base font-semibold text-gray-700 dark:text-gray-300">
               Type
             </span>
             <select
@@ -139,7 +139,7 @@ const CreateCommunityForm = () => {
 
       {/* Submit + Cancel */}
       <div className="flex-end mx-3 mb-5 gap-4">
-        <Link href="/" className="text-gray-500 text-sm">
+        <Link href="/" className="text-sm text-gray-500">
           Cancel
         </Link>
         <SubmitButton className="mt-4 flex w-full justify-center rounded-md bg-gray-800 px-4 py-2 text-center text-white hover:bg-gray-700">

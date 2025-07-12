@@ -19,7 +19,7 @@ const OrganizationProfile = ({
   isEditing = false,
 }) => {
   return (
-    <section className="flex w-full flex-col items-center justify-center">
+    <section className="mainContent">
       <DynamicHeader bannerUrl={formData.bannerUrl}>
         <div className="mb-3 flex h-full w-full max-w-5xl flex-col items-center">
           {/* Banner */}
@@ -47,41 +47,6 @@ const OrganizationProfile = ({
                 No banner uploaded
               </div>
             )}
-            {/* Action Buttons */}
-            <div className="absolute bottom-4 right-4 z-20">
-              {isOwner && !isEditing && (
-                <div className="flex items-center gap-2">
-                  <Link
-                    href={`/communities/${formData._id}/edit`}
-                    className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-500"
-                  >
-                    Edit Page
-                  </Link>
-                  <Link
-                    href={`/communities/${formData._id}/events/create`}
-                    className="rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-500"
-                  >
-                    Create Post
-                  </Link>
-                </div>
-              )}
-              {isEditing && (
-                <div className="flex items-center gap-2">
-                  <Link
-                    href={`/communities/${formData._id}`}
-                    className="rounded-md bg-gray-600 px-4 py-2 text-white hover:bg-gray-500"
-                  >
-                    Cancel
-                  </Link>
-                  <button
-                    type="submit"
-                    className="rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-500"
-                  >
-                    Save Changes
-                  </button>
-                </div>
-              )}
-            </div>
           </div>
 
           {/* Profile & Name */}
@@ -117,6 +82,41 @@ const OrganizationProfile = ({
               </div>
             </div>
           </div>
+        </div>
+        {/* Action Buttons */}
+        <div className="absolute bottom-4 right-4 z-20">
+          {isOwner && !isEditing && (
+            <div className="flex items-center gap-2">
+              <Link
+                href={`/communities/${formData._id}/edit`}
+                className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-500"
+              >
+                Edit Page
+              </Link>
+              <Link
+                href={`/communities/${formData._id}/events/create`}
+                className="rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-500"
+              >
+                Create Post
+              </Link>
+            </div>
+          )}
+          {isEditing && (
+            <div className="flex items-center gap-2">
+              <Link
+                href={`/communities/${formData._id}`}
+                className="rounded-md bg-gray-600 px-4 py-2 text-white hover:bg-gray-500"
+              >
+                Cancel
+              </Link>
+              <button
+                type="submit"
+                className="rounded-md bg-green-600 px-4 py-2 text-white hover:bg-green-500"
+              >
+                Save Changes
+              </button>
+            </div>
+          )}
         </div>
       </DynamicHeader>
       {/* Main Content */}

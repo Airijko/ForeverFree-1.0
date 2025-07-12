@@ -7,7 +7,7 @@ import {
   PhoneIcon,
 } from '@heroicons/react/24/outline';
 
-const OrganizationCard = async ({ organization, index }) => {
+const OrganizationCard = async ({ organization }) => {
   const orgLink = organization?._id ? `/communities/${organization._id}` : '#';
 
   return (
@@ -29,12 +29,12 @@ const OrganizationCard = async ({ organization, index }) => {
           </div>
 
           {/* Name & Location */}
-          <div className="flex w-full flex-col justify-between text-gray-900 dark:text-white">
+          <div className="relative flex w-full flex-col justify-between py-7 text-gray-900 dark:text-white">
             {/* Tag - Top Right */}
-            <span className="z-10 mx-1 my-1 ml-auto select-none rounded-md bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
+            <span className="absolute right-1 top-1 z-10 ml-auto select-none rounded-md bg-blue-100 px-3 py-1 text-xs font-semibold text-blue-700">
               {organization.type}
             </span>
-            <div className="px-4">
+            <div className="my-auto px-2">
               <h1 className="organization_card_title whitespace-normal break-words text-2xl font-bold">
                 {organization.name}
               </h1>
@@ -45,16 +45,10 @@ const OrganizationCard = async ({ organization, index }) => {
                     {organization.location.street}
                   </p>
                 </span>
-                <span className="flex min-w-0 items-center gap-1">
-                  <PhoneIcon className="h-4 w-4 shrink-0" />
-                  <p className="min-w-0 whitespace-normal break-words">
-                    {organization.phone}
-                  </p>
-                </span>
               </div>
             </div>
             {/* Bottom right icons */}
-            <div className="mt-4 flex justify-end space-x-4">
+            <div className="absolute bottom-2 right-2 flex items-center gap-2">
               <button
                 aria-label="Share"
                 className="text-gray-400 transition hover:text-gray-600 dark:hover:text-gray-200"

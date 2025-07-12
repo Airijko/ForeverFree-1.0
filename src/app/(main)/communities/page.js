@@ -19,7 +19,7 @@ const Communities = async () => {
               <span className="block">Communities</span>
             </h1>
 
-            <div className="mb-8 w-full">
+            <div className="w-full">
               <SearchBar />
             </div>
           </div>
