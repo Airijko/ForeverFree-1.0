@@ -54,7 +54,7 @@ body::before {
 
 /* === Overlay when in dark mode === */
 .dark body::before {
-  backdrop-filter: brightness(0.075); /* dim image */
+  backdrop-filter: brightness(0.08); /* dim image */
 }
 
 .feed {
@@ -107,7 +107,7 @@ body::before {
 
 /* === Typography === */
 .head_text {
-  @apply font-semibold text-primary;
+  @apply text-3xl font-bold text-primary md:text-4xl lg:text-5xl;
 }
 
 .blue_gradient {
@@ -115,7 +115,7 @@ body::before {
 }
 
 .desc {
-  @apply mt-5 text-lg text-gray-600 sm:text-xl;
+  @apply mt-3 text-sm text-gray-600 md:text-lg;
 }
 /* === Forms === */
 .search_input,

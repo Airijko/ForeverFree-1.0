@@ -17,12 +17,12 @@ const Home = async () => {
       <section className="mainContent">
         <MainHeader>
           <div className="flex h-full flex-col items-center justify-end">
-            <h1 className="head_text max-w-2xl text-center md:text-4xl">
-              Discover What&apos;s Happening in Your Christian Community
+            <h1 className="head_text max-w-lg text-center">
+              Connect with your Christian Community
             </h1>
             <p className="desc max-w-lg text-center">
-              Find events, connect with churches, and explore resources that
-              enrich your faith journey.
+              Discover events and communities that inspire and uplift your
+              faith.
             </p>
             <div className="mt-5 flex flex-row items-center gap-2">
               <button
