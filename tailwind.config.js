@@ -21,6 +21,15 @@ module.exports = {
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
       },
+      animation: {
+        shine: 'shine 0.75s ease-in-out forwards',
+      },
+      keyframes: {
+        shine: {
+          '0%': { left: '-75%' },
+          '100%': { left: '125%' },
+        },
+      },
     },
   },
   plugins: [
