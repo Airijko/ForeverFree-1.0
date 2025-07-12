@@ -8,16 +8,11 @@ export const metadata = {
 
 const DashboardLayout = ({ children }) => {
   return (
-    <html lang="en">
-      <head />
-      <body className="font-inter text-primary transition-colors duration-300 dark:text-white">
-        <Provider>
-          <div className="min-h-screen w-full bg-neutral-50 dark:bg-neutral-900">
-            {children}
-          </div>
-        </Provider>
-      </body>
-    </html>
+    <Provider>
+      <div className="min-h-screen w-full bg-neutral-50 font-inter text-primary transition-colors duration-300 dark:bg-neutral-900 dark:text-white">
+        {children}
+      </div>
+    </Provider>
   );
 };
 
