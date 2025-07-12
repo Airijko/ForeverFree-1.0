@@ -45,6 +45,17 @@ body::before {
     backdrop-filter 0.3s ease;
 }
 
+.mainContent {
+  flex: 1;
+  border-left: 1px solid #e5e7eb; /* Tailwind's border-gray-200 */
+  border-right: 1px solid #e5e7eb;
+  transition: all 0.3s;
+}
+.dark .mainContent {
+  border-left-color: #404040; /* Tailwind's dark:border-neutral-700 */
+  border-right-color: #404040;
+}
+
 /* === Overlay when in dark mode === */
 .dark body::before {
   backdrop-filter: brightness(0.075); /* dim image */
@@ -56,7 +67,7 @@ body::before {
 
 /* === Buttons === */
 .btn {
-  @apply inline-flex items-center justify-center px-5 py-2 rounded-full text-sm font-medium transition-colors duration-200;
+  @apply inline-flex items-center justify-center rounded-full px-5 py-2 text-sm font-medium transition-colors duration-200;
 }
 
 .btn-primary {
@@ -64,20 +75,20 @@ body::before {
 }
 
 .btn-outline {
-  @apply border border-accent text-accent bg-transparent hover:bg-accent hover:text-white;
+  @apply border border-accent bg-transparent text-accent hover:bg-accent hover:text-white;
 }
 
 .btn-light {
-  @apply bg-white text-black border border-gray-300 hover:bg-gray-100;
+  @apply border border-gray-300 bg-white text-black hover:bg-gray-100;
 }
 
 .dark .btn-light {
-  @apply bg-neutral-800 text-white border-neutral-600 hover:bg-neutral-700;
+  @apply border-neutral-600 bg-neutral-800 text-white hover:bg-neutral-700;
 }
 
 .btn-glow {
-  @apply relative inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-black dark:text-neutral-200 bg-transparent transition-colors duration-300 ease-in-out;
-  @apply overflow-hidden z-0;
+  @apply relative inline-flex items-center justify-center bg-transparent px-4 py-2 text-sm font-medium text-black transition-colors duration-300 ease-in-out dark:text-neutral-200;
+  @apply z-0 overflow-hidden;
 }
 
 .btn-glow::after {
@@ -104,31 +115,31 @@ body::before {
 }
 
 .blue_gradient {
-  @apply bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 text-transparent bg-clip-text;
+  @apply bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent;
 }
 
 .desc {
-  @apply mt-5 text-lg text-gray-600  sm:text-xl;
+  @apply mt-5 text-lg text-gray-600 sm:text-xl;
 }
 /* === Forms === */
 .search_input,
 .form_input,
 .form_textarea {
-  @apply w-full rounded-md border border-gray-300 bg-white text-sm text-gray-700 p-3 shadow-sm focus:outline-none focus:ring-2 focus:ring-accent;
+  @apply w-full rounded-md border border-gray-300 bg-white p-3 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-accent;
 }
 
 .form_dropdown {
-  @apply w-full rounded-md border border-gray-300 bg-white text-sm text-gray-700 px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-accent dark:bg-gray-800 dark:text-gray-200;
+  @apply w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-accent dark:bg-gray-800 dark:text-gray-200;
 }
 
 .dark .form_dropdown {
-  @apply bg-slate-800 text-white border-slate-600;
+  @apply border-slate-600 bg-slate-800 text-white;
 }
 
 .dark .search_input,
 .dark .form_input,
 .dark .form_textarea {
-  @apply bg-slate-800 text-white border-slate-600;
+  @apply border-slate-600 bg-slate-800 text-white;
 }
 
 /* === Cards === */
@@ -138,16 +149,16 @@ body::before {
 
 /* === Utility Layouts === */
 .flex-center {
-  @apply flex justify-center items-center;
+  @apply flex items-center justify-center;
 }
 .flex-between {
-  @apply flex justify-between items-center;
+  @apply flex items-center justify-between;
 }
 .flex-end {
-  @apply flex justify-end items-center;
+  @apply flex items-center justify-end;
 }
 .flex-start {
-  @apply flex justify-start items-start;
+  @apply flex items-start justify-start;
 }
 
 .masonry-grid {
@@ -181,6 +192,6 @@ body::before {
 
 /* === Headings === */
 .heading-3 {
-  @apply text-xl md:text-2xl font-semibold text-gray-800 dark:text-gray-300 tracking-tight mb-2 pb-1  dark:border-gray-800 w-fit;
+  @apply mb-2 w-fit pb-1 text-xl font-semibold tracking-tight text-gray-800 dark:border-gray-800 dark:text-gray-300 md:text-2xl;
   letter-spacing: -0.01em;
 }

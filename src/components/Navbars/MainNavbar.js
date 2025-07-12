@@ -4,8 +4,12 @@ import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';
 import ThemeToggle from '../ThemeToggle';
 
-// Import Heroicons (outline)
-import { HomeIcon, UsersIcon, FlagIcon } from '@heroicons/react/24/outline';
+import {
+  HomeIcon,
+  UsersIcon,
+  FlagIcon,
+  CalendarIcon,
+} from '@heroicons/react/24/outline';
 
 const MainSidebar = async () => {
   const session = await getServerSession(options);
@@ -16,11 +20,12 @@ const MainSidebar = async () => {
       ? [{ label: 'Dashboard', href: '/dashboard', icon: HomeIcon }]
       : []),
     { label: 'Communities', href: '/communities', icon: UsersIcon },
+    { label: 'Events', href: '/events', icon: CalendarIcon },
     { label: 'Reconquista', href: '/reconquista', icon: FlagIcon },
   ];
 
   return (
-    <aside className="sticky top-0 z-50 flex h-screen flex-shrink-0 flex-col justify-between gap-2 overflow-hidden px-5 py-5">
+    <aside className="sticky top-0 z-50 flex h-screen w-max flex-shrink-0 flex-col justify-between gap-2 overflow-hidden px-5 py-5">
       <nav className="flex flex-col items-center gap-4 md:items-start">
         <Link
           href="/"
@@ -42,7 +47,7 @@ const MainSidebar = async () => {
           <Link
             key={label}
             href={href}
-            className="mx-auto flex flex-row items-center gap-2 rounded-lg px-2 py-2 transition-all duration-200 hover:bg-amber-700 hover:text-white dark:hover:text-white md:mx-0 md:w-full"
+            className="mx-auto flex flex-row items-center gap-2 rounded-lg px-2 py-2 hover:bg-amber-700 hover:text-white hover:transition-all hover:duration-300 dark:hover:text-white md:mx-0 md:w-full"
           >
             <Icon className="h-10 w-10" aria-hidden="true" />
             <span className="hidden text-2xl md:inline">{label}</span>
@@ -56,14 +61,14 @@ const MainSidebar = async () => {
           {session ? (
             <Link
               href="/api/auth/signout?callbackUrl=/"
-              className="flex select-none justify-center rounded-xl border border-gray-200 bg-white/70 px-4 py-2 font-semibold text-gray-900 shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:border-neutral-800 dark:bg-neutral-900/70 dark:text-gray-100 dark:hover:bg-amber-400 dark:hover:text-neutral-900"
+              className="flex select-none justify-center rounded-xl border border-gray-200 bg-black px-4 py-2 font-semibold text-white shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:bg-white dark:text-black dark:hover:bg-amber-400 dark:hover:text-black"
             >
               Logout
             </Link>
           ) : (
             <Link
               href="/api/auth/signin"
-              className="flex select-none justify-center rounded-xl border border-gray-200 bg-white/70 px-4 py-2 font-semibold text-gray-900 shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:border-neutral-800 dark:bg-neutral-900/70 dark:text-gray-100 dark:hover:bg-amber-400 dark:hover:text-neutral-900"
+              className="flex select-none justify-center rounded-xl border border-gray-200 bg-black px-4 py-2 font-semibold text-white shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:bg-white dark:text-black dark:hover:bg-amber-400 dark:hover:text-black"
             >
               Login
             </Link>

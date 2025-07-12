@@ -8,21 +8,21 @@ const Communities = async () => {
   const data = await fetchAllOrganizations();
 
   return (
-    <section className="w-full flex flex-col items-center justify-center">
+    <section className="mainContent">
       <MainHeader>
-        <div className="flex flex-col items-center justify-end h-full w-full max-w-5xl">
-          <h1 className="head_text w-full text-center text-6xl font-bold mb-8">
+        <div className="flex h-full w-full max-w-5xl flex-col items-center justify-end">
+          <h1 className="head_text mb-8 w-full text-center text-6xl font-bold">
             <span className="block">Christian</span>
             <span className="block">Communities</span>
           </h1>
           {/* Search Bar */}
           <SearchBar></SearchBar>
           {/* Register Button */}
-          <div className="w-full flex justify-end mt-1 mb-4">
+          <div className="mb-4 mt-1 flex w-full justify-end">
             <Link href="/communities/register">
               <button
                 type="button"
-                className="items-center justify-center px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-400 dark:focus:ring-blue-300 transition-all duration-200"
+                className="items-center justify-center rounded-lg bg-blue-600 px-6 py-2 font-semibold text-white shadow-md transition-all duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2 dark:bg-blue-500 dark:hover:bg-blue-400 dark:focus:ring-blue-300"
               >
                 Register Community
               </button>

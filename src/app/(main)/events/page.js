@@ -10,23 +10,21 @@ const Events = async () => {
   const coordinates = await mapCoordinatesFromData(data);
 
   return (
-    <section className="w-full flex flex-col items-center justify-center">
-      <div className="w-full h-screen">
-        <div className="flex w-full h-full">
-          <div className="h-full pt-40">
-            <EventFilterBar />
-          </div>
+    <section className="mainContent">
+      <div className="h-screen w-full">
+        <div className="flex h-full w-full">
           <main className="flex-grow overflow-y-scroll p-4 scrollbar-hide">
             <div className="py-4">
-              <h1 className="head_text w-full text-center text-6xl font-bold mb-6">
+              <h1 className="text- mb-6 w-full text-center text-6xl font-bold">
                 <span className="block">Christian Events</span>
               </h1>
               {/* Search Bar */}
               <SearchBar />
+              <EventFilterBar />
             </div>
             <ListEvents data={data} />
           </main>
-          <section className="w-[720px] h-full">
+          <section className="h-full w-[720px]">
             <Maps location={coordinates} />
           </section>
         </div>

@@ -9,7 +9,7 @@ const Communities = async () => {
 
   if (organizations.error) {
     return (
-      <div className="max-w-2xl mx-auto mt-10 p-6 text-center text-red-600">
+      <div className="mx-auto mt-10 max-w-2xl p-6 text-center text-red-600">
         {organizations.error}
       </div>
     );
@@ -17,8 +17,8 @@ const Communities = async () => {
 
   return (
     <DashboardLayout>
-      <div className="max-w-4xl mx-auto p-6 bg-white dark:bg-gray-900 rounded-lg shadow border border-gray-200 dark:border-gray-700">
-        <h1 className="text-3xl font-bold mb-6 text-gray-900 dark:text-gray-100">
+      <div className="mx-auto max-w-4xl rounded-lg border border-gray-200 bg-white p-6 shadow dark:border-gray-700 dark:bg-gray-900">
+        <h1 className="mb-6 text-3xl font-bold text-gray-900 dark:text-gray-100">
           Organization Management
         </h1>
         <table className="w-full border-collapse">
@@ -53,7 +53,7 @@ const Communities = async () => {
                   >
                     <button
                       type="submit"
-                      className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700 transition"
+                      className="rounded bg-red-600 px-3 py-1 text-white transition hover:bg-red-700"
                     >
                       Delete
                     </button>
