@@ -21,11 +21,11 @@ const MainSidebar = async () => {
 
   return (
     <aside className="sticky top-0 z-50 flex h-screen flex-shrink-0 flex-col justify-between gap-2 overflow-hidden px-5 py-5">
-      <nav className="flex flex-col items-center md:items-start gap-4">
+      <nav className="flex flex-col items-center gap-4 md:items-start">
         <Link
           href="/"
           aria-label="Go to homepage"
-          className="group mx-auto flex flex-row items-center gap-1 md:mx-0 hover:scale-105 transition-all duration-300 mb-3"
+          className="group mx-auto mb-3 flex flex-row items-center gap-1 transition-all duration-300 hover:scale-105 md:mx-0"
         >
           <Image
             src="/assets/icons/ForeverFree_Logo.png"
@@ -34,7 +34,7 @@ const MainSidebar = async () => {
             alt="ForeverFree Logo"
             className="drop-shadow-[0_0_2px_black]"
           />
-          <h1 className="hidden md:block text-3xl font-extrabold text-gray-900 dark:text-gray-100 select-none tracking-wide transition-colors duration-200 group-hover:text-amber-600 dark:group-hover:text-amber-400 whitespace-nowrap">
+          <h1 className="hidden select-none whitespace-nowrap text-3xl font-extrabold tracking-wide text-gray-900 transition-colors duration-200 group-hover:text-amber-600 dark:text-gray-100 dark:group-hover:text-amber-400 md:block">
             Forever Free
           </h1>
         </Link>
@@ -42,32 +42,28 @@ const MainSidebar = async () => {
           <Link
             key={label}
             href={href}
-            className="
-      mx-auto flex flex-row items-center gap-2 md:mx-0
-      rounded-lg px-2 py-2 transition-all duration-200 hover:text-white
-      hover:bg-amber-700 dark:hover:text-white md:w-full
-    "
+            className="mx-auto flex flex-row items-center gap-2 rounded-lg px-2 py-2 transition-all duration-200 hover:bg-amber-700 hover:text-white dark:hover:text-white md:mx-0 md:w-full"
           >
             <Icon className="h-10 w-10" aria-hidden="true" />
-            <span className="hidden md:inline text-2xl">{label}</span>
+            <span className="hidden text-2xl md:inline">{label}</span>
           </Link>
         ))}
       </nav>
 
-      <div className="mt-auto flex flex-col md:flex-row items-center gap-4 w-full">
+      <div className="mt-auto flex w-full flex-col items-center gap-4 md:flex-row">
         <ThemeToggle />
         <div className="w-full">
           {session ? (
             <Link
               href="/api/auth/signout?callbackUrl=/"
-              className="flex justify-center px-4 py-2 rounded-xl bg-white/70 dark:bg-neutral-900/70 text-gray-900 dark:text-gray-100 font-semibold shadow backdrop-blur-md border border-gray-200 dark:border-neutral-800 hover:bg-amber-600 hover:text-white dark:hover:bg-amber-400 dark:hover:text-neutral-900 transition-all duration-200 select-none"
+              className="flex select-none justify-center rounded-xl border border-gray-200 bg-white/70 px-4 py-2 font-semibold text-gray-900 shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:border-neutral-800 dark:bg-neutral-900/70 dark:text-gray-100 dark:hover:bg-amber-400 dark:hover:text-neutral-900"
             >
               Logout
             </Link>
           ) : (
             <Link
               href="/api/auth/signin"
-              className="flex justify-center px-4 py-2 rounded-xl bg-white/70 dark:bg-neutral-900/70 text-gray-900 dark:text-gray-100 font-semibold shadow backdrop-blur-md border border-gray-200 dark:border-neutral-800 hover:bg-amber-600 hover:text-white dark:hover:bg-amber-400 dark:hover:text-neutral-900 transition-all duration-200 select-none"
+              className="flex select-none justify-center rounded-xl border border-gray-200 bg-white/70 px-4 py-2 font-semibold text-gray-900 shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:border-neutral-800 dark:bg-neutral-900/70 dark:text-gray-100 dark:hover:bg-amber-400 dark:hover:text-neutral-900"
             >
               Login
             </Link>

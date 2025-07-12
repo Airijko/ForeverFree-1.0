@@ -57,7 +57,7 @@ const ImageCropper = ({ setImage }) => {
       {/* Upload Label */}
       <label
         htmlFor="image-upload"
-        className="inline-block cursor-pointer bg-blue-600 hover:bg-blue-700 text-white p-3 rounded-md text-sm font-medium transition"
+        className="inline-block cursor-pointer rounded-md bg-blue-600 p-3 text-sm font-medium text-white transition hover:bg-blue-700"
       >
         Upload Profile Image
       </label>
@@ -74,12 +74,12 @@ const ImageCropper = ({ setImage }) => {
       {/* Image Preview */}
       {imageUploaded && (
         <div className="mt-4 flex flex-col items-center gap-2">
-          <div className="w-[200px] h-[200px] rounded border border-gray-300 shadow-sm overflow-hidden">
+          <div className="h-[200px] w-[200px] overflow-hidden rounded border border-gray-300 shadow-sm">
             <Image
               ref={imageRef}
               src={imageSrc}
               alt="Crop preview"
-              className="w-full h-full object-cover"
+              className="h-full w-full object-cover"
             />
           </div>
 

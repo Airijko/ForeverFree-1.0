@@ -23,8 +23,8 @@ const navLinks = [
 
 const AdminSideBar = () => {
   return (
-    <aside className="w-64 bg-white/90 dark:bg-neutral-900/90 border-r border-gray-200 dark:border-neutral-800 p-6 flex flex-col gap-4 py-32">
-      <h2 className="text-2xl font-extrabold text-gray-900 dark:text-gray-100 mb-8 tracking-wide">
+    <aside className="flex w-64 flex-col gap-4 border-r border-gray-200 bg-white/90 p-6 py-32 dark:border-neutral-800 dark:bg-neutral-900/90">
+      <h2 className="mb-8 text-2xl font-extrabold tracking-wide text-gray-900 dark:text-gray-100">
         Admin Panel
       </h2>
       <nav className="flex flex-col gap-2">
@@ -32,7 +32,7 @@ const AdminSideBar = () => {
           <Link
             key={link.href}
             href={link.href}
-            className="flex items-center gap-3 px-4 py-2 rounded-md font-semibold text-gray-700 dark:text-gray-200 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-700 transition"
+            className="flex items-center gap-3 rounded-md px-4 py-2 font-semibold text-gray-700 transition hover:bg-blue-600 hover:text-white dark:text-gray-200 dark:hover:bg-blue-700"
           >
             <link.icon className="h-5 w-5" aria-hidden="true" />
             {link.label}

@@ -26,7 +26,7 @@ const DynamicHeader = ({ bannerUrl, children }) => {
 
   return (
     <header
-      className="relative flex flex-col items-center justify-center px-6 md:px-32 h-[375px] w-full transition-all duration-500"
+      className="relative flex h-[375px] w-full flex-col items-center justify-center px-6 transition-all duration-500 md:px-32"
       style={{ backgroundColor: bgColor }}
     >
       {children}
