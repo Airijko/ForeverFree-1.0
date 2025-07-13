@@ -2,7 +2,7 @@ import { fetchAllOrganizations } from '@actions/organizationAction';
 import { fetchAllEvents } from '@actions/eventAction';
 import MainHeader from '@components/MainHeader';
 import Link from 'next/link';
-import ListCommunities from '@components/Communties/ListCommunities';
+import ListCommunities from '@components/Communities/ListCommunities';
 import ListEvents from '@components/Events/ListEvents';
 import DynamicPanel from '@components/Layouts/DynamicPanel';
 

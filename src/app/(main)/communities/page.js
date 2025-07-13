@@ -1,5 +1,5 @@
 import { fetchAllOrganizations } from '@actions/organizationAction';
-import ListCommunities from '@components/Communties/ListCommunities';
+import ListCommunities from '@components/Communities/ListCommunities';
 import SearchBar from '@components/Inputs/SearchBar';
 import MainHeader from '@components/MainHeader';
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
@@ -34,7 +34,7 @@ const Communities = async () => {
               <Link href="/communities/register">
                 <button
                   type="button"
-                  className="hover:before:animate-shine relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-amber-600 px-6 py-4 text-2xl font-bold text-white shadow-lg transition-all duration-200 before:absolute before:left-[-100%] before:top-0 before:h-full before:w-[80%] before:bg-white/20 before:blur-sm before:content-[''] hover:bg-amber-700 focus:outline-none focus:ring-4 focus:ring-amber-300 dark:bg-amber-700 dark:hover:bg-amber-600 dark:focus:ring-amber-400"
+                  className="relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-xl bg-amber-600 px-6 py-4 text-2xl font-bold text-white shadow-lg transition-all duration-200 before:absolute before:left-[-100%] before:top-0 before:h-full before:w-[80%] before:bg-white/20 before:blur-sm before:content-[''] hover:bg-amber-700 hover:before:animate-shine focus:outline-none focus:ring-4 focus:ring-amber-300 dark:bg-amber-700 dark:hover:bg-amber-600 dark:focus:ring-amber-400"
                 >
                   <PlusCircleIcon className="h-10 w-10 text-white" />
                   Register Community
