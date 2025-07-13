@@ -50,6 +50,8 @@ const EventSchema = new Schema(
     isFree: { type: Boolean, default: true },
     price: { type: Number, default: 0 },
     currency: { type: String, default: 'USD' },
+    likes: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+    isFeatured: { type: Boolean, default: false },
 
     registrationLink: String,
     image: String,

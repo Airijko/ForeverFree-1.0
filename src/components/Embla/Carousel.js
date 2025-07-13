@@ -11,7 +11,7 @@ import {
 const Carousel = ({ data }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true }, [
     Autoplay({
-      delay: 1500,
+      delay: 3000,
       play: true,
       stopOnInteraction: false,
       stopOnMouseEnter: true,
