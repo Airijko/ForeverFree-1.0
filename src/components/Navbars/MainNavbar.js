@@ -9,6 +9,8 @@ import {
   UsersIcon,
   FlagIcon,
   CalendarIcon,
+  ArrowLeftOnRectangleIcon,
+  ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 
 const MainSidebar = async () => {
@@ -25,7 +27,7 @@ const MainSidebar = async () => {
   ];
 
   return (
-    <aside className="sticky top-0 z-50 flex h-screen w-max flex-shrink-0 flex-col justify-between gap-2 overflow-hidden px-5 py-5">
+    <aside className="sticky top-0 z-50 flex h-screen w-max flex-shrink-0 flex-col justify-between gap-2 overflow-hidden px-1 py-5 lg:px-5">
       <nav className="mx-auto flex w-max flex-col items-center gap-4 lg:items-start">
         <Link
           href="/"
@@ -61,16 +63,24 @@ const MainSidebar = async () => {
           {session ? (
             <Link
               href="/api/auth/signout?callbackUrl=/"
-              className="flex select-none justify-center rounded-xl border border-gray-200 bg-black px-4 py-2 font-semibold text-white shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:bg-white dark:text-black dark:hover:bg-amber-400 dark:hover:text-black"
+              className="flex select-none items-center justify-center rounded-xl border border-gray-200 bg-black px-4 py-2 font-semibold text-white shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:bg-white dark:text-black dark:hover:bg-amber-400 dark:hover:text-black"
             >
-              Logout
+              <span className="hidden lg:inline">Logout</span>
+              <ArrowLeftOnRectangleIcon
+                className="h-6 w-6 lg:hidden"
+                aria-label="Logout"
+              />
             </Link>
           ) : (
             <Link
               href="/api/auth/signin"
-              className="flex select-none justify-center rounded-xl border border-gray-200 bg-black px-4 py-2 font-semibold text-white shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:bg-white dark:text-black dark:hover:bg-amber-400 dark:hover:text-black"
+              className="flex select-none items-center justify-center rounded-xl border border-gray-200 bg-black px-4 py-2 font-semibold text-white shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:bg-white dark:text-black dark:hover:bg-amber-400 dark:hover:text-black"
             >
-              Login
+              <span className="hidden lg:inline">Login</span>
+              <ArrowRightOnRectangleIcon
+                className="h-6 w-6 lg:hidden"
+                aria-label="Login"
+              />
             </Link>
           )}
         </div>
