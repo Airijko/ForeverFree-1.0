@@ -45,7 +45,7 @@ body::before {
 }
 
 .mainContent {
-  @apply w-full border-l border-r border-gray-200 transition-all dark:border-neutral-700 lg:w-[600px] xl:w-[800px];
+  @apply w-full border-x border-gray-300 transition-all dark:border-neutral-700 lg:w-[600px] xl:w-[800px];
 }
 
 .dark .mainContent {
@@ -188,7 +188,80 @@ body::before {
 }
 
 /* === Headings === */
-.heading-3 {
-  @apply mb-2 w-fit pb-1 text-xl font-semibold tracking-tight text-gray-800 dark:border-gray-800 dark:text-gray-300 md:text-2xl;
+.heading-2 {
+  @apply w-fit text-3xl font-semibold tracking-tight text-neutral-100 drop-shadow-[0_0_3px_black] md:text-4xl;
   letter-spacing: -0.01em;
+}
+.heading-3 {
+  @apply w-fit text-3xl font-semibold tracking-tight text-gray-800 dark:border-gray-800 dark:text-gray-300 md:text-3xl xl:text-4xl;
+  letter-spacing: -0.01em;
+}
+
+.embla {
+  max-width: 48rem;
+  margin: auto;
+  --slide-height: 19rem;
+  --slide-spacing: 1rem;
+  --slide-size: 70%;
+}
+
+.embla__viewport {
+  overflow: hidden;
+}
+
+.embla__container {
+  backface-visibility: hidden;
+  display: flex;
+  touch-action: pan-y;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+}
+
+.embla__controls {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  justify-content: space-between;
+  gap: 1.2rem;
+}
+
+.embla__buttons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.6rem;
+  align-items: center;
+}
+
+.embla__button {
+  appearance: none;
+  background-color: transparent;
+  touch-action: manipulation;
+  display: inline-flex;
+  text-decoration: none;
+  cursor: pointer;
+  border: solid 2px rgb(126, 126, 126);
+  padding: 0;
+  margin: 0;
+  box-shadow: inset 0 0 0 0.2rem var(--detail-medium-contrast);
+  width: 3.6rem;
+  height: 3.6rem;
+  z-index: 1;
+  border-radius: 50%;
+  color: var(--text-body);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.embla__button:disabled {
+  color: var(--detail-high-contrast);
+}
+
+.embla__button__svg {
+  width: 35%;
+  height: 35%;
 }

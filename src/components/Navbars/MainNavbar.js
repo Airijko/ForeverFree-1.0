@@ -9,6 +9,7 @@ import {
   UsersIcon,
   FlagIcon,
   CalendarIcon,
+  CpuChipIcon,
   ArrowLeftOnRectangleIcon,
   ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline';
@@ -19,8 +20,9 @@ const MainSidebar = async () => {
 
   const navItems = [
     ...(isAdmin
-      ? [{ label: 'Dashboard', href: '/dashboard', icon: HomeIcon }]
+      ? [{ label: 'Dashboard', href: '/dashboard', icon: CpuChipIcon }]
       : []),
+    { label: 'Home', href: '/', icon: HomeIcon },
     { label: 'Communities', href: '/communities', icon: UsersIcon },
     { label: 'Events', href: '/events', icon: CalendarIcon },
     { label: 'Reconquista', href: '/reconquista', icon: FlagIcon },
