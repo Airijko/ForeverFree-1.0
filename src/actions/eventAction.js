@@ -224,3 +224,17 @@ export const deleteEvent = async (id, organizationId) => {
     return { error: 'Failed to delete event', status: 500 };
   }
 };
+
+// Fetch featured events
+export const fetchFeaturedEvents = async () => {
+  try {
+    await connectToDB();
+    const events = await Event.find({ isFeatured: true })
+      .populate('creator organization')
+      .lean();
+    return JSON.parse(JSON.stringify(events));
+  } catch (error) {
+    console.error('Error fetching featured events:', error);
+    return { error: 'Failed to fetch featured events', status: 500 };
+  }
+};

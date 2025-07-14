@@ -198,7 +198,6 @@ body::before {
 }
 
 .embla {
-  max-width: 48rem;
   margin: auto;
   --slide-height: 19rem;
   --slide-spacing: 1rem;
@@ -207,6 +206,8 @@ body::before {
 
 .embla__viewport {
   overflow: hidden;
+  padding-left: 1px;
+  padding-right: 1px;
   width: 100%;
 }
 

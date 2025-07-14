@@ -1,4 +1,4 @@
-import { fetchAllEvents } from '@actions/eventAction';
+import { fetchAllEvents, fetchFeaturedEvents } from '@actions/eventAction';
 import MainHeader from '@components/MainHeader';
 import Link from 'next/link';
 import ListEvents from '@components/Events/ListEvents';
@@ -9,7 +9,8 @@ import Carousel from '@components/Embla/Carousel';
 const Home = async () => {
   const eventData = await fetchAllEvents();
   const recentEvents = await eventData.reverse().slice(0, 4);
-  const recentEventsList = eventData.map((event, index) => (
+  const featuredEvents = await fetchFeaturedEvents();
+  const mappedFeaturedEvents = featuredEvents.map((event, index) => (
     <EventDetailedCard event={event} key={event._id} index={index} />
   ));
 
@@ -34,7 +35,13 @@ const Home = async () => {
             </div>
             <div className="flex w-full flex-col gap-5">
               <h3 className="heading-2">Featured Events</h3>
-              <Carousel data={recentEventsList} />
+              {mappedFeaturedEvents.length === 0 ? (
+                <p className="w-full rounded-lg bg-neutral-100 p-3 text-gray-600 dark:bg-neutral-800 dark:text-gray-300">
+                  No featured events available at the moment.
+                </p>
+              ) : (
+                <Carousel data={mappedFeaturedEvents} />
+              )}
             </div>
           </div>
         </MainHeader>
