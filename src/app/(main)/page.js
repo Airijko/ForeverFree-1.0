@@ -4,14 +4,16 @@ import Link from 'next/link';
 import ListEvents from '@components/Events/ListEvents';
 import Image from 'next/image';
 import EventDetailedCard from '@components/Cards/EventDetailedCard';
-import Carousel from '@components/Embla/Carousel';
+import EventCarousel from '@components/Embla/EventCarousel';
 
 const Home = async () => {
   const eventData = await fetchAllEvents();
   const recentEvents = await eventData.reverse().slice(0, 4);
   const featuredEvents = await fetchFeaturedEvents();
   const mappedFeaturedEvents = featuredEvents.map((event, index) => (
-    <EventDetailedCard event={event} key={event._id} index={index} />
+    <div className="embla__slide" key={event._id}>
+      <EventDetailedCard event={event} key={event._id} index={index} />
+    </div>
   ));
 
   return (
@@ -35,13 +37,7 @@ const Home = async () => {
             </div>
             <div className="flex w-full flex-col gap-5">
               <h3 className="heading-2">Featured Events</h3>
-              {mappedFeaturedEvents.length === 0 ? (
-                <p className="w-full rounded-lg bg-neutral-100 p-3 text-gray-600 dark:bg-neutral-800 dark:text-gray-300">
-                  No featured events available at the moment.
-                </p>
-              ) : (
-                <Carousel data={mappedFeaturedEvents} />
-              )}
+              <EventCarousel events={mappedFeaturedEvents} />
             </div>
           </div>
         </MainHeader>

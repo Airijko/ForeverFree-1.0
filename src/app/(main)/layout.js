@@ -1,4 +1,5 @@
 import '@styles/globals.css';
+import '@styles/embla.css';
 import 'react-phone-number-input/style.css';
 
 import Provider from '@components/Provider';
