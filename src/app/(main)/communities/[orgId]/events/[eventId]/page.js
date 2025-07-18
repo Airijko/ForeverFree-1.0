@@ -78,7 +78,7 @@ const ViewPostPage = async ({ params }) => {
     .join(', ');
 
   return (
-    <article className="mainContent overflow-hidden rounded-xl bg-white shadow dark:bg-neutral-900">
+    <article className="mainContent overflow-hidden bg-white shadow dark:bg-neutral-900">
       {/* Hero Section */}
       <div className="relative h-72 w-full">
         <Image
