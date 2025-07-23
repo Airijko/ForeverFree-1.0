@@ -29,7 +29,7 @@ const LanguageInput = () => {
 
   return (
     <div className="flex flex-col">
-      <label className="font-satoshi font-semibold text-base text-gray-700 dark:text-gray-300">
+      <label className="font-satoshi text-base font-semibold text-gray-700 dark:text-gray-300">
         Languages
       </label>
       <div className="flex gap-2">
@@ -43,24 +43,24 @@ const LanguageInput = () => {
         <button
           type="button"
           onClick={addLanguage}
-          className="bg-blue-600 text-white px-4 rounded hover:bg-blue-700"
+          className="rounded bg-blue-600 px-4 text-white hover:bg-blue-700"
         >
           Add
         </button>
       </div>
 
       {/* List of added languages */}
-      <div className="flex flex-wrap gap-2 mt-2">
+      <div className="flex flex-wrap gap-2">
         {languages.map((lang, index) => (
           <div
             key={index}
-            className="flex items-center bg-gray-200 border dark:bg-gray-700 px-3 py-1 rounded-md"
+            className="mt-2 flex items-center rounded-md border bg-gray-200 px-3 py-1 dark:bg-gray-700"
           >
             <span className="mr-2 text-sm">{lang}</span>
             <button
               type="button"
               onClick={() => removeLanguage(lang)}
-              className="text-red-600 font-bold text-xs"
+              className="text-xs font-bold text-red-600"
             >
               ✕
             </button>

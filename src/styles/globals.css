@@ -120,22 +120,24 @@ body::before {
 /* === Forms === */
 .search_input,
 .form_input,
+.form_dropdown,
 .form_textarea {
   @apply w-full rounded-md border border-gray-300 bg-white p-3 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-accent;
+  height: 45px;
+  box-sizing: border-box;
 }
 
 .form_dropdown {
-  @apply w-full rounded-md border border-gray-300 bg-white px-4 py-2 text-sm text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-accent dark:bg-gray-800 dark:text-gray-200;
-}
-
-.dark .form_dropdown {
-  @apply border-slate-600 bg-slate-800 text-white;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
 
 .dark .search_input,
 .dark .form_input,
+.dark .form_dropdown,
 .dark .form_textarea {
-  @apply border-slate-600 bg-slate-800 text-white;
+  @apply border-zinc-700 bg-zinc-900 text-white;
 }
 
 /* === Cards === */

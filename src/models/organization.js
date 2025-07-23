@@ -30,7 +30,7 @@ const OrganizationSchema = new Schema({
   location: {
     street: { type: String, required: true },
     city: { type: String, required: true },
-    province: { type: String, required: true },
+    region: { type: String, required: true },
     country: { type: String, required: true },
   },
   website: {
@@ -74,6 +74,10 @@ const OrganizationSchema = new Schema({
   type: {
     type: String,
     enum: ['church', 'school', 'organization'],
+  },
+  tags: {
+    type: [String],
+    default: [],
   },
   members: [
     {

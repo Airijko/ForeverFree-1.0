@@ -192,8 +192,7 @@ const OrganizationProfile = ({
                   ) : (
                     <span>
                       {formData.location?.street}, {formData.location?.city},{' '}
-                      {formData.location?.province},{' '}
-                      {formData.location?.country}
+                      {formData.location?.region}, {formData.location?.country}
                     </span>
                   )}
                 </div>
@@ -279,7 +278,7 @@ const OrganizationProfile = ({
           </div>
 
           {/* Owner Info */}
-          {!isEditing && formData.owner && (
+          {!isEditing && isOwner && (
             <div className="mt-6 rounded-md bg-gray-50 p-4 text-sm dark:bg-neutral-800">
               <h3 className="mb-2 font-semibold">Owner Info</h3>
               <p>

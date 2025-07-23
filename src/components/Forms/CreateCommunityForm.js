@@ -76,10 +76,12 @@ const CreateCommunityForm = () => {
       <PhoneInput name="phone" />
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        {/* Location   */}
-        <LocationInput />
+        <div className="flex flex-col">
+          {/* Location   */}
+          <LocationInput />
+        </div>
 
-        <div className="flex h-full flex-col">
+        <div className="flex flex-col">
           {/* Website */}
           <label>
             <span className="font-satoshi text-base font-semibold text-gray-700 dark:text-gray-300">

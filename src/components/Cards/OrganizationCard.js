@@ -1,17 +1,12 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  MapPinIcon,
-  ShareIcon,
-  HeartIcon,
-  PhoneIcon,
-} from '@heroicons/react/24/outline';
+import { MapPinIcon, ShareIcon, HeartIcon } from '@heroicons/react/24/outline';
 
-const OrganizationCard = async ({ organization }) => {
+const OrganizationCard = ({ organization }) => {
   const orgLink = organization?._id ? `/communities/${organization._id}` : '#';
 
   return (
-    <div className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl dark:border-neutral-700 dark:bg-neutral-800">
+    <div className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl dark:border-zinc-700 dark:bg-zinc-900">
       <Link href={orgLink} className="relative flex h-full w-full flex-col p-2">
         {/* Content Section */}
         <div className="flex min-h-[8rem] flex-row">

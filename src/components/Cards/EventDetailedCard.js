@@ -38,7 +38,7 @@ const EventDetailedCard = async ({ event }) => {
   return (
     <Link
       href={eventLink}
-      className="group flex w-full flex-row overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md transition-transform duration-300 hover:scale-[1.02] dark:border-neutral-700 dark:bg-neutral-800"
+      className="group flex w-full flex-row overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md transition-transform duration-300 hover:scale-[1.02] dark:border-zinc-700 dark:bg-zinc-900"
     >
       {/* Image */}
       <div className="relative h-auto w-48 min-w-48">

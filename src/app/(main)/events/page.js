@@ -1,5 +1,4 @@
 import { fetchAllEvents } from '@actions/eventAction';
-import SearchBar from '@components/Inputs/SearchBar';
 import ListEvents from '@components/Events/ListEvents';
 import Maps from '@components/Maps';
 import EventFilterBar from '@components/Navbars/EventFilterBar';
@@ -19,8 +18,6 @@ const Events = async () => {
                 <h1 className="text- mb-6 w-full text-center text-6xl font-bold">
                   <span className="block">Christian Events</span>
                 </h1>
-                {/* Search Bar */}
-                <SearchBar />
                 <EventFilterBar />
               </div>
               <ListEvents data={data} />

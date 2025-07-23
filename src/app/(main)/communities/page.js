@@ -1,13 +1,19 @@
 import { fetchAllOrganizations } from '@actions/organizationAction';
-import ListCommunities from '@components/Communities/ListCommunities';
-import SearchBar from '@components/Inputs/SearchBar';
+import FeedCommunities from '@components/Communities/FeedCommunities';
 import MainHeader from '@components/MainHeader';
 import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
-const Communities = async () => {
-  const data = await fetchAllOrganizations();
-  const recentCommunities = data.reverse();
+const Communities = async ({ searchParams }) => {
+  const { search, type, country, region, city } = await searchParams;
+  const organizations = await fetchAllOrganizations(
+    search,
+    type,
+    country,
+    region,
+    city
+  );
+  const recentCommunities = organizations.reverse();
 
   return (
     <>
@@ -18,17 +24,12 @@ const Communities = async () => {
               <span className="block">Christian</span>
               <span className="block">Communities</span>
             </h1>
-
-            <div className="w-full">
-              <SearchBar />
-            </div>
           </div>
         </MainHeader>
 
         {/* Main Content */}
-        <div className="relative mb-32 w-full px-4 py-6">
-          <ListCommunities data={recentCommunities} columns={1} />
-          {/* Register Button */}
+        <main>
+          <FeedCommunities organizations={recentCommunities} />
           <div className="sticky bottom-0 z-20 w-full bg-inherit py-4">
             <div className="mx-auto w-full max-w-2xl px-4">
               <Link href="/communities/register">
@@ -42,7 +43,7 @@ const Communities = async () => {
               </Link>
             </div>
           </div>
-        </div>
+        </main>
       </section>
     </>
   );

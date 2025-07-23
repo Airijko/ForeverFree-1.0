@@ -11,13 +11,48 @@ import { handleFileUpload } from '@utils/fileUpload';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
 
-// ✅ Fetch all organizations
-export const fetchAllOrganizations = async () => {
+// Fetch all organizations with optional filters
+export const fetchAllOrganizations = async (
+  search = '',
+  type = '',
+  country = '',
+  region = '',
+  city = ''
+) => {
   try {
     await connectToDB();
-    const organizations = await Organization.find().populate('owner');
 
-    // Convert to plain objects for Client Components
+    const filter = {};
+    console.log('Fetching organizations with filters:', {
+      search,
+      type,
+      country,
+      region,
+      city,
+    });
+
+    // Keyword search
+    if (search) {
+      filter.$or = [
+        { name: { $regex: search, $options: 'i' } },
+        { denomination: { $regex: search, $options: 'i' } },
+        { description: { $regex: search, $options: 'i' } },
+      ];
+    }
+
+    // Type filter
+    if (type) {
+      filter.type = type;
+    }
+
+    // Location filters
+    if (country)
+      filter['location.country'] = { $regex: country, $options: 'i' };
+    if (region) filter['location.region'] = { $regex: region, $options: 'i' };
+    if (city) filter['location.city'] = { $regex: city, $options: 'i' };
+
+    const organizations = await Organization.find(filter).populate('owner');
+
     return JSON.parse(JSON.stringify(organizations));
   } catch (error) {
     console.error('Error fetching all organizations:', error);
@@ -46,7 +81,6 @@ export const fetchOrganization = async (id) => {
     }
 
     // Convert to plain object for Client Components
-    console.log('Fetched organization:', organization);
     return JSON.parse(JSON.stringify(organization));
   } catch (error) {
     console.error('Error fetching organization:', error);
