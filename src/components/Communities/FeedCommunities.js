@@ -7,9 +7,32 @@ import {
   BuildingLibraryIcon,
   MagnifyingGlassIcon,
   UsersIcon,
+  HeartIcon,
+  HandRaisedIcon,
+  ShieldCheckIcon,
+  HomeIcon,
+  GlobeAltIcon,
+  UserGroupIcon,
 } from '@heroicons/react/24/outline';
 import OrganizationCard from '@components/Cards/OrganizationCard';
 import LocationInput from '@components/Inputs/LocationInput';
+
+const subcategories = [
+  {
+    label: 'Spiritual Guidance & Counseling',
+    value: 'guidance',
+    icon: HeartIcon,
+  },
+  { label: 'Prayer & Intercession', value: 'prayer', icon: HandRaisedIcon },
+  { label: 'Recovery & Restoration', value: 'recovery', icon: ShieldCheckIcon },
+  { label: 'Community Outreach & Aid', value: 'outreach', icon: HomeIcon },
+  {
+    label: 'Evangelism & Discipleship',
+    value: 'evangelism',
+    icon: GlobeAltIcon,
+  },
+  { label: 'Youth & Family Ministries', value: 'youth', icon: UserGroupIcon },
+];
 
 const FeedCommunities = ({ organizations }) => {
   const router = useRouter();
@@ -27,6 +50,7 @@ const FeedCommunities = ({ organizations }) => {
     country = searchParams.get('country') || '',
     region = searchParams.get('region') || '',
     city = searchParams.get('city') || '',
+    tag = searchParams.get('tag') || '',
   }) => {
     const params = new URLSearchParams();
 
@@ -35,6 +59,7 @@ const FeedCommunities = ({ organizations }) => {
     if (country) params.set('country', country);
     if (region) params.set('region', region);
     if (city) params.set('city', city);
+    if (tag) params.set('tag', tag);
 
     startTransition(() => {
       router.replace(`/communities?${params.toString()}`);
@@ -43,6 +68,10 @@ const FeedCommunities = ({ organizations }) => {
 
   const handleTypeClick = (type) => {
     updateSearchParams({ type });
+  };
+
+  const handleTagClick = (tag) => {
+    updateSearchParams({ tag });
   };
 
   const handleSearchChange = (e) => {
@@ -86,13 +115,14 @@ const FeedCommunities = ({ organizations }) => {
 
       {/* Filter Cards */}
       <div className="mx-auto w-full max-w-6xl px-4">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+          {/* Churches */}
           <button
             type="button"
             onClick={() => handleTypeClick('church')}
-            className="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-md transition hover:bg-amber-100 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-amber-900"
+            className="card-gradient group flex flex-col items-center justify-center gap-3 p-6"
           >
-            <div className="rounded-full bg-amber-600 p-3 text-white transition group-hover:scale-110">
+            <div className="rounded-full bg-amber-600 p-3 text-white transition-transform group-hover:scale-110">
               <BuildingLibraryIcon className="h-8 w-8" />
             </div>
             <div className="text-center">
@@ -105,12 +135,13 @@ const FeedCommunities = ({ organizations }) => {
             </div>
           </button>
 
+          {/* Schools */}
           <button
             type="button"
             onClick={() => handleTypeClick('school')}
-            className="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-md transition hover:bg-amber-100 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-amber-900"
+            className="card-gradient group flex flex-col items-center justify-center gap-3 p-6"
           >
-            <div className="rounded-full bg-amber-600 p-3 text-white transition group-hover:scale-110">
+            <div className="rounded-full bg-amber-600 p-3 text-white transition-transform group-hover:scale-110">
               <AcademicCapIcon className="h-8 w-8" />
             </div>
             <div className="text-center">
@@ -123,12 +154,13 @@ const FeedCommunities = ({ organizations }) => {
             </div>
           </button>
 
+          {/* Organizations */}
           <button
             type="button"
             onClick={() => handleTypeClick('organization')}
-            className="group flex flex-col items-center justify-center gap-2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-md transition hover:bg-amber-100 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-amber-900"
+            className="card-gradient group flex flex-col items-center justify-center gap-3 p-6"
           >
-            <div className="rounded-full bg-amber-600 p-3 text-white transition group-hover:scale-110">
+            <div className="rounded-full bg-amber-600 p-3 text-white transition-transform group-hover:scale-110">
               <UsersIcon className="h-8 w-8" />
             </div>
             <div className="text-center">
@@ -145,7 +177,7 @@ const FeedCommunities = ({ organizations }) => {
         <button
           type="button"
           onClick={() => router.replace('/communities')}
-          className="group mt-4 flex w-full flex-col items-center justify-center gap-2 rounded-2xl border border-zinc-200 bg-white p-6 shadow-md transition hover:bg-amber-100 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-amber-900"
+          className="card-gradient group mt-6 flex w-full flex-col items-center justify-center gap-2 p-6"
         >
           <div className="text-center">
             <h3 className="text-xl font-semibold text-zinc-800 dark:text-white">
@@ -153,6 +185,27 @@ const FeedCommunities = ({ organizations }) => {
             </h3>
           </div>
         </button>
+      </div>
+
+      {/* Subcategories Section */}
+      <div className="mx-auto mt-4 w-full max-w-6xl px-4">
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+          {subcategories.map(({ label, value, icon: Icon }) => (
+            <button
+              key={value}
+              type="button"
+              onClick={() => handleTagClick(value)}
+              className="card-gradient group flex flex-row items-center justify-start gap-4 rounded-xl p-6"
+            >
+              <div className="rounded-full bg-amber-600 p-3 text-white transition-transform group-hover:scale-110">
+                <Icon className="h-6 w-6" />
+              </div>
+              <h4 className="text-md text-start font-medium text-zinc-800 dark:text-white">
+                {label}
+              </h4>
+            </button>
+          ))}
+        </div>
       </div>
 
       {isPending && (

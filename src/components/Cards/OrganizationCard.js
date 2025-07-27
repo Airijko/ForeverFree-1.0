@@ -6,7 +6,7 @@ const OrganizationCard = ({ organization }) => {
   const orgLink = organization?._id ? `/communities/${organization._id}` : '#';
 
   return (
-    <div className="w-full overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-md transition-all duration-300 hover:scale-105 hover:shadow-xl dark:border-zinc-700 dark:bg-zinc-900">
+    <div className="card-gradient w-full overflow-hidden transition-all duration-300">
       <Link href={orgLink} className="relative flex h-full w-full flex-col p-2">
         {/* Content Section */}
         <div className="flex min-h-[8rem] flex-row">

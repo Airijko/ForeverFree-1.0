@@ -17,19 +17,13 @@ export const fetchAllOrganizations = async (
   type = '',
   country = '',
   region = '',
-  city = ''
+  city = '',
+  tag = ''
 ) => {
   try {
     await connectToDB();
 
     const filter = {};
-    console.log('Fetching organizations with filters:', {
-      search,
-      type,
-      country,
-      region,
-      city,
-    });
 
     // Keyword search
     if (search) {
@@ -37,6 +31,7 @@ export const fetchAllOrganizations = async (
         { name: { $regex: search, $options: 'i' } },
         { denomination: { $regex: search, $options: 'i' } },
         { description: { $regex: search, $options: 'i' } },
+        { tags: { $regex: search, $options: 'i' } },
       ];
     }
 
@@ -50,6 +45,8 @@ export const fetchAllOrganizations = async (
       filter['location.country'] = { $regex: country, $options: 'i' };
     if (region) filter['location.region'] = { $regex: region, $options: 'i' };
     if (city) filter['location.city'] = { $regex: city, $options: 'i' };
+
+    if (tag) filter.tags = { $regex: tag, $options: 'i' };
 
     const organizations = await Organization.find(filter).populate('owner');
 

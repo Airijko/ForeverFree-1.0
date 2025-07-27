@@ -15,11 +15,7 @@ html {
   font-family: 'Inter', sans-serif;
   scroll-behavior: smooth;
 
-  background-image: url('/assets/images/sitebackground.svg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
+  background-color: #0f0f38;
 
   color: theme('colors.primary');
   position: relative;
@@ -38,18 +34,14 @@ body::before {
   pointer-events: none;
 
   background-color: transparent;
-  backdrop-filter: brightness(1); /* no dimming */
+  backdrop-filter: brightness(1);
   transition:
     background-color 0.3s ease,
     backdrop-filter 0.3s ease;
 }
 
 .mainContent {
-  @apply w-full border-x border-gray-300 transition-all dark:border-neutral-700 lg:w-[600px] xl:w-[800px];
-}
-
-.dark .mainContent {
-  @apply border-neutral-700;
+  @apply mx-auto max-w-7xl transition-all;
 }
 
 /* === Overlay when in dark mode === */
@@ -107,16 +99,17 @@ body::before {
 
 /* === Typography === */
 .head_text {
-  @apply text-3xl font-bold text-primary md:text-4xl lg:text-5xl;
+  @apply text-3xl font-bold text-white md:text-5xl lg:text-7xl;
+}
+
+.desc {
+  @apply mt-3 text-base text-neutral-300 sm:text-lg md:text-xl lg:text-2xl xl:text-3xl;
 }
 
 .blue_gradient {
   @apply bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 bg-clip-text text-transparent;
 }
 
-.desc {
-  @apply mt-3 text-sm text-gray-600 md:text-lg;
-}
 /* === Forms === */
 .search_input,
 .form_input,
@@ -195,6 +188,15 @@ body::before {
   letter-spacing: -0.01em;
 }
 .heading-3 {
-  @apply w-fit text-3xl font-semibold tracking-tight text-gray-800 dark:border-gray-800 dark:text-gray-300 md:text-3xl xl:text-4xl;
+  @apply w-fit border-gray-800 text-3xl font-semibold tracking-tight text-gray-300 md:text-3xl xl:text-4xl;
   letter-spacing: -0.01em;
+}
+
+/* Card  */
+.card-gradient {
+  @apply rounded-2xl border border-zinc-300 transition hover:scale-105;
+  @apply bg-gradient-to-tr from-white via-zinc-200 to-white;
+  @apply hover:bg-gradient-to-bl hover:from-zinc-200 hover:via-white hover:to-zinc-200;
+  @apply dark:border-zinc-700 dark:bg-gradient-to-tr dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900;
+  @apply dark:hover:bg-gradient-to-bl dark:hover:from-zinc-800 dark:hover:via-zinc-900 dark:hover:to-zinc-800;
 }

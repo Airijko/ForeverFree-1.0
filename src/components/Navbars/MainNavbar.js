@@ -14,7 +14,7 @@ import {
   ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 
-const MainSidebar = async () => {
+const TopNavbar = async () => {
   const session = await getServerSession(options);
   const isAdmin = session?.user?.role === 'admin';
 
@@ -29,66 +29,62 @@ const MainSidebar = async () => {
   ];
 
   return (
-    <aside className="sticky top-0 z-50 flex h-screen w-max flex-shrink-0 flex-col justify-between gap-2 overflow-hidden px-1 py-5 lg:px-5">
-      <nav className="mx-auto flex w-max flex-col items-center gap-4 lg:items-start">
-        <Link
-          href="/"
-          aria-label="Go to homepage"
-          className="group mx-auto mb-3 flex flex-row items-center gap-1 transition-all duration-300 hover:scale-105 md:mx-0"
-        >
-          <Image
-            src="/assets/icons/ForeverFree_Logo.png"
-            width={50}
-            height={50}
-            alt="ForeverFree Logo"
-            className="drop-shadow-[0_0_2px_black]"
-          />
-          <h1 className="hidden select-none whitespace-nowrap text-3xl font-extrabold tracking-wide text-gray-900 transition-colors duration-200 group-hover:text-amber-600 dark:text-gray-100 dark:group-hover:text-amber-400 lg:block">
-            Forever Free
-          </h1>
-        </Link>
+    <header className="sticky top-0 z-50 flex w-full flex-row items-center justify-between bg-slate-900 px-4 py-3 shadow-lg">
+      {/* Logo Section */}
+      <Link
+        href="/"
+        aria-label="Go to homepage"
+        className="flex items-center gap-2 transition-transform hover:scale-105"
+      >
+        <Image
+          src="/assets/icons/ForeverFree_Logo.png"
+          width={40}
+          height={40}
+          alt="ForeverFree Logo"
+          className="drop-shadow-[0_0_2px_black]"
+        />
+        <span className="hidden text-2xl font-extrabold tracking-wide text-amber-400 transition-colors hover:text-amber-600 lg:block">
+          Forever Free
+        </span>
+      </Link>
+
+      {/* Nav Items */}
+      <nav className="flex items-center gap-6">
         {navItems.map(({ label, href, icon: Icon }) => (
           <Link
             key={label}
             href={href}
-            className="mx-auto flex flex-row items-center gap-2 rounded-lg px-2 py-2 hover:bg-amber-700 hover:text-white hover:transition-all hover:duration-300 dark:hover:text-white md:mx-0 md:w-full"
+            className="flex items-center gap-2 text-white transition-colors hover:text-amber-400"
           >
-            <Icon className="h-10 w-10" aria-hidden="true" />
-            <span className="hidden text-2xl lg:block">{label}</span>
+            <Icon className="h-6 w-6" aria-hidden="true" />
+            <span className="hidden text-lg md:inline-block">{label}</span>
           </Link>
         ))}
       </nav>
 
-      <div className="mt-auto flex w-full flex-col items-center gap-4 lg:flex-row">
+      {/* Right Side */}
+      <div className="flex items-center gap-4">
         <ThemeToggle />
-        <div className="w-full">
-          {session ? (
-            <Link
-              href="/api/auth/signout?callbackUrl=/"
-              className="flex select-none items-center justify-center rounded-xl border border-gray-200 bg-black px-4 py-2 font-semibold text-white shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:bg-white dark:text-black dark:hover:bg-amber-400 dark:hover:text-black"
-            >
-              <span className="hidden lg:inline">Logout</span>
-              <ArrowLeftOnRectangleIcon
-                className="h-6 w-6 lg:hidden"
-                aria-label="Logout"
-              />
-            </Link>
-          ) : (
-            <Link
-              href="/api/auth/signin"
-              className="flex select-none items-center justify-center rounded-xl border border-gray-200 bg-black px-4 py-2 font-semibold text-white shadow backdrop-blur-md transition-all duration-200 hover:bg-amber-600 hover:text-white dark:bg-white dark:text-black dark:hover:bg-amber-400 dark:hover:text-black"
-            >
-              <span className="hidden lg:inline">Login</span>
-              <ArrowRightOnRectangleIcon
-                className="h-6 w-6 lg:hidden"
-                aria-label="Login"
-              />
-            </Link>
-          )}
-        </div>
+        {session ? (
+          <Link
+            href="/api/auth/signout?callbackUrl=/"
+            className="flex items-center gap-2 rounded border border-amber-600 bg-amber-700 px-3 py-1 text-white transition hover:bg-amber-600"
+          >
+            <span className="hidden lg:inline">Logout</span>
+            <ArrowLeftOnRectangleIcon className="h-5 w-5 lg:hidden" />
+          </Link>
+        ) : (
+          <Link
+            href="/api/auth/signin"
+            className="flex items-center gap-2 rounded border border-amber-600 bg-amber-700 px-3 py-1 text-white transition hover:bg-amber-600"
+          >
+            <span className="hidden lg:inline">Login</span>
+            <ArrowRightOnRectangleIcon className="h-5 w-5 lg:hidden" />
+          </Link>
+        )}
       </div>
-    </aside>
+    </header>
   );
 };
 
-export default MainSidebar;
+export default TopNavbar;

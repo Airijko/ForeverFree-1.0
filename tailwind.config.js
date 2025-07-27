@@ -18,6 +18,15 @@ module.exports = {
           text: '#e5e7eb', // gray-200
         },
       },
+      boxShadow: {
+        'card-hover': '0 6px 15px rgba(255, 191, 0, 0.2)',
+      },
+      backgroundImage: {
+        'card-gradient-light':
+          'linear-gradient(to top right, #ffffff, #f4f4f5, #ffffff)',
+        'card-gradient-dark':
+          'linear-gradient(to top right, #18181b, #27272a, #18181b)',
+      },
       fontFamily: {
         inter: ['Inter', 'sans-serif'],
       },
@@ -29,6 +38,12 @@ module.exports = {
           '0%': { left: '-75%' },
           '100%': { left: '125%' },
         },
+      },
+    },
+    container: {
+      center: true,
+      screens: {
+        '2xl': '2400px',
       },
     },
   },

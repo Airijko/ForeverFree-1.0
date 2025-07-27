@@ -1,11 +1,13 @@
 const MainLayout = ({ children, mainNavbar }) => {
   return (
-    <div className="flex min-h-screen w-full items-center justify-center">
-      <div className="flex w-full max-w-7xl flex-row">
-        {/* Left Navbar */}
-        <aside>{mainNavbar}</aside>
+    <div className="flex min-h-screen w-full justify-center">
+      <div className="flex w-full flex-col">
+        {/* Top Navbar */}
+        {mainNavbar}
         {/* Main Content */}
-        <div className="flex w-full flex-row">{children}</div>
+        <div className="flex w-full flex-row items-center justify-center">
+          {children}
+        </div>
       </div>
     </div>
   );

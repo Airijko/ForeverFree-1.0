@@ -5,13 +5,14 @@ import { PlusCircleIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 const Communities = async ({ searchParams }) => {
-  const { search, type, country, region, city } = await searchParams;
+  const { search, type, country, region, city, tag } = await searchParams;
   const organizations = await fetchAllOrganizations(
     search,
     type,
     country,
     region,
-    city
+    city,
+    tag
   );
   const recentCommunities = organizations.reverse();
 
