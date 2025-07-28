@@ -9,7 +9,7 @@ const EventCarousel = ({ events }) => {
       delay: 2000,
       playOnInit: true,
       stopOnInteraction: false,
-      stopOnMouseEnter: false,
+      stopOnMouseEnter: true,
     }),
   ]);
 

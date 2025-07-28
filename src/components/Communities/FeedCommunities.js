@@ -101,7 +101,7 @@ const FeedCommunities = ({ organizations }) => {
             value={searchTerm}
             onChange={handleSearchChange}
             placeholder="Search communities..."
-            className="w-full rounded-lg border border-zinc-200 bg-white py-3 pl-10 pr-4 text-base text-zinc-900 shadow-sm transition focus:border-amber-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:bg-zinc-900"
+            className="w-full rounded-lg border border-zinc-200 bg-white py-3 pl-10 pr-4 text-base text-zinc-900 shadow-sm transition-transform focus:border-amber-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:bg-zinc-900"
           />
         </div>
 
@@ -114,7 +114,7 @@ const FeedCommunities = ({ organizations }) => {
       </div>
 
       {/* Filter Cards */}
-      <div className="mx-auto w-full max-w-6xl px-4">
+      <div className="mx-auto w-full px-4">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
           {/* Churches */}
           <button
@@ -187,8 +187,7 @@ const FeedCommunities = ({ organizations }) => {
         </button>
       </div>
 
-      {/* Subcategories Section */}
-      <div className="mx-auto mt-4 w-full max-w-6xl px-4">
+      {/* <div className="mx-auto mt-4 w-full px-4">
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
           {subcategories.map(({ label, value, icon: Icon }) => (
             <button
@@ -216,7 +215,7 @@ const FeedCommunities = ({ organizations }) => {
         {organizations.map((org) => (
           <OrganizationCard key={org._id} organization={org} />
         ))}
-      </ul>
+      </ul> */}
     </div>
   );
 };

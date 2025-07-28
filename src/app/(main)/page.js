@@ -19,7 +19,7 @@ const Home = async () => {
   return (
     <section className="flex h-full w-full flex-col">
       <MainHeader>
-        <div className="flex h-full w-full flex-col items-center justify-end">
+        <div className="flex h-full w-full flex-col items-center justify-start">
           <h1 className="head_text max-w-4xl text-center">
             Connect with your Christian Community
           </h1>
@@ -47,8 +47,16 @@ const Home = async () => {
         </div>
       </MainHeader>
       {/* Main Content */}
-      <main className="mainContent">
-        <div className="flex w-full flex-col gap-6 px-7 py-5">
+      <main className="relative">
+        <Image
+          src="/assets/images/layered-steps-2.svg"
+          alt="Header Background"
+          fill
+          priority
+          className="-z-10 object-cover object-center"
+        />
+
+        <div className="mainContent flex w-full flex-col gap-6 px-7 py-5">
           <section className="flex flex-col gap-4 py-7 md:flex-row md:items-center md:justify-between">
             <div className="mb-auto md:w-1/2">
               <div className="flex flex-col items-center gap-3 md:items-start">
@@ -70,7 +78,7 @@ const Home = async () => {
                 alt="Lone Cross"
                 width={400}
                 height={400}
-                className="h-auto max-h-64 w-full object-contain"
+                className="h-auto w-full object-cover"
               />
             </div>
           </section>
