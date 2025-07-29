@@ -22,42 +22,55 @@ const LocationInput = ({
 
   return (
     <>
-      <div className="min-w-[150px] flex-1">
-        <label className="flex flex-col">
-          <span>Country</span>
-          <CountryDropdown
-            value={country}
-            onChange={(val) => {
-              setCountry(val);
-              setRegion('');
-            }}
-            className="form_dropdown"
-          />
-        </label>
-      </div>
+      <div className="flex flex-1 flex-wrap gap-4">
+        <div className="min-w-[150px] flex-1">
+          <label className="flex flex-col">
+            <CountryDropdown
+              value={country}
+              onChange={(val) => {
+                setCountry(val);
+                setRegion('');
+              }}
+              className="form_dropdown"
+            />
+          </label>
+        </div>
 
-      <div className="min-w-[150px] flex-1">
-        <label className="flex flex-col">
-          <span>Province / State</span>
-          <RegionDropdown
-            country={country}
-            value={region}
-            onChange={(val) => setRegion(val)}
-            className="form_dropdown"
-          />
-        </label>
-      </div>
+        <div className="w-full min-w-[150px] max-w-[200px] flex-1">
+          <label className="flex flex-col">
+            <RegionDropdown
+              country={country}
+              value={region}
+              onChange={(val) => setRegion(val)}
+              className="form_dropdown"
+            />
+          </label>
+        </div>
 
-      <div className="min-w-[150px] flex-1">
-        <label className="flex flex-col">
-          <span>City</span>
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            className="form_input"
-          />
-        </label>
+        <div className="w-full min-w-[150px] max-w-[200px] flex-1">
+          <label className="flex flex-col">
+            <input
+              type="text"
+              value={city}
+              onChange={(e) => setCity(e.target.value)}
+              className="form_input"
+            />
+          </label>
+        </div>
+
+        {showStreet && (
+          <div className="w-full min-w-[150px] max-w-[200px] flex-1">
+            <label className="flex flex-col">
+              <span>Street</span>
+              <input
+                type="text"
+                value={street}
+                onChange={(e) => setStreet(e.target.value)}
+                className="form_input"
+              />
+            </label>
+          </div>
+        )}
       </div>
 
       {showStreet && (

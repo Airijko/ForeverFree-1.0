@@ -19,7 +19,7 @@ const Home = async () => {
   return (
     <section className="flex h-full w-full flex-col">
       <MainHeader>
-        <div className="flex h-full w-full flex-col items-center justify-start">
+        <div className="flex h-full w-full flex-col items-center justify-center">
           <h1 className="head_text max-w-4xl text-center">
             Connect with your Christian Community
           </h1>

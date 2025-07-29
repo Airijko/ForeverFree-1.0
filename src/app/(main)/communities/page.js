@@ -30,6 +30,9 @@ const Communities = async ({ searchParams }) => {
       </div>
       {/* Main Content */}
       <main className="mainContent">
+        <h1 className="my-4 mb-6 w-full text-start text-6xl font-bold text-white">
+          <span className="block">Christian Communities</span>
+        </h1>
         <FeedCommunities organizations={recentCommunities} />
         <div className="sticky bottom-0 z-20 w-full bg-inherit py-4">
           <div className="mx-auto w-full max-w-2xl px-4">

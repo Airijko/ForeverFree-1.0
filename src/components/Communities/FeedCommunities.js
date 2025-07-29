@@ -13,6 +13,7 @@ import {
   HomeIcon,
   GlobeAltIcon,
   UserGroupIcon,
+  BuildingOffice2Icon,
 } from '@heroicons/react/24/outline';
 import OrganizationCard from '@components/Cards/OrganizationCard';
 import LocationInput from '@components/Inputs/LocationInput';
@@ -39,6 +40,7 @@ const FeedCommunities = ({ organizations }) => {
   const searchParams = useSearchParams();
   const [searchTerm, setSearchTerm] = useState('');
   const [isPending, startTransition] = useTransition();
+  const [showSubcategories, setShowSubcategories] = useState(false);
 
   useEffect(() => {
     setSearchTerm(searchParams.get('search') || '');
@@ -88,34 +90,52 @@ const FeedCommunities = ({ organizations }) => {
     });
   };
 
-  return (
-    <div>
-      {/* Search Input */}
-      <div className="mx-auto my-8 px-4">
-        <div className="relative">
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-zinc-500">
-            <MagnifyingGlassIcon className="h-5 w-5" />
-          </span>
-          <input
-            type="text"
-            value={searchTerm}
-            onChange={handleSearchChange}
-            placeholder="Search communities..."
-            className="w-full rounded-lg border border-zinc-200 bg-white py-3 pl-10 pr-4 text-base text-zinc-900 shadow-sm transition-transform focus:border-amber-400 focus:bg-white focus:outline-none focus:ring-2 focus:ring-amber-300 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:bg-zinc-900"
-          />
-        </div>
+  const handleSubcategoryToggle = () => {
+    setShowSubcategories((prev) => !prev);
+    console.log('Subcategories toggled:', !showSubcategories);
+  };
 
-        <div className="mt-4 flex flex-wrap gap-4">
-          <LocationInput
-            showStreet={false}
-            onLocationChange={handleLocationChange}
-          />
+  return (
+    <section className="w-full">
+      {/* Search Input */}
+      <div className="mx-auto my-8">
+        <div className="flex flex-row">
+          <div className="relative flex-row">
+            <span className="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-400 dark:text-zinc-500">
+              <MagnifyingGlassIcon className="h-5 w-5" />
+            </span>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={handleSearchChange}
+              placeholder="Search communities..."
+              className="w-full rounded-l-lg border border-zinc-200 bg-white py-3 pl-10 pr-4 text-base text-zinc-900 shadow-sm transition-transform focus:bg-white focus:outline-none focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:bg-zinc-900"
+            />
+          </div>
+          <div className="flex max-w-[150px] flex-1 items-start">
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="Location / Area Code"
+              className="w-full rounded-r-lg border border-zinc-200 bg-white px-3 py-3 pr-4 text-base text-zinc-900 shadow-sm transition-transform focus:bg-white focus:outline-none focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:bg-zinc-900"
+            />
+          </div>
+          <div className="ml-2 flex max-w-[200px] flex-1 items-start">
+            <button
+              type="button"
+              onClick={handleSubcategoryToggle}
+              className="flex h-full items-center justify-center rounded-lg bg-amber-600 px-5 py-2 text-white transition-transform hover:scale-105"
+            >
+              Sub-categories
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Filter Cards */}
-      <div className="mx-auto w-full px-4">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
+      <div className="mx-auto w-full">
+        <div className="grid grid-cols-3 gap-6">
           {/* Churches */}
           <button
             type="button"
@@ -129,7 +149,7 @@ const FeedCommunities = ({ organizations }) => {
               <h3 className="text-xl font-semibold text-zinc-800 dark:text-white">
                 Churches
               </h3>
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
+              <p className="mt-1 hidden text-sm text-zinc-600 dark:text-zinc-300 md:block">
                 Find local churches and fellowships near you.
               </p>
             </div>
@@ -148,7 +168,7 @@ const FeedCommunities = ({ organizations }) => {
               <h3 className="text-xl font-semibold text-zinc-800 dark:text-white">
                 Schools
               </h3>
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
+              <p className="mt-1 hidden text-sm text-zinc-600 dark:text-zinc-300 md:block">
                 Discover faith-based schools and learning centers.
               </p>
             </div>
@@ -161,62 +181,64 @@ const FeedCommunities = ({ organizations }) => {
             className="card-gradient group flex flex-col items-center justify-center gap-3 p-6"
           >
             <div className="rounded-full bg-amber-600 p-3 text-white transition-transform group-hover:scale-110">
-              <UsersIcon className="h-8 w-8" />
+              <BuildingOffice2Icon className="h-8 w-8" />
             </div>
             <div className="text-center">
               <h3 className="text-xl font-semibold text-zinc-800 dark:text-white">
                 Organizations
               </h3>
-              <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
+              <p className="mt-1 hidden text-sm text-zinc-600 dark:text-zinc-300 md:block">
                 Explore ministries, nonprofits, and outreach groups.
               </p>
             </div>
           </button>
         </div>
 
+        {showSubcategories && (
+          <div className="mx-auto mt-4 w-full">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
+              {subcategories.map(({ label, value, icon: Icon }) => (
+                <button
+                  key={value}
+                  type="button"
+                  onClick={() => handleTagClick(value)}
+                  className="card-gradient group flex flex-row items-center justify-start gap-4 rounded-xl p-6"
+                >
+                  <div className="rounded-full bg-amber-600 p-3 text-white transition-transform group-hover:scale-110">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h4 className="text-md text-start font-medium text-zinc-800 dark:text-white">
+                    {label}
+                  </h4>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         <button
           type="button"
           onClick={() => router.replace('/communities')}
-          className="card-gradient group mt-6 flex w-full flex-col items-center justify-center gap-2 p-6"
+          className="card-gradient group mt-4 flex w-full flex-col items-center justify-center gap-2 p-6"
         >
           <div className="text-center">
             <h3 className="text-xl font-semibold text-zinc-800 dark:text-white">
-              All Communities
+              All Communities / Reset
             </h3>
           </div>
         </button>
-      </div>
-
-      {/* <div className="mx-auto mt-4 w-full px-4">
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3">
-          {subcategories.map(({ label, value, icon: Icon }) => (
-            <button
-              key={value}
-              type="button"
-              onClick={() => handleTagClick(value)}
-              className="card-gradient group flex flex-row items-center justify-start gap-4 rounded-xl p-6"
-            >
-              <div className="rounded-full bg-amber-600 p-3 text-white transition-transform group-hover:scale-110">
-                <Icon className="h-6 w-6" />
-              </div>
-              <h4 className="text-md text-start font-medium text-zinc-800 dark:text-white">
-                {label}
-              </h4>
-            </button>
-          ))}
-        </div>
       </div>
 
       {isPending && (
         <p className="text-center text-sm text-amber-600">Loading...</p>
       )}
 
-      <ul className="mx-auto my-4 flex flex-col gap-5 px-4">
+      <ul className="mx-auto my-4 flex flex-col gap-5">
         {organizations.map((org) => (
           <OrganizationCard key={org._id} organization={org} />
         ))}
-      </ul> */}
-    </div>
+      </ul>
+    </section>
   );
 };
 
