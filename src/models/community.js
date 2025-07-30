@@ -10,7 +10,7 @@ const serviceSchema = new Schema({
   times: [serviceTimeSchema],
 });
 
-const OrganizationSchema = new Schema({
+const CommunitySchema = new Schema({
   owner: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -94,7 +94,6 @@ const OrganizationSchema = new Schema({
   ],
 });
 
-const Organization =
-  models.Organization || model('Organization', OrganizationSchema);
+const Community = models.Community || model('Community', CommunitySchema);
 
-export default Organization;
+export default Community;

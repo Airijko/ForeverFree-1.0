@@ -1,7 +1,7 @@
 import {
   fetchAllOrganizations,
   deleteOrganization,
-} from '@actions/organizationAction';
+} from '@actions/communityAction';
 
 const Communities = async () => {
   const organizations = await fetchAllOrganizations();

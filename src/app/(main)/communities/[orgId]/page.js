@@ -1,5 +1,5 @@
 // app/communities/[id]/page.js
-import { fetchOrganization } from '@actions/organizationAction';
+import { fetchOrganization } from '@actions/communityAction';
 import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';
 import OrganizationProfile from '@components/OrganizationProfile';
@@ -13,11 +13,11 @@ const Page = async ({ params }) => {
 
   if (!organization) {
     return (
-      <h1 className="text-center py-20 text-xl">Organization Not Found</h1>
+      <h1 className="py-20 text-center text-xl">Organization Not Found</h1>
     );
   }
   if (organization.error) {
-    return <h1 className="text-center py-20 text-xl">{organization.error}</h1>;
+    return <h1 className="py-20 text-center text-xl">{organization.error}</h1>;
   }
 
   return (

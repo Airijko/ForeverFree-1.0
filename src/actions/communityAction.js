@@ -1,29 +1,34 @@
 'use server';
 
 import { connectToDB } from '@utils/database';
-import Organization from '@models/organization';
+import Community from '@models/community';
 import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import OrganizationCard from '@components/Cards/OrganizationCard';
+import CommunityCard from '@components/Cards/CommunityCard';
 import { handleFileUpload } from '@utils/fileUpload';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
 
-// Fetch all organizations with optional filters
-export const fetchAllOrganizations = async (
+// Fetch all communities with optional filters
+export const fetchAllCommunities = async (
   search = '',
-  type = '',
   country = '',
   region = '',
   city = '',
-  tag = ''
+  tag = '',
+  type = ''
 ) => {
   try {
     await connectToDB();
 
     const filter = {};
+
+    // Category filter
+    if (type) {
+      filter.type = type;
+    }
 
     // Keyword search
     if (search) {
@@ -35,11 +40,6 @@ export const fetchAllOrganizations = async (
       ];
     }
 
-    // Type filter
-    if (type) {
-      filter.type = type;
-    }
-
     // Location filters
     if (country)
       filter['location.country'] = { $regex: country, $options: 'i' };
@@ -48,44 +48,40 @@ export const fetchAllOrganizations = async (
 
     if (tag) filter.tags = { $regex: tag, $options: 'i' };
 
-    const organizations = await Organization.find(filter).populate('owner');
+    const communities = await Community.find(filter).populate('owner');
 
-    return JSON.parse(JSON.stringify(organizations));
+    return JSON.parse(JSON.stringify(communities));
   } catch (error) {
-    console.error('Error fetching all organizations:', error);
-    return { error: 'Failed to fetch organizations', status: 500 };
+    console.error('Error fetching communities:', error);
+    return { error: 'Failed to fetch communities', status: 500 };
   }
 };
 
-export const mapOrganizations = async (data) => {
-  return data.map((organization, index) => (
-    <OrganizationCard
-      organization={organization}
-      key={organization._id}
-      index={index}
-    />
+export const mapCommunities = async (data) => {
+  return data.map((community, index) => (
+    <CommunityCard community={community} key={community._id} index={index} />
   ));
 };
 
-// ✅ Fetch a single organization
-export const fetchOrganization = async (id) => {
+// ✅ Fetch a single community
+export const fetchCommunity = async (id) => {
   try {
     await connectToDB();
-    const organization = await Organization.findById(id).populate('owner');
+    const community = await Community.findById(id).populate('owner');
 
-    if (!organization) {
-      return { error: 'Organization not found', status: 404 };
+    if (!community) {
+      return { error: 'Community not found', status: 404 };
     }
 
     // Convert to plain object for Client Components
-    return JSON.parse(JSON.stringify(organization));
+    return JSON.parse(JSON.stringify(community));
   } catch (error) {
-    console.error('Error fetching organization:', error);
-    return { error: 'Failed to fetch organization', status: 500 };
+    console.error('Error fetching community:', error);
+    return { error: 'Failed to fetch community', status: 500 };
   }
 };
 
-const extractOrganizationData = async (formData) => {
+const extractCommunityData = async (formData) => {
   const type = formData.get('type');
   const isChurch = type === 'church';
 
@@ -125,7 +121,7 @@ const extractOrganizationData = async (formData) => {
   let bannerUrl = null;
 
   if (imageFile && imageFile instanceof File && imageFile.size > 0) {
-    imageUrl = await handleFileUpload(imageFile, 'organizations');
+    imageUrl = await handleFileUpload(imageFile, 'communities');
   }
   if (bannerFile && bannerFile instanceof File && bannerFile.size > 0) {
     bannerUrl = await handleFileUpload(bannerFile, 'banners');
@@ -182,7 +178,7 @@ const extractOrganizationData = async (formData) => {
   return data;
 };
 
-const handleOrganization = async (id, formData, isEdit = false) => {
+const handleCommunity = async (id, formData, isEdit = false) => {
   const session = await getServerSession(options);
 
   // Check if user is authenticated
@@ -192,30 +188,30 @@ const handleOrganization = async (id, formData, isEdit = false) => {
 
   const userId = session.user.id;
   const userRole = session.user.role; // <-- Add this line
-  const orgData = await extractOrganizationData(formData);
+  const orgData = await extractCommunityData(formData);
 
   try {
     await connectToDB();
 
-    let organization;
+    let community;
 
     if (isEdit) {
-      organization = await Organization.findById(id);
-      if (!organization) {
-        return { error: 'Organization not found', status: 404 };
+      community = await Community.findById(id);
+      if (!community) {
+        return { error: 'Community not found', status: 404 };
       }
 
       // Allow if owner or admin
-      if (organization.owner.toString() !== userId && userRole !== 'admin') {
+      if (community.owner.toString() !== userId && userRole !== 'admin') {
         return {
           error:
-            'Unauthorized: Only the owner or admins can edit this organization',
+            'Unauthorized: Only the owner or admins can edit this community',
           status: 403,
         };
       }
     } else {
       // NEW: Add creator as owner and admin-level member
-      organization = new Organization({
+      community = new Community({
         ...orgData,
         owner: userId,
         members: [
@@ -228,41 +224,41 @@ const handleOrganization = async (id, formData, isEdit = false) => {
     }
 
     // Update with new data (excluding old file cleanup for simplicity)
-    Object.assign(organization, orgData);
+    Object.assign(community, orgData);
 
-    await organization.save();
+    await community.save();
 
     revalidatePath('/communities');
-    revalidatePath(`/communities/${organization._id}`);
+    revalidatePath(`/communities/${community._id}`);
 
-    return JSON.parse(JSON.stringify(organization));
+    return JSON.parse(JSON.stringify(community));
   } catch (error) {
     console.error(`Error during ${isEdit ? 'update' : 'registration'}:`, error);
     return {
-      error: `Failed to ${isEdit ? 'update' : 'register'} organization`,
+      error: `Failed to ${isEdit ? 'update' : 'register'} community`,
       status: 500,
     };
   }
 };
 
-export const createOrganization = async (formData) => {
-  const newOrg = await handleOrganization(null, formData);
+export const createCommunity = async (formData) => {
+  const newOrg = await handleCommunity(null, formData);
   if (newOrg && !newOrg.error) {
     redirect(`/communities/${newOrg._id}`);
   }
   return newOrg;
 };
 
-export const updateOrganization = async (id, formData) => {
-  const updatedOrg = await handleOrganization(id, formData, true);
+export const updateCommunity = async (id, formData) => {
+  const updatedOrg = await handleCommunity(id, formData, true);
   if (updatedOrg && !updatedOrg.error) {
     redirect(`/communities/${id}`);
   }
   return updatedOrg;
 };
 
-// ✅ Delete an organization
-export const deleteOrganization = async (id) => {
+// ✅ Delete an community
+export const deleteCommunity = async (id) => {
   const session = await getServerSession(options);
 
   if (!session?.user?.id) {
@@ -274,26 +270,26 @@ export const deleteOrganization = async (id) => {
 
   try {
     await connectToDB();
-    const organization = await Organization.findById(id);
+    const community = await Community.findById(id);
 
-    if (!organization) {
-      return { error: 'Organization not found', status: 404 };
+    if (!community) {
+      return { error: 'Community not found', status: 404 };
     }
 
     // Allow if owner or admin
-    if (organization.owner.toString() !== userId && userRole !== 'admin') {
+    if (community.owner.toString() !== userId && userRole !== 'admin') {
       return {
         error:
-          'Unauthorized: Only the owner or admins can delete this organization',
+          'Unauthorized: Only the owner or admins can delete this community',
         status: 403,
       };
     }
 
-    await Organization.findByIdAndDelete(id);
+    await Community.findByIdAndDelete(id);
     revalidatePath('/communities');
-    return { message: 'Organization deleted successfully' };
+    return { message: 'Community deleted successfully' };
   } catch (error) {
-    console.error('Error deleting organization:', error);
-    return { error: 'Failed to delete organization', status: 500 };
+    console.error('Error deleting community:', error);
+    return { error: 'Failed to delete community', status: 500 };
   }
 };

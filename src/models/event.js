@@ -3,9 +3,9 @@ import { Schema, model, models } from 'mongoose';
 const EventSchema = new Schema(
   {
     creator: { type: Schema.Types.ObjectId, ref: 'User', required: true },
-    organization: {
+    community: {
       type: Schema.Types.ObjectId,
-      ref: 'Organization',
+      ref: 'Community',
       required: true,
     },
 

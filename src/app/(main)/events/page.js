@@ -12,7 +12,7 @@ const Events = async () => {
     <section className="mainContent w-full">
       <div className="h-screen w-full">
         <div className="flex h-full w-full flex-col">
-          <h1 className="my-4 w-full text-start text-6xl font-bold text-white">
+          <h1 className="my-4 w-full text-center text-6xl font-bold text-white">
             <span className="block">Christian Events</span>
           </h1>
           <main className="flex flex-col scrollbar-hide">

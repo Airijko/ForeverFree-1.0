@@ -16,7 +16,7 @@ const EventCard = async ({ event }) => {
     isFree,
     price,
     currency,
-    organization,
+    community,
   } = event;
 
   const formattedMonth = startDate
@@ -27,8 +27,8 @@ const EventCard = async ({ event }) => {
 
   const formattedDay = startDate ? new Date(startDate).getDate() : '';
 
-  const eventLink = organization?._id
-    ? `communities/${organization._id}/events/${_id}`
+  const eventLink = community?._id
+    ? `communities/${community._id}/events/${_id}`
     : '#';
 
   return (
@@ -56,10 +56,9 @@ const EventCard = async ({ event }) => {
                 <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border-2 border-neutral-800 bg-neutral-700">
                   <Image
                     src={
-                      organization?.image ||
-                      '/assets/images/event-placeholder.jpg'
+                      community?.image || '/assets/images/eventsplaceholder.png'
                     }
-                    alt={organization?.name || 'Organization'}
+                    alt={community?.name || 'community'}
                     fill
                     className="object-cover"
                   />

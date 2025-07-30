@@ -1,7 +1,7 @@
 import {
   updateOrganization,
   fetchOrganization,
-} from '@actions/organizationAction';
+} from '@actions/communityAction';
 import OrganizationProfile from '@components/OrganizationProfile';
 import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';
@@ -15,16 +15,16 @@ const EditPage = async ({ params }) => {
   // Redirect if user is not logged in
   if (!session || !userId) {
     return (
-      <div className="mx-auto flex flex-col items-center mt-12 max-w-md text-center">
-        <h1 className="text-2xl font-bold text-red-600 mb-4">
+      <div className="mx-auto mt-12 flex max-w-md flex-col items-center text-center">
+        <h1 className="mb-4 text-2xl font-bold text-red-600">
           Authentication Required
         </h1>
-        <p className="text-gray-700 mb-4">
+        <p className="mb-4 text-gray-700">
           You must be logged in to edit organizations.
         </p>
         <Link
           href="/api/auth/signin"
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500"
+          className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-500"
         >
           Sign In
         </Link>
@@ -38,14 +38,14 @@ const EditPage = async ({ params }) => {
   // Redirect if user is not the owner
   if (!isOwner) {
     return (
-      <div className="mx-auto flex flex-col items-center mt-12 max-w-md text-center">
-        <h1 className="text-2xl font-bold text-red-600 mb-4">Access Denied</h1>
-        <p className="text-gray-700 mb-4">
+      <div className="mx-auto mt-12 flex max-w-md flex-col items-center text-center">
+        <h1 className="mb-4 text-2xl font-bold text-red-600">Access Denied</h1>
+        <p className="mb-4 text-gray-700">
           You can only edit organizations that you own.
         </p>
         <Link
           href={`/communities/${orgId}`}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500"
+          className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-500"
         >
           Back to Organization
         </Link>

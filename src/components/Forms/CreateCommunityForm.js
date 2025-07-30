@@ -1,7 +1,7 @@
 'use client';
 import { useState } from 'react';
 
-import { createOrganization } from '@actions/organizationAction';
+import { createOrganization } from '@actions/communityAction';
 import { SubmitButton } from '@components/Buttons/SubmitButton';
 import ImageCropper from '@components/ImageCropper';
 import Link from 'next/link';

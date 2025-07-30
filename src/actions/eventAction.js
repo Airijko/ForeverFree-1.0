@@ -1,7 +1,7 @@
 'use server';
 
 import { connectToDB } from '@utils/database';
-import Organization from '@models/organization';
+import Community from '@models/community';
 import Event from '@models/event';
 import { getServerSession } from 'next-auth';
 import { options } from '@app/api/auth/[...nextauth]/options';
@@ -14,7 +14,7 @@ import EventCard from '@components/Cards/EventCard';
 export const fetchAllEvents = async () => {
   try {
     await connectToDB();
-    const events = await Event.find().populate('creator organization').lean();
+    const events = await Event.find().populate('creator community').lean();
     return JSON.parse(JSON.stringify(events));
   } catch (error) {
     console.error('Error fetching events:', error);
@@ -29,23 +29,23 @@ export const mapEvents = async (data) => {
       key={event._id}
       event={event}
       index={index}
-      organization={event.organization}
+      community={event.community}
     />
   ));
 };
 
-// Fetch a single event with organization check
-export const fetchEvent = async (eventId, organizationId) => {
+// Fetch a single event with community check
+export const fetchEvent = async (eventId, communityId) => {
   try {
     await connectToDB();
     const event = await Event.findOne({
       _id: eventId,
-      organization: organizationId,
+      community: communityId,
     }).lean();
 
     if (!event) {
       return {
-        error: 'Event not found or does not belong to this organization',
+        error: 'Event not found or does not belong to this community',
         status: 404,
       };
     }
@@ -57,11 +57,11 @@ export const fetchEvent = async (eventId, organizationId) => {
   }
 };
 
-// Fetch events by organization
-export const fetchEventsByOrganization = async (organizationId) => {
+// Fetch events by community
+export const fetchEventsByCommunity = async (communityId) => {
   try {
     await connectToDB();
-    const events = await Event.find({ organization: organizationId }).lean();
+    const events = await Event.find({ community: communityId }).lean();
     return JSON.parse(JSON.stringify(events));
   } catch (error) {
     console.error('Error fetching events:', error);
@@ -116,10 +116,10 @@ const handleEvent = async (id, formData, isEdit = false) => {
 
   const userId = session.user.id;
   const userRole = session.user.role;
-  const organizationId = formData.get('organization');
+  const communityId = formData.get('community');
 
-  if (!organizationId) {
-    return { error: 'Organization ID is required', status: 400 };
+  if (!communityId) {
+    return { error: 'Community ID is required', status: 400 };
   }
 
   const eventData = await extractEventData(formData);
@@ -143,7 +143,7 @@ const handleEvent = async (id, formData, isEdit = false) => {
     } else {
       event = new Event({
         creator: userId,
-        organization: organizationId,
+        community: communityId,
       });
     }
 
@@ -151,9 +151,9 @@ const handleEvent = async (id, formData, isEdit = false) => {
     await event.save();
 
     // Revalidate pages affected by this event
-    revalidatePath(`/communities/${organizationId}/events`);
+    revalidatePath(`/communities/${communityId}/events`);
     revalidatePath(
-      `/communities/${organizationId}/events/${event._id.toString()}`
+      `/communities/${communityId}/events/${event._id.toString()}`
     );
 
     return JSON.parse(JSON.stringify(event));
@@ -169,28 +169,26 @@ const handleEvent = async (id, formData, isEdit = false) => {
 // Public event actions
 
 export const createEvent = async (formData) => {
-  const organizationId = formData.get('organization');
+  const communityId = formData.get('community');
   const newEvent = await handleEvent(null, formData);
   if (newEvent && !newEvent.error) {
-    redirect(
-      `/communities/${organizationId}/events/${newEvent._id.toString()}`
-    );
+    redirect(`/communities/${communityId}/events/${newEvent._id.toString()}`);
   }
   return newEvent;
 };
 
 export const updateEvent = async (id, formData) => {
-  const organizationId = formData.get('organization');
+  const communityId = formData.get('community');
   const updatedEvent = await handleEvent(id, formData, true);
   if (updatedEvent && !updatedEvent.error) {
     redirect(
-      `/communities/${organizationId}/events/${updatedEvent._id.toString()}`
+      `/communities/${communityId}/events/${updatedEvent._id.toString()}`
     );
   }
   return updatedEvent;
 };
 
-export const deleteEvent = async (id, organizationId) => {
+export const deleteEvent = async (id, communityId) => {
   const session = await getServerSession(options);
 
   if (!session?.user?.id) {
@@ -217,7 +215,7 @@ export const deleteEvent = async (id, organizationId) => {
     }
 
     await Event.findByIdAndDelete(id);
-    revalidatePath(`/communities/${organizationId}/events`);
+    revalidatePath(`/communities/${communityId}/events`);
     return { message: 'Event deleted successfully' };
   } catch (error) {
     console.error('Error deleting event:', error);
@@ -230,7 +228,7 @@ export const fetchFeaturedEvents = async () => {
   try {
     await connectToDB();
     const events = await Event.find({ isFeatured: true })
-      .populate('creator organization')
+      .populate('creator community')
       .lean();
     return JSON.parse(JSON.stringify(events));
   } catch (error) {
