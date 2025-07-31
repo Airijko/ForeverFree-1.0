@@ -1,4 +1,5 @@
 'use client';
+
 import { useState, useEffect } from 'react';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 
@@ -18,7 +19,7 @@ const LocationInput = ({
   // Emit location change to parent
   useEffect(() => {
     onLocationChange?.({ country, region, city, street });
-  }, [country, region, city, street]);
+  }, [country, region, city, street, onLocationChange]);
 
   return (
     <>

@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 
 const SearchForm = () => {
   const pathname = usePathname();
-  const match = pathname?.match(/^\/communities\/([^\/?#]+)/);
+  const match = pathname?.match(/^\/communities\/([^/?#]+)/);
   const category = match?.[1] || 'all';
 
   const clientAction = async (formData) => {
