@@ -41,7 +41,7 @@ body::before {
 }
 
 .mainContent {
-  @apply mx-auto max-w-7xl transition-all;
+  @apply mx-auto max-w-7xl px-4 transition-all;
 }
 
 /* === Overlay when in dark mode === */

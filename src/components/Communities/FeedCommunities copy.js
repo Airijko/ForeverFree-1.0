@@ -112,15 +112,7 @@ const FeedCommunities = ({ organizations }) => {
               className="w-full rounded-l-lg border border-zinc-200 bg-white py-3 pl-10 pr-4 text-base text-zinc-900 shadow-sm transition-transform focus:bg-white focus:outline-none focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:bg-zinc-900"
             />
           </div>
-          <div className="flex max-w-[150px] flex-1 items-start">
-            <input
-              type="text"
-              id="location"
-              name="location"
-              placeholder="Location / Area Code"
-              className="w-full rounded-r-lg border border-zinc-200 bg-white px-3 py-3 pr-4 text-base text-zinc-900 shadow-sm transition-transform focus:bg-white focus:outline-none focus:ring-2 dark:border-zinc-700 dark:bg-zinc-900 dark:text-white dark:focus:bg-zinc-900"
-            />
-          </div>
+
           <div className="ml-2 flex max-w-[200px] flex-1 items-start">
             <button
               type="button"

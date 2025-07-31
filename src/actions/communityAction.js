@@ -11,6 +11,18 @@ import { handleFileUpload } from '@utils/fileUpload';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5 MB
 
+export async function handleCommunitySearch(formData) {
+  const search = formData.get('search')?.toString() || '';
+  const location = formData.get('location')?.toString() || '';
+  const category = formData.get('category')?.toString() || 'all';
+
+  const params = new URLSearchParams();
+  if (search) params.set('search', search);
+  if (location) params.set('location', location);
+
+  redirect(`/communities/${category}?${params.toString()}`);
+}
+
 // Fetch all communities with optional filters
 export const fetchAllCommunities = async (
   search = '',
