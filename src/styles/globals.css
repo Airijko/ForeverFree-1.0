@@ -195,7 +195,7 @@ body::before {
 /* Card  */
 .card-gradient {
   @apply rounded-2xl border border-zinc-300 transition hover:scale-105;
-  @apply bg-gradient-to-tr from-white via-zinc-200 to-white;
+  @apply bg-gradient-to-tr from-zinc-100 via-indigo-200 to-zinc-100;
   @apply hover:bg-gradient-to-bl hover:from-zinc-200 hover:via-white hover:to-zinc-200;
   @apply dark:border-zinc-700 dark:bg-gradient-to-tr dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900;
   @apply dark:hover:bg-gradient-to-bl dark:hover:from-zinc-800 dark:hover:via-zinc-900 dark:hover:to-zinc-800;

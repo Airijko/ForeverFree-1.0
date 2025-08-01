@@ -4,11 +4,7 @@ import React from 'react';
 
 const page = async () => {
   const communities = await fetchAllCommunities();
-  return (
-    <div>
-      <FeedCommunities communities={communities} />
-    </div>
-  );
+  return <FeedCommunities communities={communities} />;
 };
 
 export default page;

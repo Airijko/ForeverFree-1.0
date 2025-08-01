@@ -2,14 +2,20 @@ import SearchForm from '@components/Forms/SearchForm';
 import {
   AcademicCapIcon,
   BuildingLibraryIcon,
-  BuildingOffice2Icon,
 } from '@heroicons/react/24/outline';
+import {
+  Building2,
+  Building2Icon,
+  Church,
+  GraduationCap,
+  Users,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const CommunityLayout = ({ children }) => {
   return (
-    <section className="relative w-full">
+    <section className="relative mx-auto max-w-7xl">
       <div className="fixed inset-0 -z-10">
         <Image
           src="/assets/images/layered-steps-2.svg"
@@ -25,21 +31,26 @@ const CommunityLayout = ({ children }) => {
           <span className="block">Find Christian Communities</span>
         </h1>
         <SearchForm />
-
+        <div className="my-8">
+          <h1 className="w-full text-center text-4xl font-semibold text-white">
+            <span className="block">Browse by Category</span>
+          </h1>
+          <p className="w-full text-center text-lg text-zinc-300">
+            Explore various types of Christian communities and organizations.
+          </p>
+        </div>
         <div className="grid grid-cols-4 gap-6">
           {/* ALL COMMUNITIES */}
           <Link
             href="/communities/all"
-            className="card-gradient group flex flex-col items-center justify-center gap-3 p-6"
+            className="card-gradient group flex w-full flex-col items-center justify-center gap-3 p-6 lg:aspect-square"
           >
-            <div className="rounded-full bg-amber-600 p-3 text-white transition-transform group-hover:scale-110">
-              <BuildingLibraryIcon className="h-16 w-16" />
+            <div className="rounded-full text-indigo-600 transition-transform group-hover:scale-110">
+              <Users className="h-16 w-16 lg:h-24 lg:w-24" />
             </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-zinc-800 dark:text-white">
-                All Communities
-              </h3>
-              <p className="mt-1 hidden text-sm text-zinc-600 dark:text-zinc-300 md:block">
+            <div className="hidden text-center md:block">
+              <h3 className="text-2xl font-bold text-black">All Communities</h3>
+              <p className="text-md mt-1 text-zinc-800">
                 Explore all Christian communities and organizations.
               </p>
             </div>
@@ -47,16 +58,14 @@ const CommunityLayout = ({ children }) => {
           {/* Churches */}
           <Link
             href="/communities/churches"
-            className="card-gradient group flex flex-col items-center justify-center gap-3 p-6"
+            className="card-gradient group flex w-full flex-col items-center justify-center gap-3 p-6 xl:aspect-square"
           >
-            <div className="rounded-full bg-amber-600 p-3 text-white transition-transform group-hover:scale-110">
-              <BuildingLibraryIcon className="h-16 w-16" />
+            <div className="rounded-full text-indigo-600 transition-transform group-hover:scale-110">
+              <Church className="h-16 w-16 lg:h-24 lg:w-24" />
             </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-zinc-800 dark:text-white">
-                Churches
-              </h3>
-              <p className="mt-1 hidden text-sm text-zinc-600 dark:text-zinc-300 md:block">
+            <div className="hidden text-center md:block">
+              <h3 className="text-2xl font-bold text-black">Churches</h3>
+              <p className="text-md mt-1 hidden text-zinc-800 md:block">
                 Find local churches and fellowships near you.
               </p>
             </div>
@@ -64,16 +73,14 @@ const CommunityLayout = ({ children }) => {
           {/* Schools */}
           <Link
             href="/communities/schools"
-            className="card-gradient group flex flex-col items-center justify-center gap-3 p-6"
+            className="card-gradient group flex w-full flex-col items-center justify-center gap-3 p-6 xl:aspect-square"
           >
-            <div className="rounded-full bg-amber-600 p-3 text-white transition-transform group-hover:scale-110">
-              <AcademicCapIcon className="h-16 w-16" />
+            <div className="rounded-full text-indigo-600 transition-transform group-hover:scale-110">
+              <GraduationCap className="h-16 w-16 lg:h-24 lg:w-24" />
             </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-zinc-800 dark:text-white">
-                Schools
-              </h3>
-              <p className="mt-1 hidden text-sm text-zinc-600 dark:text-zinc-300 md:block">
+            <div className="hidden text-center md:block">
+              <h3 className="text-2xl font-bold text-black">Schools</h3>
+              <p className="text-md mt-1 hidden text-zinc-800 md:block">
                 Discover faith-based schools and learning centers.
               </p>
             </div>
@@ -81,16 +88,14 @@ const CommunityLayout = ({ children }) => {
           {/* Organizations */}
           <Link
             href="/communities/organizations"
-            className="card-gradient group flex flex-col items-center justify-center gap-3 p-6"
+            className="card-gradient group flex w-full flex-col items-center justify-center gap-3 p-6 xl:aspect-square"
           >
-            <div className="rounded-full bg-amber-600 p-3 text-white transition-transform group-hover:scale-110">
-              <BuildingOffice2Icon className="h-16 w-16" />
+            <div className="rounded-full text-indigo-600 transition-transform group-hover:scale-110">
+              <Building2 className="h-16 w-16 lg:h-24 lg:w-24" />
             </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-zinc-800 dark:text-white">
-                Organizations
-              </h3>
-              <p className="mt-1 hidden text-sm text-zinc-600 dark:text-zinc-300 md:block">
+            <div className="hidden text-center md:block">
+              <h3 className="text-2xl font-bold text-black">Organizations</h3>
+              <p className="text-md mt-1 hidden text-zinc-800 md:block">
                 Explore ministries, nonprofits, and outreach groups.
               </p>
             </div>
