@@ -1,11 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import {
-  MapPinIcon,
-  ShareIcon,
-  HeartIcon,
-  CurrencyDollarIcon,
-} from '@heroicons/react/24/outline';
+import { MapPinIcon, ShareIcon } from '@heroicons/react/24/outline';
 
 const EventDetailedCard = async ({ event }) => {
   const {
@@ -16,7 +11,7 @@ const EventDetailedCard = async ({ event }) => {
     isFree,
     price,
     currency,
-    organization,
+    community,
     image,
     eventType,
   } = event;
@@ -29,8 +24,8 @@ const EventDetailedCard = async ({ event }) => {
 
   const formattedDay = startDate ? new Date(startDate).getDate() : '';
 
-  const eventLink = organization?._id
-    ? `/communities/${organization._id}/events/${_id}`
+  const eventLink = community?._id
+    ? `/communities/${community._id}/events/${_id}`
     : '#';
 
   const displayImage = image || '/assets/images/eventsplaceholder.png';
@@ -62,18 +57,18 @@ const EventDetailedCard = async ({ event }) => {
             <h2 className="line-clamp-2 text-4xl font-semibold text-white">
               {title}
             </h2>
-            {/* Organization */}
+            {/* Community */}
             <div className="flex items-center gap-2">
               <div className="relative h-7 w-7 overflow-hidden rounded-full bg-gray-300 dark:bg-neutral-700">
                 <Image
-                  src={organization?.image || '/assets/icons/cross-logo.jpg'}
-                  alt={organization?.name || 'Organization'}
+                  src={community?.image || '/assets/icons/cross-logo.jpg'}
+                  alt={community?.name || 'Community'}
                   fill
                   className="object-cover"
                 />
               </div>
               <span className="truncate text-sm font-medium text-gray-300">
-                {organization?.name || 'Unknown Org'}
+                {community?.name || 'Unknown Org'}
               </span>
             </div>
           </div>

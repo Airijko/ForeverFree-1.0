@@ -4,7 +4,6 @@ import 'react-phone-number-input/style.css';
 
 import Provider from '@components/Provider';
 import MainLayout from '@components/Layouts/MainLayout';
-import MainNavbar from '@components/Navbars/MainNavbar';
 
 export const metadata = {
   title: 'Forever Free',
@@ -19,7 +18,7 @@ const RootLayout = async ({ children }) => {
     <html lang="en" className="scroll-smooth">
       <body className="font-inter text-primary transition-colors duration-300 dark:text-white">
         <Provider>
-          <MainLayout mainNavbar={<MainNavbar />}>{children}</MainLayout>
+          <MainLayout>{children}</MainLayout>
         </Provider>
       </body>
     </html>

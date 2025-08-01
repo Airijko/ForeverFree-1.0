@@ -200,3 +200,8 @@ body::before {
   @apply dark:border-zinc-700 dark:bg-gradient-to-tr dark:from-zinc-900 dark:via-zinc-800 dark:to-zinc-900;
   @apply dark:hover:bg-gradient-to-bl dark:hover:from-zinc-800 dark:hover:via-zinc-900 dark:hover:to-zinc-800;
 }
+
+.card-gradient2 {
+  @apply w-full overflow-hidden rounded-xl border border-gray-700 transition-all duration-300 hover:scale-[1.02] hover:shadow-md;
+  @apply bg-gradient-to-br from-indigo-900 via-indigo-950 to-purple-950;
+}

@@ -5,6 +5,7 @@ import ListEvents from '@components/Events/ListEvents';
 import Image from 'next/image';
 import EventDetailedCard from '@components/Cards/EventDetailedCard';
 import EventCarousel from '@components/Embla/EventCarousel';
+import { Receipt } from 'lucide-react';
 
 const Home = async () => {
   const eventData = await fetchAllEvents();
@@ -48,16 +49,17 @@ const Home = async () => {
       </MainHeader>
       {/* Main Content */}
       <main className="relative">
-        <Image
-          src="/assets/images/layered-steps-2.svg"
-          alt="Header Background"
-          fill
-          priority
-          className="-z-10 object-cover object-center"
-        />
-
-        <div className="mainContent flex w-full flex-col gap-6 px-7 py-5">
-          <section className="flex flex-col gap-4 py-7 md:flex-row md:items-center md:justify-between">
+        <div className="fixed inset-0 -z-10">
+          <Image
+            src="/assets/images/layered-steps-2.svg"
+            alt="Header Background"
+            fill
+            priority
+            className="object-cover object-center"
+          />
+        </div>
+        <div className="mainContent flex w-full flex-col items-center justify-center gap-6 px-7 py-5">
+          <section className="flex max-w-6xl flex-col gap-4 pb-12 md:flex-row md:items-center md:justify-between">
             <div className="mb-auto md:w-1/2">
               <div className="flex flex-col items-center gap-3 md:items-start">
                 <h3 className="heading-3">Explore Christian Communities</h3>
@@ -72,7 +74,7 @@ const Home = async () => {
                 </button>
               </div>
             </div>
-            <div className="mt-4 flex justify-center overflow-hidden rounded-xl md:mt-0 md:w-1/2 md:justify-end">
+            <div className="hidden justify-center overflow-hidden rounded-xl md:block md:w-1/2 md:justify-end">
               <Image
                 src="/assets/images/LoneCross.png"
                 alt="Lone Cross"
@@ -82,10 +84,14 @@ const Home = async () => {
               />
             </div>
           </section>
-          <div className="flex w-full flex-col gap-2">
-            <h3 className="heading-3">Upcoming Events</h3>
+        </div>
+        <div className="flex w-full flex-col bg-neutral-100 pb-24">
+          <section className="mainContent flex flex-col scrollbar-hide">
+            <h3 className="my-8 w-full text-start text-4xl font-semibold text-neutral-700">
+              <span>Recent Events</span>
+            </h3>
             <ListEvents data={recentEvents} />
-          </div>
+          </section>
         </div>
       </main>
     </section>

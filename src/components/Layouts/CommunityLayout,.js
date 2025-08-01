@@ -1,21 +1,12 @@
 import SearchForm from '@components/Forms/SearchForm';
-import {
-  AcademicCapIcon,
-  BuildingLibraryIcon,
-} from '@heroicons/react/24/outline';
-import {
-  Building2,
-  Building2Icon,
-  Church,
-  GraduationCap,
-  Users,
-} from 'lucide-react';
+
+import { Building2, Church, GraduationCap, Users } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 
 const CommunityLayout = ({ children }) => {
   return (
-    <section className="relative mx-auto max-w-7xl">
+    <section className="relative mx-auto w-full max-w-7xl">
       <div className="fixed inset-0 -z-10">
         <Image
           src="/assets/images/layered-steps-2.svg"
@@ -27,7 +18,7 @@ const CommunityLayout = ({ children }) => {
       </div>
       {/* Main Content */}
       <section className="mainContent">
-        <h1 className="my-8 mb-6 w-full text-center text-6xl font-bold text-white">
+        <h1 className="my-8 w-full text-center text-6xl font-bold text-white">
           <span className="block">Find Christian Communities</span>
         </h1>
         <SearchForm />

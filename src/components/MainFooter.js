@@ -1,6 +1,6 @@
 const MainFooter = () => {
   return (
-    <footer className="absolute bottom-0 w-full bg-indigo-950 px-4 py-8">
+    <footer className="w-full bg-indigo-950 px-4 py-8">
       <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 md:flex-row">
         <div className="text-lg font-bold text-white">
           ForeverFree &copy; {new Date().getFullYear()}
