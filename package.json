@@ -8,7 +8,7 @@
     "yarn": "please-use-npm"
   },
   "scripts": {
-    "dev": "cross-env NODE=OPTIONS='--inspect' next dev --webpack",
+    "dev": "cross-env NODE_OPTIONS='--inspect' next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",
